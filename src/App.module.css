@@ -1,0 +1,41 @@
+
+
+.container {
+  position: relative;
+  flex: 1;
+}
+.container__background {
+  opacity: 0.5;
+  z-index: 0;
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  content: "";
+  width: auto;
+  height: auto;
+  background-image: url("/assets/WelcomeImage.jpg");
+  background-position: center;
+  background-size: cover;
+}
+.container__body {
+  position: relative;
+  max-width: 1280px;
+  margin: 0 auto;
+}
+
+
+.container__header {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.container__nav {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  list-style: none;
+}

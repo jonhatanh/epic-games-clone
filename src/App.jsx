@@ -1,19 +1,28 @@
 import { useState } from 'react'
-import './App.css'
-import { Outlet } from 'react-router-dom'
+import styles from './App.module.css'
+import { Link, Outlet } from 'react-router-dom'
 
 function App () {
-  const [count, setCount] = useState(0)
-
   return (
-    <>
-      <div>
-        <h1>GAME STORE</h1>
+    <div className={styles.container}>
+      <div className={styles.containerBackground} />
+      <div className={styles.containerBody}>
+        <header className={styles.containerHeader}>
+          <h1>GAME STORE</h1>
+          <nav>
+            <ul className={styles.containerNav}>
+              <li><Link to='/'>Home</Link></li>
+              <li><Link to='store'>Store</Link></li>
+              <li><Link to='profile'>Profile</Link></li>
+            </ul>
+          </nav>
+        </header>
+        <main>
+          <Outlet />
+        </main>
+
       </div>
-      <div>
-        <Outlet />
-      </div>
-    </>
+    </div>
   )
 }
 
