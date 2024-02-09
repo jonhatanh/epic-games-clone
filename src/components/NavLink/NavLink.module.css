@@ -1,0 +1,12 @@
+
+.navLink {
+    display: flex;
+    gap: 3px;
+    flex-wrap: nowrap;
+    border-radius: 10px;
+    background-color: rgba(0, 0, 0, 0.541);
+    /* box-shadow: 3px 3px 3px white; */
+    text-decoration: none;
+    color: white;
+    padding: 5px 10px;
+}

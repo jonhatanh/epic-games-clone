@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import styles from './App.module.css'
 import { Link, Outlet } from 'react-router-dom'
+import NavLink from './components/NavLink/NavLink'
 
 function App () {
   return (
@@ -11,13 +12,13 @@ function App () {
           <h1>GAME STORE</h1>
           <nav>
             <ul className={styles.containerNav}>
-              <li><Link to='/'>Home</Link></li>
-              <li><Link to='store'>Store</Link></li>
-              <li><Link to='profile'>Profile</Link></li>
+              <li><NavLink to='/'>Home</NavLink></li>
+              <li><NavLink to='store'>Store</NavLink></li>
+              <li><NavLink to='profile'>Profile</NavLink></li>
             </ul>
           </nav>
         </header>
-        <main>
+        <main className={styles.containerMain}>
           <Outlet />
         </main>
 
