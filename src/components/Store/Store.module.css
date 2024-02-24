@@ -23,3 +23,22 @@
 .link:hover {
     opacity: 1;
 }
+
+.store_main {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.hero_games {
+    display: grid;
+    grid-template-columns: 80% 1fr;
+    grid-template-rows: repeat(6, 1fr);
+}
+
+.main_game {
+    width: 100%;
+    position: relative;
+
+}
+
