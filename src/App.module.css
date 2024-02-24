@@ -24,7 +24,8 @@
   opacity: 0.2;
 }
 .container__background--dark {
-  background-color: darkblue;
+  background-color: #242424;
+  background-image: none;
 }
 .container__body {
   position: relative;

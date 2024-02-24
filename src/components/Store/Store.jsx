@@ -1,8 +1,8 @@
-import { Link, useLoaderData } from 'react-router-dom';
-import exampleImg from '../../assets/exampleImage.avif';
-import classes from './Store.module.css';
-import { useState } from 'react';
-import { randomPriceString } from '../../helpers';
+import { Link, useLoaderData } from 'react-router-dom'
+import exampleImg from '../../assets/exampleImage.avif'
+import classes from './Store.module.css'
+import { useState } from 'react'
+import { randomPriceString } from '../../helpers'
 
 function returnCopies (game, qty = 1) {
   const copies = []
@@ -18,7 +18,7 @@ const Store = () => {
   const game2 = heroGames.results[1]
   console.log(heroGames)
   return (
-    <div className=''>
+    <div className={classes.store}>
       {/* Nav store */}
       <nav className={classes.nav}>
         <input
@@ -39,30 +39,42 @@ const Store = () => {
         {/* best last six months */}
         <article className={classes.heroGames}>
           <div className={classes.mainGame}>
-            <img
-              src={game1.background_image}
-              alt={`${game1.name} background image`}
-            />
+            <div className={classes.imageShadow}>
+            </div>
+              <img
+                src={game1.background_image}
+                alt={`${game1.name} background image`}
+              />
             <div className={classes.options}>
               <h3>{game1.name}</h3>
-              <span>{randomPriceString()}</span>
-              <button>Buy Now</button>
-              <button>Add to wishlist</button>
+              <p className={classes.price}>
+                Starting at <span>{randomPriceString()}</span>
+              </p>
+              <div>
+                <button className={`${classes.button} ${classes.buttonWhite}`}>
+                  Buy Now
+                </button>
+                <button
+                  className={`${classes.button} ${classes.buttonTransparent}`}
+                >
+                  Add to wishlist
+                </button>
+              </div>
             </div>
           </div>
-          <div className={classes.sideGames}>
-            {returnCopies(game1, 6).map((game, index) => {
-              return (
-                <div key={index} className={classes.cardHero}>
-                  <img
-                    src={game.background_image}
-                    alt={`${game.name} background image`}
-                  />
-                  <h3>{game.name}</h3>
-                </div>
-              )
-            })}
-          </div>
+          {/* <div className={classes.sideGames}> */}
+          {returnCopies(game1, 6).map((game, index) => {
+            return (
+              <div key={index} className={classes.cardHero}>
+                <img
+                  src={game.background_image}
+                  alt={`${game.name} background image`}
+                />
+                <h3>{game.name}</h3>
+              </div>
+            )
+          })}
+          {/* </div> */}
         </article>
 
         {/* bY META CRITIC  this year */}

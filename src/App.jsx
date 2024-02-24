@@ -8,7 +8,7 @@ function App () {
   console.log(currentRoute)
 
   const darkBody =
-    currentRoute !== '/'
+    currentRoute.pathname !== '/'
 
   return (
     <div className={styles.container}>

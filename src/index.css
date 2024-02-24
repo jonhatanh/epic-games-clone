@@ -20,7 +20,7 @@
 }
 body {
   display: flex;
-  min-width: 320px;
+  min-width: 768px;
   min-height: 100dvh;
 }
 #root {
