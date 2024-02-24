@@ -23,6 +23,9 @@
 .container__background--darker {
   opacity: 0.2;
 }
+.container__background--dark {
+  background-color: darkblue;
+}
 .container__body {
   position: relative;
   max-width: 1280px;

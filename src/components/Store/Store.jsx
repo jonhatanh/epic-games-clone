@@ -1,7 +1,8 @@
-import { Link, useLoaderData } from 'react-router-dom'
-import exampleImg from '../../assets/exampleImage.avif'
-import classes from './Store.module.css'
-import { useState } from 'react'
+import { Link, useLoaderData } from 'react-router-dom';
+import exampleImg from '../../assets/exampleImage.avif';
+import classes from './Store.module.css';
+import { useState } from 'react';
+import { randomPriceString } from '../../helpers';
 
 function returnCopies (game, qty = 1) {
   const copies = []
@@ -42,21 +43,26 @@ const Store = () => {
               src={game1.background_image}
               alt={`${game1.name} background image`}
             />
-            <h3>{game1.name}</h3>
-            <button>Buy Now</button>
-            <button>Add to wishlist</button>
+            <div className={classes.options}>
+              <h3>{game1.name}</h3>
+              <span>{randomPriceString()}</span>
+              <button>Buy Now</button>
+              <button>Add to wishlist</button>
+            </div>
           </div>
-          {returnCopies(game1, 6).map((game, index) => {
-            return (
-              <div key={index} className={classes.cardHero}>
-                <img
-                  src={game.background_image}
-                  alt={`${game.name} background image`}
-                />
-                <h3>{game.name}</h3>
-              </div>
-            )
-          })}
+          <div className={classes.sideGames}>
+            {returnCopies(game1, 6).map((game, index) => {
+              return (
+                <div key={index} className={classes.cardHero}>
+                  <img
+                    src={game.background_image}
+                    alt={`${game.name} background image`}
+                  />
+                  <h3>{game.name}</h3>
+                </div>
+              )
+            })}
+          </div>
         </article>
 
         {/* bY META CRITIC  this year */}
@@ -82,6 +88,6 @@ const Store = () => {
       </section>
     </div>
   )
-}
+};
 
 export default Store
