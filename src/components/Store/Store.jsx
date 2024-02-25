@@ -1,10 +1,10 @@
-import { Link, useLoaderData } from 'react-router-dom';
-import exampleImg from '../../assets/exampleImage.avif';
-import classes from './Store.module.css';
-import { useState } from 'react';
-import { randomPriceString } from '../../helpers';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons';
+import { Link, useLoaderData } from 'react-router-dom'
+import exampleImg from '../../assets/exampleImage.avif'
+import classes from './Store.module.css'
+import { useState } from 'react'
+import { randomPriceString } from '../../helpers'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons'
 
 function returnCopies (game, qty = 1) {
   const copies = []
@@ -110,16 +110,61 @@ const Store = () => {
                   <h3>{game.name}</h3>
                   <span>{randomPriceString()}</span>
                 </div>
-              )
+              );
             })}
           </div>
         </article>
 
         {/* random games and last 30 days */}
         <article className={classes.listOfGamesVertical}>
-          {returnCopies(game1, 15).map((game) => {
-            return <div className={classes.cardHero}>{game.name}</div>;
-          })}
+          <div className={classes.listTitle}>
+            <h2>New Releases</h2>
+            <FontAwesomeIcon
+              className={classes.centerIcon}
+              icon={faChevronRight}
+            />
+          </div>
+          <div className={`${classes.listTitle} ${classes.listTitleDouble}`}>
+            <h2>Random Games</h2>
+            <FontAwesomeIcon
+              className={classes.centerIcon}
+              icon={faChevronRight}
+            />
+          </div>
+          <div className={classes.verticalList}>
+            {returnCopies(game1, 5).map((game, index) => {
+              return (
+                <div key={index} className={classes.cardHero}>
+                  <img
+                    src={game.background_image}
+                    alt={`${game.name} background image`}
+                  />
+                  <div>
+                    <h3>{game.name}</h3>
+                    <span>{randomPriceString()}</span>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+          <div
+            className={`${classes.verticalList} ${classes.verticalListDouble}`}
+          >
+            {returnCopies(game2, 10).map((game, index) => {
+              return (
+                <div key={index} className={classes.cardHero}>
+                  <img
+                    src={game.background_image}
+                    alt={`${game.name} background image`}
+                  />
+                  <div>
+                    <h3>{game.name}</h3>
+                    <span>{randomPriceString()}</span>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
         </article>
 
         {/* all time best */}
