@@ -20,7 +20,7 @@
 }
 body {
   display: flex;
-  /* min-width: 768px; */
+  min-width: 450px;
   min-height: 100dvh;
 }
 #root {

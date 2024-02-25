@@ -104,7 +104,7 @@ const Store = () => {
                     src={game.background_image || "/assets/default_image.png"}
                     alt={`${game.name} background image`}
                   />
-                  <h3>{game.name}</h3>
+                  <h3 className='break_lines break_lines--three'>{game.name}</h3>
                   <span>{randomPriceString()}</span>
                 </div>
               );
