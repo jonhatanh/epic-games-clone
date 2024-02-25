@@ -4,7 +4,7 @@ import classes from './Store.module.css'
 import { useState } from 'react'
 import { randomPriceString } from '../../helpers'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons'
+import { faChevronLeft, faChevronRight, faCirclePlus } from '@fortawesome/free-solid-svg-icons'
 
 function returnCopies (game, qty = 1) {
   const copies = []
@@ -29,7 +29,7 @@ const Store = () => {
           placeholder="Search store"
           className={classes.searchBar}
         />
-        <Link className={classes.link} to="discover">
+        <Link className={`${classes.link} ${classes.linkActive}`} to="discover">
           Discover
         </Link>
         <Link className={classes.link} to="browse">
@@ -42,7 +42,7 @@ const Store = () => {
           <div className={classes.mainGame}>
             <div className={classes.imageShadow} />
             <img
-              src={game1.background_image || '/assets/default_image.png'}
+              src={game1.background_image || "/assets/default_image.png"}
               alt={`${game1.name} background image`}
             />
             <div className={classes.options}>
@@ -57,12 +57,11 @@ const Store = () => {
                 <button
                   className={`${classes.button} ${classes.buttonTransparent}`}
                 >
-                  Add to wishlist
+                  <FontAwesomeIcon icon={faCirclePlus} />Add to wishlist
                 </button>
               </div>
             </div>
           </div>
-          {/* <div className={classes.sideGames}> */}
           {heroGames.results.slice(0, 6).map((game, index) => {
             return (
               <div key={index} className={classes.cardHero}>
@@ -70,11 +69,10 @@ const Store = () => {
                   src={game.background_image || "/assets/default_image.png"}
                   alt={`${game.name} background image`}
                 />
-                <h3>{game.name}</h3>
+                <h3 className='break_lines break_lines--two'>{game.name}</h3>
               </div>
             );
           })}
-          {/* </div> */}
         </article>
 
         {/* bY META CRITIC  this year */}
@@ -90,7 +88,7 @@ const Store = () => {
               </span>
             </h2>
             <div>
-              <button className={classes.buttonCircular}>
+              <button className={`${classes.buttonCircular} ${classes.disabled}`}>
                 <FontAwesomeIcon icon={faChevronLeft} />
               </button>
               <button className={classes.buttonCircular}>

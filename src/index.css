@@ -20,13 +20,31 @@
 }
 body {
   display: flex;
-  min-width: 768px;
+  /* min-width: 768px; */
   min-height: 100dvh;
 }
 #root {
 
   width: 100%;
   display: flex;
+}
+.break_lines {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+}
+.break_lines--two {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+.break_lines--three {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
 }
 
 @media (prefers-color-scheme: light) {
