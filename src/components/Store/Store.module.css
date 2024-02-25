@@ -150,3 +150,73 @@
         background-color: #444444;
     }
 }
+
+
+
+/* LIST OF GAMES HORIZONTAL */
+
+.list_of_games_horizontal {
+    display: flex;
+    flex-direction: column;
+
+    header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        h2 {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+        }
+        /* svg {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        } */
+        div {
+            display: flex;
+            gap: 0.8rem;
+        }
+    }
+}
+.button_circular {
+    padding: 8px;
+    border-radius: 50%;
+    border: none;
+    background-color: #303030;
+    font-size: 12px;
+    width: 35px;
+    height: 35px;
+}
+.center_icon {
+    display: grid;
+    font-size: 12px;
+    padding-top: 5px;
+}
+
+.card_container {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+
+    div {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        img {
+            width: 100%;
+            aspect-ratio: 9/13;
+            object-fit: cover;
+            border-radius: 10px;
+        }
+        h3 {
+            font-size: 1rem;
+            font-weight: 600;
+        }
+        span {
+            font-weight: 600;
+        }
+    }
+}
+
