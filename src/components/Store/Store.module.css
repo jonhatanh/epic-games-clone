@@ -24,6 +24,10 @@
     text-decoration: none;
     transition: all 0.3s;
 }
+.link--active {
+    opacity: 1;
+    pointer-events: none;
+}
 .link:hover {
     opacity: 1;
 }
@@ -127,29 +131,31 @@
 }
 .card_hero {
     padding: 5px 10px;
-    display: flex;
-    place-content: center;
-    gap: 5px;
-    border-radius: 20px;
+    column-gap: 10px;
+    align-items: center;
+    border-radius: 15px;
     align-items: center;
     transition: background-color 0.3s;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
 
 
     img {
         border-radius: 10px;
         object-fit: cover;
         aspect-ratio: 9/12;
-        width: 25%;
+        width: 100%;
     }
 
     div {
-        flex-grow: 1;
+        grid-column: span 3;
         display: flex;
         flex-direction: column;
         justify-content: center;
         gap: 1rem;
     }
     h3 {
+        grid-column: span 3;
         font-weight: 500;
         font-size: small;
     }
@@ -210,16 +216,16 @@
 }
 
 .card_container {
-    display: flex;
-    align-items: center;
-    gap: 14px;
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    column-gap: 20px;
 
     div {
         display: flex;
         flex-direction: column;
         gap: 10px;
         img {
-            width: 100%;
+            min-width: 100%;
             aspect-ratio: 9/13;
             object-fit: cover;
             border-radius: 10px;
@@ -242,10 +248,8 @@
         }
     }
 }
-.card_container--grid {
-    display: grid;
+.card_container--three {
     grid-template-columns: repeat(3, 1fr);
-    column-gap: 20px;
     row-gap: 35px;
 
     div {

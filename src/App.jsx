@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import styles from './App.module.css'
 import { Link, Outlet, useLocation } from 'react-router-dom'
 import NavLink from './components/NavLink/NavLink'

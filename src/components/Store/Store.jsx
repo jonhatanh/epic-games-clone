@@ -17,7 +17,6 @@ function returnCopies (game, qty = 1) {
 const Store = () => {
   const { heroGames } = useLoaderData()
   const game1 = heroGames.results[0]
-  const game2 = heroGames.results[1]
   console.log(heroGames)
   return (
     <div className={classes.store}>
@@ -43,7 +42,7 @@ const Store = () => {
           <div className={classes.mainGame}>
             <div className={classes.imageShadow} />
             <img
-              src={game1.background_image}
+              src={game1.background_image || '/assets/default_image.png'}
               alt={`${game1.name} background image`}
             />
             <div className={classes.options}>
@@ -64,11 +63,11 @@ const Store = () => {
             </div>
           </div>
           {/* <div className={classes.sideGames}> */}
-          {returnCopies(game1, 6).map((game, index) => {
+          {heroGames.results.slice(0, 6).map((game, index) => {
             return (
               <div key={index} className={classes.cardHero}>
                 <img
-                  src={game.background_image}
+                  src={game.background_image || "/assets/default_image.png"}
                   alt={`${game.name} background image`}
                 />
                 <h3>{game.name}</h3>
@@ -100,11 +99,11 @@ const Store = () => {
             </div>
           </header>
           <div className={classes.cardContainer}>
-            {returnCopies(game2, 6).map((game, index) => {
+            {heroGames.results.slice(0, 6).map((game, index) => {
               return (
                 <div key={index}>
                   <img
-                    src={game.background_image}
+                    src={game.background_image || "/assets/default_image.png"}
                     alt={`${game.name} background image`}
                   />
                   <h3>{game.name}</h3>
@@ -132,11 +131,11 @@ const Store = () => {
             />
           </div>
           <div className={classes.verticalList}>
-            {returnCopies(game1, 5).map((game, index) => {
+            {heroGames.results.slice(10, 15).map((game, index) => {
               return (
                 <div key={index} className={classes.cardHero}>
                   <img
-                    src={game.background_image}
+                    src={game.background_image || "/assets/default_image.png"}
                     alt={`${game.name} background image`}
                   />
                   <div>
@@ -150,11 +149,11 @@ const Store = () => {
           <div
             className={`${classes.verticalList} ${classes.verticalListDouble}`}
           >
-            {returnCopies(game2, 10).map((game, index) => {
+            {heroGames.results.slice(0, 10).map((game, index) => {
               return (
                 <div key={index} className={classes.cardHero}>
                   <img
-                    src={game.background_image}
+                    src={game.background_image || "/assets/default_image.png"}
                     alt={`${game.name} background image`}
                   />
                   <div>
@@ -179,25 +178,32 @@ const Store = () => {
                 />
               </span>
             </h2>
-            <div>
+            {/* <div>
               <button className={classes.buttonCircular}>
                 <FontAwesomeIcon icon={faChevronLeft} />
               </button>
               <button className={classes.buttonCircular}>
                 <FontAwesomeIcon icon={faChevronRight} />
               </button>
-            </div>
+            </div> */}
           </header>
-          <div className={`${classes.cardContainer} ${classes.cardContainerGrid}`}>
-            {returnCopies(game2, 6).map((game, index) => {
+          <div
+            className={`${classes.cardContainer} ${classes.cardContainerThree}`}
+          >
+            {heroGames.results.slice(0, 6).map((game, index) => {
               return (
                 <div key={index}>
                   <img
-                    src={game.background_image}
+                    src={game.background_image || "/assets/default_image.png"}
                     alt={`${game.name} background image`}
                   />
                   <h3>{game.name}</h3>
-                  <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quod, sequi iusto aliquam provident aliquid ex incidunt ullam rerum perferendis quisquam velit labore eius quidem inventore, aspernatur magni. Ratione, minus facilis?</p>
+                  <p>
+                    Lorem ipsum dolor, sit amet consectetur adipisicing elit.
+                    Quod, sequi iusto aliquam provident aliquid ex incidunt
+                    ullam rerum perferendis quisquam velit labore eius quidem
+                    inventore, aspernatur magni. Ratione, minus facilis?
+                  </p>
                 </div>
               );
             })}
