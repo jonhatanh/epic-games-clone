@@ -180,6 +180,8 @@
             justify-content: center;
             align-items: center;
             gap: 10px;
+            font-weight: 400;
+            font-size: 1.3rem;
         }
         /* svg {
             display: flex;
@@ -229,7 +231,29 @@
         span {
             font-weight: 600;
         }
+        p {
+            color: #9e9e9e;
+            overflow: hidden;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            line-clamp: 2;
+            -webkit-box-orient: vertical;
+
+        }
     }
+}
+.card_container--grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    column-gap: 20px;
+    row-gap: 35px;
+
+    div {
+        img {
+            aspect-ratio: 16 / 9;
+        }
+    }
+
 }
 
 .list_of_games_vertical {
@@ -257,4 +281,31 @@
 }
 .list_title--double {
     grid-column: span 2;
+}
+
+.card_goty_container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    column-gap: 20px;
+    row-gap: 35px;
+    /* gap: 20px; */
+
+    div {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        img {
+            width: 100%;
+            aspect-ratio: 16 / 9;
+            object-fit: cover;
+            border-radius: 10px;
+        }
+        h3 {
+            font-size: 1rem;
+            font-weight: 600;
+        }
+        span {
+            font-weight: 600;
+        }
+    }
 }

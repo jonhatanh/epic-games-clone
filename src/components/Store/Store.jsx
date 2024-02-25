@@ -169,9 +169,39 @@ const Store = () => {
 
         {/* all time best */}
         <article className={classes.listOfGamesHorizontal}>
-          {returnCopies(game2, 6).map((game) => {
-            return <div className={classes.cardHero}>{game.name}</div>;
-          })}
+          <header>
+            <h2>
+              Best Of All Time
+              <span>
+                <FontAwesomeIcon
+                  className={classes.centerIcon}
+                  icon={faChevronRight}
+                />
+              </span>
+            </h2>
+            <div>
+              <button className={classes.buttonCircular}>
+                <FontAwesomeIcon icon={faChevronLeft} />
+              </button>
+              <button className={classes.buttonCircular}>
+                <FontAwesomeIcon icon={faChevronRight} />
+              </button>
+            </div>
+          </header>
+          <div className={`${classes.cardContainer} ${classes.cardContainerGrid}`}>
+            {returnCopies(game2, 6).map((game, index) => {
+              return (
+                <div key={index}>
+                  <img
+                    src={game.background_image}
+                    alt={`${game.name} background image`}
+                  />
+                  <h3>{game.name}</h3>
+                  <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quod, sequi iusto aliquam provident aliquid ex incidunt ullam rerum perferendis quisquam velit labore eius quidem inventore, aspernatur magni. Ratione, minus facilis?</p>
+                </div>
+              );
+            })}
+          </div>
         </article>
       </section>
     </div>
