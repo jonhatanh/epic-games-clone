@@ -379,4 +379,30 @@
       }
     }
   }
+
+  /* List of games vertical */
+  .list_of_games_vertical {
+    grid-template-columns: repeat(2, 1fr);
+    row-gap: 1rem;
+  }
+  .vertical_list {
+    grid-column: span 2;
+    row-gap: 12px;
+    order: 2;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+
+    .card_hero {
+      grid-column: auto;
+    }
+  }
+  .vertical_list--double {
+    order: 4;
+  }
+  .list_title {
+    grid-column: span 2;
+    order: 1;
+  }
+  .list_title--double {
+    order: 3;
+  }
 }
