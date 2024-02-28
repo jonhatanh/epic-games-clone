@@ -1,0 +1,7 @@
+.hero_games {
+  display: grid;
+  grid-template-columns: 80% 1fr;
+  column-gap: 0.5rem;
+  grid-template-rows: repeat(6, 1fr);
+}
+

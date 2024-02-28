@@ -1,10 +1,12 @@
 import { Link, useLoaderData } from 'react-router-dom'
 import exampleImg from '../../assets/exampleImage.avif'
 import classes from './Store.module.css'
+import globalClasses from '../../Global.module.css'
 import { useState } from 'react'
 import { randomPriceString } from '../../helpers'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faChevronLeft, faChevronRight, faCirclePlus } from '@fortawesome/free-solid-svg-icons'
+import Hero from '../Hero/Hero'
 
 function returnCopies (game, qty = 1) {
   const copies = []
@@ -37,43 +39,7 @@ const Store = () => {
         </Link>
       </nav>
       <section className={classes.storeMain}>
-        {/* best last six months */}
-        <article className={classes.heroGames}>
-          <div className={classes.mainGame}>
-            <div className={classes.imageShadow} />
-            <img
-              src={game1.background_image || "/assets/default_image.png"}
-              alt={`${game1.name} background image`}
-            />
-            <div className={classes.options}>
-              <h3>{game1.name}</h3>
-              <p className={classes.price}>
-                Starting at <span>{randomPriceString()}</span>
-              </p>
-              <div>
-                <button className={`${classes.button} ${classes.buttonWhite}`}>
-                  Buy Now
-                </button>
-                <button
-                  className={`${classes.button} ${classes.buttonTransparent}`}
-                >
-                  <FontAwesomeIcon icon={faCirclePlus} />Add to wishlist
-                </button>
-              </div>
-            </div>
-          </div>
-          {heroGames.results.slice(0, 6).map((game, index) => {
-            return (
-              <div key={index} className={classes.cardHero}>
-                <img
-                  src={game.background_image || "/assets/default_image.png"}
-                  alt={`${game.name} background image`}
-                />
-                <h3 className='break_lines break_lines--two'>{game.name}</h3>
-              </div>
-            );
-          })}
-        </article>
+        <Hero games={heroGames.results.slice(0, 6)} />
 
         {/* bY META CRITIC  this year */}
         <article className={classes.listOfGamesHorizontal}>
@@ -131,7 +97,7 @@ const Store = () => {
           <div className={classes.verticalList}>
             {heroGames.results.slice(10, 15).map((game, index) => {
               return (
-                <div key={index} className={classes.cardHero}>
+                <div key={index} className={globalClasses.cardHero}>
                   <img
                     src={game.background_image || "/assets/default_image.png"}
                     alt={`${game.name} background image`}
@@ -149,7 +115,7 @@ const Store = () => {
           >
             {heroGames.results.slice(0, 10).map((game, index) => {
               return (
-                <div key={index} className={classes.cardHero}>
+                <div key={index} className={globalClasses.cardHero}>
                   <img
                     src={game.background_image || "/assets/default_image.png"}
                     alt={`${game.name} background image`}

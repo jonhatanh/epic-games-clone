@@ -38,14 +38,14 @@
   gap: 3rem;
 }
 
-.hero_games {
+/* .hero_games {
   display: grid;
   grid-template-columns: 80% 1fr;
   column-gap: 0.5rem;
   grid-template-rows: repeat(6, 1fr);
-}
+} */
 
-.main_game {
+/* .main_game {
   position: relative;
   overflow: hidden;
   border-radius: 25px;
@@ -93,10 +93,9 @@
     div {
       display: flex;
       gap: 1rem;
-      /* background-color: red; */
     }
   }
-}
+} */
 .button {
   background-color: white;
   color: #141414;
@@ -128,7 +127,7 @@
     grid-template-rows: repeat(6, 1fr);
     gap: 3px;
 } */
-.card_hero {
+/* .card_hero {
   padding: 5px 10px;
   column-gap: 10px;
   align-items: center;
@@ -165,7 +164,7 @@
   &:hover {
     background-color: #444444;
   }
-}
+} */
 
 /* LIST OF GAMES HORIZONTAL */
 
