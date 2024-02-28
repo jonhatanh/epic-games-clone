@@ -14,7 +14,7 @@
     z-index: 5;
   }
   img {
-    width: 100%;
+  width: 100%;
     aspect-ratio: 16 / 9;
     object-fit: cover;
     border-radius: 25px;
@@ -51,3 +51,9 @@
   }
 }
 
+@media (max-width: 767px) {
+.main_game {
+    grid-column: span 6;
+    /* grid-row: span 3; */
+  }
+}

@@ -96,31 +96,7 @@
     }
   }
 } */
-.button {
-  background-color: white;
-  color: #141414;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 8px;
-  padding: 1rem 0;
-  width: clamp(100px, 150px, 100%);
-  border-radius: 5px;
-  outline: none;
-  border: none;
-  text-transform: uppercase;
-  font-weight: 700;
-  font-size: 0.5rem;
-  letter-spacing: 2px;
-}
-.button.button--white {
-  color: #141414;
-  background-color: white;
-}
-.button.button--transparent {
-  color: white;
-  background-color: transparent;
-}
+
 
 /* .side_games {
     display: grid;
@@ -313,25 +289,25 @@
 
 @media (max-width: 767px) {
   .store {
-    background-color: rgb(41, 46, 51);
+    /* background-color: rgb(41, 46, 51); */
   }
 
   /* Hero */
-  .hero_games {
+/*   .hero_games {
     grid-template-columns: repeat(6, 1fr);
     column-gap: 0.5rem;
     row-gap: 15px;
     grid-template-rows: auto;
     grid-auto-rows: minmax(0px, 1fr);
-  }
+  } */
 
-  .main_game {
+  /* .main_game {
     grid-column: span 6;
-    /* grid-row: span 3; */
+    
   }
   .card_hero {
     grid-column: span 2;
-  }
+  } */
 
   /* List of game horizontal */
 

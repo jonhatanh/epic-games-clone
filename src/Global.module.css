@@ -1,4 +1,7 @@
 .card_hero {
+  cursor: pointer;
+ position: relative;
+ overflow: hidden;
   padding: 5px 10px;
   column-gap: 10px;
   align-items: center;
@@ -34,5 +37,38 @@
 
   &:hover {
     background-color: #444444;
+  }
+}
+
+.button {
+  background-color: white;
+  color: #141414;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  padding: 1rem 0;
+  width: clamp(100px, 150px, 100%);
+  border-radius: 5px;
+  outline: none;
+  border: none;
+  text-transform: uppercase;
+  font-weight: 700;
+  font-size: 0.7rem;
+  letter-spacing: 2px;
+}
+.button.button--white {
+  color: #141414;
+  background-color: white;
+}
+.button.button--transparent {
+  color: white;
+  background-color: transparent;
+}
+
+
+@media (max-width: 767px) {
+.card_hero {
+    grid-column: span 2;
   }
 }

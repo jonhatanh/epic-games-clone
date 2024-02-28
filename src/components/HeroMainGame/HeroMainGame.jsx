@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types'
 import classes from './HeroMainGame.module.css'
+import globalClasses from '../../Global.module.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCirclePlus } from '@fortawesome/free-solid-svg-icons'
 import { randomPriceString } from '../../helpers'
@@ -17,10 +18,10 @@ const HeroMainGame = ({ game }) => {
           Starting at <span>{randomPriceString()}</span>
         </p>
         <div>
-          <button className={`${classes.button} ${classes.buttonWhite}`}>
+          <button className={`${globalClasses.button} ${globalClasses.buttonWhite}`}>
             Buy Now
           </button>
-          <button className={`${classes.button} ${classes.buttonTransparent}`}>
+          <button className={`${globalClasses.button} ${globalClasses.buttonTransparent}`}>
             <FontAwesomeIcon icon={faCirclePlus} />
             Add to wishlist
           </button>
