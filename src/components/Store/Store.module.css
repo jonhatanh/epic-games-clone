@@ -144,7 +144,7 @@
 
 /* LIST OF GAMES HORIZONTAL */
 
-.list_of_games_horizontal {
+/* .list_of_games_horizontal {
   display: flex;
   flex-direction: column;
   gap: 0.7rem;
@@ -160,18 +160,13 @@
       font-weight: 400;
       font-size: 1.3rem;
     }
-    /* svg {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        } */
     div {
       display: flex;
       gap: 0.8rem;
     }
   }
-}
-.button_circular {
+} */
+/* .button_circular {
   padding: 8px;
   border-radius: 50%;
   border: none;
@@ -189,9 +184,9 @@
   display: grid;
   font-size: 12px;
   padding-top: 5px;
-}
+} */
 
-.card_container {
+/* .card_container {
   display: grid;
   grid-template-columns: repeat(6, 1fr);
   column-gap: 20px;
@@ -232,7 +227,7 @@
       aspect-ratio: 16 / 9;
     }
   }
-}
+} */
 
 .list_of_games_vertical {
   display: grid;
@@ -311,7 +306,7 @@
 
   /* List of game horizontal */
 
-  .card_container {
+/*   .card_container {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     column-gap: 20px;
@@ -352,7 +347,7 @@
         aspect-ratio: 16 / 9;
       }
     }
-  }
+  } */
 
   /* List of games vertical */
   .list_of_games_vertical {

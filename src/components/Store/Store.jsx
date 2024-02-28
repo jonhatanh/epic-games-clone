@@ -7,6 +7,7 @@ import { randomPriceString } from '../../helpers'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faChevronLeft, faChevronRight, faCirclePlus } from '@fortawesome/free-solid-svg-icons'
 import Hero from '../Hero/Hero'
+import GamesHorizontal from '../GamesHorizontal/GamesHorizontal'
 
 function returnCopies (game, qty = 1) {
   const copies = []
@@ -42,41 +43,8 @@ const Store = () => {
         <Hero games={heroGames.results.slice(0, 6)} />
 
         {/* bY META CRITIC  this year */}
-        <article className={classes.listOfGamesHorizontal}>
-          <header>
-            <h2>
-              Best Of This Year
-              <span>
-                <FontAwesomeIcon
-                  className={classes.centerIcon}
-                  icon={faChevronRight}
-                />
-              </span>
-            </h2>
-            <div>
-              <button className={`${classes.buttonCircular} ${classes.disabled}`}>
-                <FontAwesomeIcon icon={faChevronLeft} />
-              </button>
-              <button className={classes.buttonCircular}>
-                <FontAwesomeIcon icon={faChevronRight} />
-              </button>
-            </div>
-          </header>
-          <div className={classes.cardContainer}>
-            {heroGames.results.slice(0, 6).map((game, index) => {
-              return (
-                <div key={index}>
-                  <img
-                    src={game.background_image || "/assets/default_image.png"}
-                    alt={`${game.name} background image`}
-                  />
-                  <h3 className='break_lines break_lines--three'>{game.name}</h3>
-                  <span>{randomPriceString()}</span>
-                </div>
-              );
-            })}
-          </div>
-        </article>
+        <GamesHorizontal games={heroGames.results.slice(0, 16)} />
+        
 
         {/* random games and last 30 days */}
         <article className={classes.listOfGamesVertical}>

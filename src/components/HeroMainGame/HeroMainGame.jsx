@@ -32,7 +32,7 @@ const HeroMainGame = ({ game }) => {
 }
 
 HeroMainGame.propTypes = {
-  game: PropTypes
+  game: PropTypes.object.isRequired
 }
 
 export default HeroMainGame
