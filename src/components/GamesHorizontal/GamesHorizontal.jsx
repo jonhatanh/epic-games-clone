@@ -10,6 +10,7 @@ import PropTypes from 'prop-types';
 import { randomPriceString } from '../../helpers';
 import HeroMainGame from '../HeroMainGame/HeroMainGame';
 import { useEffect, useRef, useState } from 'react';
+import GameCard from '../GameCard/GameCard';
 const GamesHorizontal = ({ games }) => {
   const [leftButtonDisabled, setLeftButtonDisabled] = useState(true)
   const [rightButtonDisabled, setRightButtonDisabled] = useState(false)
@@ -79,14 +80,13 @@ const GamesHorizontal = ({ games }) => {
       >
         {games.map((game, index) => {
           return (
-            <div key={index}>
-              <img
-                src={game.background_image || '/assets/default_image.png'}
-                alt={`${game.name} background image`}
-              />
-              <h3 className='break_lines break_lines--three'>{game.name}</h3>
-              <span>{randomPriceString()}</span>
-            </div>
+            <GameCard
+              key={game.id}
+              game={game}
+              showPrice
+              breakLines='three'
+              cardSize='small'
+            />
           )
         })}
       </div>

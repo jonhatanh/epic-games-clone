@@ -10,6 +10,7 @@ import PropTypes from 'prop-types'
 import { randomPriceString } from '../../helpers'
 import HeroMainGame from '../HeroMainGame/HeroMainGame'
 import { useEffect, useRef, useState } from 'react'
+import GameCard from '../GameCard/GameCard'
 const GamesVertical = ({ randomGames, recentGames }) => {
   return (
     <article className={classes.listOfGamesVertical}>
@@ -24,36 +25,13 @@ const GamesVertical = ({ randomGames, recentGames }) => {
       <div className={classes.verticalList}>
         {recentGames.map((game, index) => {
           return (
-            <div
-              key={index}
-              className={`${globalClasses.cardHero} ${classes.cardHeroSmall}`}
-            >
-              <img
-                src={game.background_image || "/assets/default_image.png"}
-                alt={`${game.name} background image`}
-              />
-              <div>
-                <h3>{game.name}</h3>
-                <span>{randomPriceString()}</span>
-              </div>
-            </div>
+            <GameCard key={game.id} game={game} cardSize='small'/>
           );
         })}
       </div>
       <div className={`${classes.verticalList} ${classes.verticalListDouble}`}>
         {randomGames.map((game, index) => {
-          return (
-            <div key={index} className={`${globalClasses.cardHero} ${classes.cardHeroSmall}`}>
-              <img
-                src={game.background_image || '/assets/default_image.png'}
-                alt={`${game.name} background image`}
-              />
-              <div>
-                <h3>{game.name}</h3>
-                <span>{randomPriceString()}</span>
-              </div>
-            </div>
-          )
+          return <GameCard key={game.id} game={game} cardSize="small" />;
         })}
       </div>
     </article>
