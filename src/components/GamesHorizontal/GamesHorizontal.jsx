@@ -74,7 +74,7 @@ const GamesHorizontal = ({ games }) => {
       </header>
       <div
         ref={gamesContainerRef}
-        className={classes.cardContainer}
+        className={globalClasses.cardContainer}
         onScroll={(e) => checkButtonStatus(e)}
       >
         {games.map((game, index) => {

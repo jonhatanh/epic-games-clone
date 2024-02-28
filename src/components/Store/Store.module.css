@@ -229,7 +229,7 @@
   }
 } */
 
-.list_of_games_vertical {
+/* .list_of_games_vertical {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   row-gap: 1rem;
@@ -253,7 +253,7 @@
 }
 .list_title--double {
   grid-column: span 2;
-}
+} */
 
 .card_goty_container {
   display: grid;

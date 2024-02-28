@@ -8,6 +8,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faChevronLeft, faChevronRight, faCirclePlus } from '@fortawesome/free-solid-svg-icons'
 import Hero from '../Hero/Hero'
 import GamesHorizontal from '../GamesHorizontal/GamesHorizontal'
+import GamesVertical from '../GamesVertical/GamesVertical'
 
 function returnCopies (game, qty = 1) {
   const copies = []
@@ -44,59 +45,12 @@ const Store = () => {
 
         {/* bY META CRITIC  this year */}
         <GamesHorizontal games={heroGames.results.slice(0, 16)} />
-        
 
         {/* random games and last 30 days */}
-        <article className={classes.listOfGamesVertical}>
-          <div className={classes.listTitle}>
-            <h2>New Releases</h2>
-            <FontAwesomeIcon
-              className={classes.centerIcon}
-              icon={faChevronRight}
-            />
-          </div>
-          <div className={`${classes.listTitle} ${classes.listTitleDouble}`}>
-            <h2>Random Games</h2>
-            <FontAwesomeIcon
-              className={classes.centerIcon}
-              icon={faChevronRight}
-            />
-          </div>
-          <div className={classes.verticalList}>
-            {heroGames.results.slice(10, 15).map((game, index) => {
-              return (
-                <div key={index} className={globalClasses.cardHero}>
-                  <img
-                    src={game.background_image || "/assets/default_image.png"}
-                    alt={`${game.name} background image`}
-                  />
-                  <div>
-                    <h3>{game.name}</h3>
-                    <span>{randomPriceString()}</span>
-                  </div>
-                </div>
-              );
-            })}
-          </div>
-          <div
-            className={`${classes.verticalList} ${classes.verticalListDouble}`}
-          >
-            {heroGames.results.slice(0, 10).map((game, index) => {
-              return (
-                <div key={index} className={globalClasses.cardHero}>
-                  <img
-                    src={game.background_image || "/assets/default_image.png"}
-                    alt={`${game.name} background image`}
-                  />
-                  <div>
-                    <h3>{game.name}</h3>
-                    <span>{randomPriceString()}</span>
-                  </div>
-                </div>
-              );
-            })}
-          </div>
-        </article>
+        <GamesVertical
+          recentGames={heroGames.results.slice(10, 15)}
+          randomGames={heroGames.results.slice(0, 10)}
+        />
 
         {/* all time best */}
         <article className={classes.listOfGamesHorizontal}>
