@@ -2,14 +2,9 @@ import classes from './GamesVertical.module.css'
 import globalClasses from './../../Global.module.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {
-  faChevronLeft,
-  faChevronRight,
-  faCirclePlus
+  faChevronRight
 } from '@fortawesome/free-solid-svg-icons'
 import PropTypes from 'prop-types'
-import { randomPriceString } from '../../helpers'
-import HeroMainGame from '../HeroMainGame/HeroMainGame'
-import { useEffect, useRef, useState } from 'react'
 import GameCard from '../GameCard/GameCard'
 const GamesVertical = ({ randomGames, recentGames }) => {
   return (
@@ -24,14 +19,12 @@ const GamesVertical = ({ randomGames, recentGames }) => {
       </div>
       <div className={classes.verticalList}>
         {recentGames.map((game, index) => {
-          return (
-            <GameCard key={game.id} game={game} cardSize='small'/>
-          );
+          return <GameCard key={game.id} game={game} cardSize='small' />
         })}
       </div>
       <div className={`${classes.verticalList} ${classes.verticalListDouble}`}>
         {randomGames.map((game, index) => {
-          return <GameCard key={game.id} game={game} cardSize="small" />;
+          return <GameCard key={game.id} game={game} cardSize='small' />
         })}
       </div>
     </article>

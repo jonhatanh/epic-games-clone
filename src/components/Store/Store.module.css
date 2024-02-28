@@ -350,7 +350,7 @@
   } */
 
   /* List of games vertical */
-  .list_of_games_vertical {
+  /* .list_of_games_vertical {
     grid-template-columns: repeat(2, 1fr);
     row-gap: 1rem;
   }
@@ -373,5 +373,5 @@
   }
   .list_title--double {
     order: 3;
-  }
+  } */
 }

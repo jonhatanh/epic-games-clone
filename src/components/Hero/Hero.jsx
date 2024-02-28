@@ -1,12 +1,8 @@
-import classes from './Hero.module.css';
-import globalClasses from './../../Global.module.css';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCirclePlus } from '@fortawesome/free-solid-svg-icons';
-import PropTypes from 'prop-types';
-import { randomPriceString } from '../../helpers';
-import HeroMainGame from '../HeroMainGame/HeroMainGame';
-import { useEffect, useState } from 'react';
-import GameCard from '../GameCard/GameCard';
+import classes from './Hero.module.css'
+import PropTypes from 'prop-types'
+import HeroMainGame from '../HeroMainGame/HeroMainGame'
+import { useEffect, useState } from 'react'
+import GameCard from '../GameCard/GameCard'
 const Hero = ({ games }) => {
   const [mainGameId, setMainGameId] = useState(games[0].id)
   const mainGame = games.find((game) => game.id === mainGameId)
@@ -36,10 +32,10 @@ const Hero = ({ games }) => {
       })}
     </article>
   )
-};
+}
 
 Hero.propTypes = {
   games: PropTypes.arrayOf(PropTypes.object).isRequired
-};
+}
 
 export default Hero

@@ -1,16 +1,13 @@
-import classes from './GamesHorizontal.module.css';
-import globalClasses from './../../Global.module.css';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import classes from './GamesHorizontal.module.css'
+import globalClasses from './../../Global.module.css'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {
   faChevronLeft,
-  faChevronRight,
-  faCirclePlus
-} from '@fortawesome/free-solid-svg-icons';
-import PropTypes from 'prop-types';
-import { randomPriceString } from '../../helpers';
-import HeroMainGame from '../HeroMainGame/HeroMainGame';
-import { useEffect, useRef, useState } from 'react';
-import GameCard from '../GameCard/GameCard';
+  faChevronRight
+} from '@fortawesome/free-solid-svg-icons'
+import PropTypes from 'prop-types'
+import { useRef, useState } from 'react'
+import GameCard from '../GameCard/GameCard'
 const GamesHorizontal = ({ games }) => {
   const [leftButtonDisabled, setLeftButtonDisabled] = useState(true)
   const [rightButtonDisabled, setRightButtonDisabled] = useState(false)
@@ -92,10 +89,10 @@ const GamesHorizontal = ({ games }) => {
       </div>
     </article>
   )
-};
+}
 
 GamesHorizontal.propTypes = {
   games: PropTypes.arrayOf(PropTypes.object).isRequired
-};
+}
 
 export default GamesHorizontal

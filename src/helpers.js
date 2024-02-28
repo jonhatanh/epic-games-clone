@@ -17,3 +17,11 @@ export function parsePrice (price) {
 export function randomPriceString (min = 200, max = 1500) {
   return parsePrice(randomPrice(min, max))
 }
+
+export function returnCopies (game, qty = 1) {
+  const copies = []
+  for (let i = 1; i <= qty; i++) {
+    copies.push({ ...game })
+  }
+  return copies
+}
