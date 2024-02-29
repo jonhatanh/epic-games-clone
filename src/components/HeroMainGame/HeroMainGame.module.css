@@ -51,9 +51,25 @@
   }
 }
 
+.enter_animation {
+  animation: enter forwards 0.7s ;
+}
+
+@keyframes enter {
+  from {
+    opacity: 0.3;
+    transform: translateX(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0px);
+  }
+}
+
 @media (max-width: 767px) {
 .main_game {
     grid-column: span 6;
     /* grid-row: span 3; */
   }
 }
+
