@@ -1,0 +1,27 @@
+.nav {
+  display: flex;
+  gap: 2rem;
+  align-items: center;
+  list-style: none;
+}
+
+.search__bar {
+  padding: 0.6rem 1rem;
+  border-radius: 20px;
+  border-width: 0px;
+  color: white;
+}
+
+.link {
+  color: rgb(255, 255, 255);
+  opacity: 0.8;
+  text-decoration: none;
+  transition: all 0.3s;
+}
+.link--active {
+  opacity: 1;
+  pointer-events: none;
+}
+.link:hover {
+  opacity: 1;
+}

@@ -1,10 +1,9 @@
 .store {
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: 2rem;
 }
-.nav {
-  padding: 0rem 0 1rem 0;
+/* .nav {
   display: flex;
   gap: 2rem;
   align-items: center;
@@ -30,13 +29,13 @@
 }
 .link:hover {
   opacity: 1;
-}
+} */
 
-.store_main {
+/* .store_main {
   display: flex;
   flex-direction: column;
   gap: 3rem;
-}
+} */
 
 /* .hero_games {
   display: grid;
@@ -255,12 +254,11 @@
   grid-column: span 2;
 } */
 
-.card_goty_container {
+/* .card_goty_container {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   column-gap: 20px;
   row-gap: 35px;
-  /* gap: 20px; */
 
   div {
     display: flex;
@@ -280,7 +278,7 @@
       font-weight: 600;
     }
   }
-}
+} */
 
 @media (max-width: 767px) {
   .store {

@@ -3,7 +3,9 @@ import ErrorPage from './ErrorPage'
 import Welcome from './Welcome/Welcome'
 import Store from './Store/Store'
 import App from '../App'
-import { gamesLoader } from './Store/Store.loader'
+import { gamesLoader } from './Discover/Discover.loader'
+import Discover from './Discover/Discover'
+import ShowGame from './ShowGame/ShowGame'
 
 const Router = () => {
   const router = createBrowserRouter([
@@ -15,11 +17,11 @@ const Router = () => {
         {
           path: 'store',
           element: <Store />,
-          loader: gamesLoader,
-          // children: [
-          //   { index: true, element: <Discover /> },
-          //   { path: 'browse', element: <BrowseStore /> }
-          // ]
+          children: [
+            { index: true, element: <Discover />, loader: gamesLoader },
+            // { path: 'browse', element: <BrowseStore /> }
+            { path: 'games/:gameId', element: <ShowGame /> }
+          ]
         }
       ],
       errorElement: <ErrorPage />
