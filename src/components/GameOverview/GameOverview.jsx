@@ -1,12 +1,25 @@
-import { useLoaderData } from "react-router-dom";
+import { Link, useLoaderData } from 'react-router-dom'
 import classes from './GameOverview.module.css'
-import { randomPriceString } from "../../helpers";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCaretLeft, faCaretRight, faChevronLeft, faChevronRight, faCirclePlus } from "@fortawesome/free-solid-svg-icons";
-import Button from "../Button/Button";
+import { randomPriceString } from '../../helpers'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import {
+  faCaretLeft,
+  faCaretRight,
+  faChevronLeft,
+  faChevronRight,
+  faCirclePlus
+} from '@fortawesome/free-solid-svg-icons'
+import Button from '../Button/Button'
+import React from 'react'
+
+function justEnglishDescription (description) {
+  description = description.replaceAll('<br />', '<br /><br />')
+  return description.split('Español')[0]
+}
+
 const GameOverview = () => {
-  const { game } = useLoaderData();
-  console.log(game);
+  const { game } = useLoaderData()
+  console.log(game)
   return (
     <div className={classes.container}>
       <h1 className={classes.title}>{game.name}</h1>
@@ -42,19 +55,52 @@ const GameOverview = () => {
               </button>
             </div>
           </div>
-          <p>
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Totam
-            voluptate dolor voluptatibus sunt at odit expedita quasi nostrum
-            ducimus animi harum commodi, eum, ad velit ab. Maxime, autem.
-            Architecto, ea?
-          </p>
+          <div className={classes.gameExtras}>
+            <div className={classes.genreTags}>
+              <span>Genres</span>
+              <div>
+                {game.genres.map((genre, index) => {
+                  const lastItem = game.genres.length - 1 === index;
+                  return (
+                    <React.Fragment key={genre.id}>
+                      <Link>{genre.name}</Link>
+                      {lastItem ? "" : ", "}
+                    </React.Fragment>
+                  );
+                })}
+              </div>
+            </div>
+            <div className={classes.genreTags}>
+              <span>Tags</span>
+              <div>
+                {game.tags.map((tags, index) => {
+                  const lastItem = game.tags.length - 1 === index;
+                  return (
+                    <React.Fragment key={tags.id}>
+                      <Link>{tags.name}</Link>
+                      {lastItem ? "" : ", "}
+                    </React.Fragment>
+                  );
+                })}
+              </div>
+            </div>
+          </div>
+          <div
+            dangerouslySetInnerHTML={{
+              __html: justEnglishDescription(game.description),
+            }}
+          />
         </main>
         {/* Game checkout */}
         <aside>
           <img src={game.background_image} alt="Game Background Image" />
           <span>{randomPriceString()}</span>
-          <Button size="large" bgColor="blue">Buy Now</Button>
-          <Button border size="large">Add to cart</Button>
+          <Button size="large" bgColor="blue">
+            Buy Now
+          </Button>
+          <Button border size="large">
+            Add to cart
+          </Button>
           <Button border size="large">
             <FontAwesomeIcon icon={faCirclePlus} />
             Add to wishlist
