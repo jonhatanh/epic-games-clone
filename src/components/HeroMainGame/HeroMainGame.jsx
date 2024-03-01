@@ -5,6 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCirclePlus } from '@fortawesome/free-solid-svg-icons'
 import { randomPriceString } from '../../helpers'
 import { useEffect, useRef } from 'react'
+import Button from '../Button/Button'
 const HeroMainGame = ({ game }) => {
   const imageRef = useRef(null)
   useEffect(() => {
@@ -27,13 +28,13 @@ const HeroMainGame = ({ game }) => {
           Starting at <span>{randomPriceString()}</span>
         </p>
         <div>
-          <button className={`${globalClasses.button} ${globalClasses.buttonWhite}`}>
+          <Button bgColor='white'>
             Buy Now
-          </button>
-          <button className={`${globalClasses.button} ${globalClasses.buttonTransparent}`}>
+          </Button>
+          <Button textSize='small'>
             <FontAwesomeIcon icon={faCirclePlus} />
             Add to wishlist
-          </button>
+          </Button>
         </div>
       </div>
     </div>

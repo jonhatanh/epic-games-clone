@@ -2,7 +2,8 @@ import { useLoaderData } from "react-router-dom";
 import classes from './GameOverview.module.css'
 import { randomPriceString } from "../../helpers";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCaretLeft, faCaretRight, faChevronLeft, faChevronRight } from "@fortawesome/free-solid-svg-icons";
+import { faCaretLeft, faCaretRight, faChevronLeft, faChevronRight, faCirclePlus } from "@fortawesome/free-solid-svg-icons";
+import Button from "../Button/Button";
 const GameOverview = () => {
   const { game } = useLoaderData();
   console.log(game);
@@ -52,9 +53,12 @@ const GameOverview = () => {
         <aside>
           <img src={game.background_image} alt="Game Background Image" />
           <span>{randomPriceString()}</span>
-          <button>BUY NOW</button>
-          <button>ADD TO CART</button>
-          <button>ADD TO WISHLIST</button>
+          <Button size="large" bgColor="blue">Buy Now</Button>
+          <Button border size="large">Add to cart</Button>
+          <Button border size="large">
+            <FontAwesomeIcon icon={faCirclePlus} />
+            Add to wishlist
+          </Button>
         </aside>
       </div>
       <div>{/* Archivements */}</div>

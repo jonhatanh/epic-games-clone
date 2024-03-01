@@ -1,4 +1,4 @@
-.button {
+/* .button {
   background-color: white;
   color: #141414;
   display: flex;
@@ -22,7 +22,7 @@
 .button.button--transparent {
   color: white;
   background-color: transparent;
-}
+} */
 
 .button_circular {
   padding: 8px;
