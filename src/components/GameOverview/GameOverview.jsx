@@ -11,6 +11,7 @@ import {
 } from '@fortawesome/free-solid-svg-icons'
 import Button from '../Button/Button'
 import React from 'react'
+import Collapsable from '../Collapsable/Collapsable'
 
 function justEnglishDescription (description) {
   description = description.replaceAll('<br />', '<br /><br />')
@@ -35,7 +36,7 @@ const GameOverview = () => {
           {/* Media Player */}
           <div className={classes.galleryContainer}>
             <div className={classes.mainImage}>
-              <img src={game.background_image} alt="Game Image" />
+              <img src={game.background_image} alt='Game Image' />
             </div>
             <div className={classes.gallery}>
               <button>
@@ -45,10 +46,10 @@ const GameOverview = () => {
                 <img
                   className={classes.active}
                   src={game.background_image}
-                  alt="Game Image"
+                  alt='Game Image'
                 />
-                <img src={game.background_image} alt="Game Image" />
-                <img src={game.background_image} alt="Game Image" />
+                <img src={game.background_image} alt='Game Image' />
+                <img src={game.background_image} alt='Game Image' />
               </div>
               <button>
                 <FontAwesomeIcon icon={faChevronRight} />
@@ -56,52 +57,59 @@ const GameOverview = () => {
             </div>
           </div>
           <div className={classes.gameExtras}>
-            <div className={classes.genreTags}>
-              <span>Genres</span>
-              <div>
-                {game.genres.map((genre, index) => {
-                  const lastItem = game.genres.length - 1 === index;
-                  return (
-                    <React.Fragment key={genre.id}>
-                      <Link>{genre.name}</Link>
-                      {lastItem ? "" : ", "}
-                    </React.Fragment>
-                  );
-                })}
+            <Collapsable>
+              <div className={classes.genreTags}>
+                <span>Genres</span>
+                <div>
+                  {game.genres.map((genre, index) => {
+                    const lastItem = game.genres.length - 1 === index
+                    return (
+                      <React.Fragment key={genre.id}>
+                        <Link>{genre.name}</Link>
+                        {lastItem ? '' : ', '}
+                      </React.Fragment>
+                    )
+                  })}
+                </div>
               </div>
-            </div>
-            <div className={classes.genreTags}>
-              <span>Tags</span>
-              <div>
-                {game.tags.map((tags, index) => {
-                  const lastItem = game.tags.length - 1 === index;
-                  return (
-                    <React.Fragment key={tags.id}>
-                      <Link>{tags.name}</Link>
-                      {lastItem ? "" : ", "}
-                    </React.Fragment>
-                  );
-                })}
+            </Collapsable>
+            <Collapsable>
+              <div className={classes.genreTags}>
+                <span>Tags</span>
+                <div>
+                  {game.tags.map((tags, index) => {
+                    const lastItem = game.tags.length - 1 === index
+                    return (
+                      <React.Fragment key={tags.id}>
+                        <Link>{tags.name}</Link>
+                        {lastItem ? '' : ', '}
+                      </React.Fragment>
+                    )
+                  })}
+                </div>
               </div>
-            </div>
+            </Collapsable>
           </div>
-          <div
-            dangerouslySetInnerHTML={{
-              __html: justEnglishDescription(game.description),
-            }}
-          />
+          <Collapsable size='large'>
+            <div
+              className={classes.gameDescription}
+              dangerouslySetInnerHTML={{
+                __html: justEnglishDescription(game.description)
+              }}
+            />
+          </Collapsable>
         </main>
         {/* Game checkout */}
         <aside>
-          <img src={game.background_image} alt="Game Background Image" />
+          <img src={game.background_image} alt='Game Background Image' />
           <span>{randomPriceString()}</span>
-          <Button size="large" bgColor="blue">
+          <Button size='large' bgColor='blue'>
             Buy Now
           </Button>
-          <Button border size="large">
+          <Button border size='large'>
             Add to cart
           </Button>
-          <Button border size="large">
+          <Button border size='large'>
             <FontAwesomeIcon icon={faCirclePlus} />
             Add to wishlist
           </Button>
@@ -110,7 +118,7 @@ const GameOverview = () => {
       <div>{/* Archivements */}</div>
       <div>{/* Sistem req */}</div>
     </div>
-  );
+  )
 }
 
 export default GameOverview

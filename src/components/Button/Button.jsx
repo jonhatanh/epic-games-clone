@@ -29,7 +29,7 @@ const Button = ({
 
 Button.propTypes = {
   children: PropTypes.node,
-  bgColor: PropTypes.oneOf(['transparent', 'white', 'blue']),
+  bgColor: PropTypes.oneOf(['transparent', 'white', 'blue', 'gray']),
   textSize: PropTypes.oneOf(['small', 'normal', 'large']),
   size: PropTypes.oneOf(['small', 'normal', 'large']),
   border: PropTypes.bool

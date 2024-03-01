@@ -1,0 +1,46 @@
+
+.collapsable {
+  position: relative;
+  overflow: hidden;
+  max-height: 130px;
+  &::after {
+    position: absolute;
+    content: '';
+    bottom: 25px;
+    left: 0;
+    right: 0;
+    height: 70px;
+    background: linear-gradient(rgba(255, 255, 255, 0), black);
+  }
+
+  button {
+    position: absolute;
+    max-height: 100px;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 5;
+  }
+}
+.collapsable--small {
+  max-height: 100px;
+}
+.collapsable--large {
+  max-height: 200px;
+}
+.collapsable--false {
+  max-height: none;
+  overflow: initial;
+  button {
+    position: relative;
+    margin-top: 10px;
+    svg {
+      transition: all 0.3s;
+      transform: rotate(180deg);
+    }
+  }
+  &::after {
+    display: none;
+  }
+
+}
