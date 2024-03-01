@@ -1,5 +1,8 @@
 import { useLoaderData } from "react-router-dom";
 import classes from './GameOverview.module.css'
+import { randomPriceString } from "../../helpers";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCaretLeft, faCaretRight, faChevronLeft, faChevronRight } from "@fortawesome/free-solid-svg-icons";
 const GameOverview = () => {
   const { game } = useLoaderData();
   console.log(game);
@@ -16,18 +19,26 @@ const GameOverview = () => {
         {/* Game Info */}
         <main>
           {/* Media Player */}
-          <div>
+          <div className={classes.galleryContainer}>
             <div className={classes.mainImage}>
               <img src={game.background_image} alt="Game Image" />
             </div>
             <div className={classes.gallery}>
-              <button>Left</button>
+              <button>
+                <FontAwesomeIcon icon={faChevronLeft} />
+              </button>
               <div>
-                <img src={game.background_image} alt="Game Image" />
+                <img
+                  className={classes.active}
+                  src={game.background_image}
+                  alt="Game Image"
+                />
                 <img src={game.background_image} alt="Game Image" />
                 <img src={game.background_image} alt="Game Image" />
               </div>
-              <button>Right</button>
+              <button>
+                <FontAwesomeIcon icon={faChevronRight} />
+              </button>
             </div>
           </div>
           <p>
@@ -38,7 +49,13 @@ const GameOverview = () => {
           </p>
         </main>
         {/* Game checkout */}
-        <aside></aside>
+        <aside>
+          <img src={game.background_image} alt="Game Background Image" />
+          <span>{randomPriceString()}</span>
+          <button>BUY NOW</button>
+          <button>ADD TO CART</button>
+          <button>ADD TO WISHLIST</button>
+        </aside>
       </div>
       <div>{/* Archivements */}</div>
       <div>{/* Sistem req */}</div>
