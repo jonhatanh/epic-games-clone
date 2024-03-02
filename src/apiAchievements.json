@@ -1,0 +1,77 @@
+{
+  "count": 57,
+  "next": "https://api.rawg.io/api/games/3498/achievements?key=2819eab2d32e48c1a69ef08a38cbff2c&page=2",
+  "previous": null,
+  "results": [
+    {
+      "id": 102967,
+      "name": "Los Santos Legend",
+      "description": "Congratulations! You're Vinewood's biggest star!",
+      "image": "https://media.rawg.io/media/achievements/f13/f13c99de8b72a8d6f50fa84aa44346ef.jpg",
+      "percent": "0.62"
+    },
+    {
+      "id": 103588,
+      "name": "Masterminds",
+      "description": "GTA Online: Complete all 3 Criminal Mastermind challenges in The Doomsday Heist.",
+      "image": "https://media.rawg.io/media/achievements/c26/c26806430fece5eb0d27ad651968979c.jpg",
+      "percent": "1.57"
+    },
+    {
+      "id": 103589,
+      "name": "Elitist",
+      "description": "GTA Online: Complete all 3 Elite Challenges in The Doomsday Heist.",
+      "image": "https://media.rawg.io/media/achievements/360/3601d762ef64efb8c4b88b883856cb0a.jpg",
+      "percent": "1.58"
+    },
+    {
+      "id": 102446,
+      "name": "Humans of Los Santos",
+      "description": "Unlock all Special Characters and enter Director Mode as an actor from this category.",
+      "image": "https://media.rawg.io/media/achievements/9f4/9f4f84f0bea821067b26a3b26eef1624.jpg",
+      "percent": "2.98"
+    },
+    {
+      "id": 104845,
+      "name": "Majestic",
+      "description": "Create and export 10 videos using the Rockstar Editor.",
+      "image": "https://media.rawg.io/media/achievements/02e/02eb7e93f5dcd6d4e463b6b470f58ef9.jpg",
+      "percent": "3.25"
+    },
+    {
+      "id": 104819,
+      "name": "Location Scout",
+      "description": "Visit all Locations in Director Mode.",
+      "image": "https://media.rawg.io/media/achievements/6d5/6d53cb6bfddf852834d3b13d6d3d85a8.jpg",
+      "percent": "3.63"
+    },
+    {
+      "id": 106142,
+      "name": "Cult Movie",
+      "description": "Enter Director Mode as Cris Formage.",
+      "image": "https://media.rawg.io/media/achievements/929/9291e747cf88e4a5e6fb8656355d7860.jpg",
+      "percent": "3.68"
+    },
+    {
+      "id": 108149,
+      "name": "Ensemble Piece",
+      "description": "Unlock all Story Characters and enter Director Mode as an actor from this category.",
+      "image": "https://media.rawg.io/media/achievements/0c6/0c6698b42095f7f97d3b4e1d38dd7b2f.jpg",
+      "percent": "3.94"
+    },
+    {
+      "id": 102447,
+      "name": "Orbital Obliteration",
+      "description": "GTA Online: Kill another player with the Orbital Cannon.",
+      "image": "https://media.rawg.io/media/achievements/b9e/b9e5f7db50208e0127e6b8d89578c399.jpg",
+      "percent": "4.23"
+    },
+    {
+      "id": 115728,
+      "name": "Animal Lover",
+      "description": "Enter Director Mode as an unlocked animal actor for the first time.",
+      "image": "https://media.rawg.io/media/achievements/091/09162853265b42ed655bb1c4b4787f83.jpg",
+      "percent": "4.61"
+    }
+  ]
+}

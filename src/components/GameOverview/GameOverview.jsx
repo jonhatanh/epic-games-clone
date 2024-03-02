@@ -19,7 +19,7 @@ function justEnglishDescription (description) {
 }
 
 const GameOverview = () => {
-  const { game } = useLoaderData()
+  const { game, achievements } = useLoaderData()
   console.log(game)
   return (
     <div className={classes.container}>
@@ -97,7 +97,30 @@ const GameOverview = () => {
                 __html: justEnglishDescription(game.description)
               }}
             />
+            <div
+              className={classes.gameDescription}
+              dangerouslySetInnerHTML={{
+                __html: justEnglishDescription(game.description)
+              }}
+            />
           </Collapsable>
+          {/* Achievements section */}
+          <section className={classes.achievementsContainer}>
+            <h5>Available Achievements</h5>
+            <div>
+              {achievements.results.map((achievement) => {
+                return (
+                  <div key={achievement.id} className={classes.achievementCard}>
+                    <img src={achievement.image} alt='Achievemenet image' />
+                    <h4 className='break_lines'>{achievement.name}</h4>
+                    <p className='break_lines break_lines--three'>
+                      {achievement.description}
+                    </p>
+                  </div>
+                )
+              })}
+            </div>
+          </section>
         </main>
         {/* Game checkout */}
         <aside>

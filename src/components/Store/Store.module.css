@@ -1,7 +1,10 @@
 .store {
+  position: relative;
   display: flex;
   flex-direction: column;
   gap: 2rem;
+  z-index: 0;
+  /* height: 80px; */
 }
 /* .nav {
   display: flex;
