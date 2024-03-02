@@ -136,6 +136,12 @@ const GameOverview = () => {
             <FontAwesomeIcon icon={faCirclePlus} />
             Add to wishlist
           </Button>
+          <div>
+            <span>Publisher</span><span>{game.publishers[0].name}</span>
+          </div>
+          <div>
+            <span>Release Date</span><span>{game.released}</span>
+          </div>
         </aside>
       </div>
       <div>{/* Archivements */}</div>
