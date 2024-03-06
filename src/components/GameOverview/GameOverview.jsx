@@ -129,6 +129,7 @@ const GameOverview = () => {
           <Button size='large' bgColor='blue'>
             Buy Now
           </Button>
+          
           <Button border size='large'>
             Add to cart
           </Button>

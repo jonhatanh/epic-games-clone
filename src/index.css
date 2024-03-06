@@ -24,7 +24,7 @@
 }
 body {
   display: flex;
-  min-width: 450px;
+  /* min-width: 450px; */
   min-height: 100dvh;
 }
 #root {
