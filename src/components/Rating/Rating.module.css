@@ -1,0 +1,45 @@
+.rating_section {
+  margin-top: 20px;
+  h5 {
+    margin-bottom: 14px;
+    font-size: large;
+    font-weight: 500;
+  }
+  article {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 13px;
+    place-content: center;
+
+    /* div {
+      position: relative;
+      &::before {
+        position: absolute;
+        z-index: -1;
+        content: "";
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        background-color: yellow;
+      }
+    } */
+  }
+  span {
+    font-size: 2.5rem;
+  }
+  svg {
+    
+    padding-top: 7px;
+    font-size: 1.7rem;
+    path {
+      fill: red;
+      overflow: hidden;
+    }
+  }
+}
+
+.star__background {
+  background: white;
+  clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+}
