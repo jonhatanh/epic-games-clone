@@ -1,4 +1,4 @@
-import { Link, Outlet, useLoaderData } from 'react-router-dom'
+import { Link, NavLink, Outlet, useLoaderData } from 'react-router-dom'
 import classes from './ShowGame.module.css'
 import { randomPriceString } from '../../helpers'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -7,7 +7,7 @@ import {
   faCaretRight,
   faChevronLeft,
   faChevronRight,
-  faCirclePlus,
+  faCirclePlus
 } from '@fortawesome/free-solid-svg-icons'
 import { faStar } from '@fortawesome/free-regular-svg-icons'
 import Button from '../Button/Button'
@@ -23,18 +23,27 @@ function justEnglishDescription (description) {
 const ShowGame = () => {
   const { game } = useLoaderData()
   console.log(game)
+
+  const navClass = ({ isActive, isPending }) =>
+    isActive ? classes.active : isPending ? '' : ''
   return (
     <article className={classes.container}>
       <h1 className={classes.title}>{game.name}</h1>
       <nav>
         <ul>
-          <li className={classes.active}><Link to=".">Overview</Link></li>
-          <li><Link to="achievements">Achievements</Link></li>
+          <li>
+            <NavLink className={navClass} to='.' end>
+              Overview
+            </NavLink>
+          </li>
+          <li>
+            <NavLink className={navClass} to='achievements'>Achievements</NavLink>
+          </li>
         </ul>
       </nav>
       <Outlet />
     </article>
-  );
+  )
 }
 
 export default ShowGame

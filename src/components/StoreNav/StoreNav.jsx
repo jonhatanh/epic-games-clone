@@ -1,6 +1,8 @@
-import { Link } from 'react-router-dom'
+import { Link, NavLink } from 'react-router-dom'
 import classes from './StoreNav.module.css'
 export default function StoreNav () {
+    const navClass = ({ isActive, isPending }) =>
+      isActive ? classes.active : isPending ? "" : "";
   return (
     <nav className={classes.nav}>
       <input
@@ -10,12 +12,12 @@ export default function StoreNav () {
         placeholder='Search store'
         className={classes.searchBar}
       />
-      <Link className={`${classes.link} ${classes.linkActive}`} to='discover'>
+      <NavLink className={navClass} to='.' end>
         Discover
-      </Link>
-      <Link className={classes.link} to='browse'>
+      </NavLink>
+      <NavLink className={navClass} to='browse'>
         Browse
-      </Link>
+      </NavLink>
     </nav>
   )
 }

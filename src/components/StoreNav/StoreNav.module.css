@@ -9,6 +9,22 @@
   max-height: 80px;
   padding: 15px 0;
   background-color: #141414;
+
+  a {
+  color: rgb(255, 255, 255);
+  opacity: 0.8;
+  text-decoration: none;
+  transition: all 0.3s;
+
+  &.active {
+    opacity: 1;
+    pointer-events: none;
+  }
+
+  &:hover {
+    opacity: 1;
+  }
+  }
 }
 
 .search__bar {
@@ -16,18 +32,4 @@
   border-radius: 20px;
   border-width: 0px;
   color: white;
-}
-
-.link {
-  color: rgb(255, 255, 255);
-  opacity: 0.8;
-  text-decoration: none;
-  transition: all 0.3s;
-}
-.link--active {
-  opacity: 1;
-  pointer-events: none;
-}
-.link:hover {
-  opacity: 1;
 }
