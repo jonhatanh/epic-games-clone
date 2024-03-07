@@ -1,4 +1,4 @@
-import { Link, useLoaderData } from 'react-router-dom'
+import { Link, useLoaderData, useRouteLoaderData } from 'react-router-dom'
 import classes from './GameOverview.module.css'
 import { randomPriceString } from '../../helpers'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -7,7 +7,7 @@ import {
   faCaretRight,
   faChevronLeft,
   faChevronRight,
-  faCirclePlus,
+  faCirclePlus
 } from '@fortawesome/free-solid-svg-icons'
 import { faStar } from '@fortawesome/free-regular-svg-icons'
 import Button from '../Button/Button'
@@ -21,24 +21,17 @@ function justEnglishDescription (description) {
 }
 
 const GameOverview = () => {
-  const { game, achievements } = useLoaderData()
+  const { game, achievements } = useRouteLoaderData('showGame')
   console.log(game)
   return (
-    <article className={classes.container}>
-      <h1 className={classes.title}>{game.name}</h1>
-      <nav>
-        <ul>
-          <li className={classes.active}>Overview</li>
-          <li>Logros</li>
-        </ul>
-      </nav>
+    <>
       <section className={classes.gameDetails}>
         {/* Game Info */}
         <article>
           {/* Media Player */}
           <section className={classes.galleryContainer}>
             <div className={classes.mainImage}>
-              <img src={game.background_image} alt="Game Image" />
+              <img src={game.background_image} alt='Game Image' />
             </div>
             <div className={classes.gallery}>
               <button>
@@ -48,10 +41,10 @@ const GameOverview = () => {
                 <img
                   className={classes.active}
                   src={game.background_image}
-                  alt="Game Image"
+                  alt='Game Image'
                 />
-                <img src={game.background_image} alt="Game Image" />
-                <img src={game.background_image} alt="Game Image" />
+                <img src={game.background_image} alt='Game Image' />
+                <img src={game.background_image} alt='Game Image' />
               </div>
               <button>
                 <FontAwesomeIcon icon={faChevronRight} />
@@ -64,13 +57,13 @@ const GameOverview = () => {
                 <span>Genres</span>
                 <div>
                   {game.genres.map((genre, index) => {
-                    const lastItem = game.genres.length - 1 === index;
+                    const lastItem = game.genres.length - 1 === index
                     return (
                       <React.Fragment key={genre.id}>
                         <Link>{genre.name}</Link>
-                        {lastItem ? "" : ", "}
+                        {lastItem ? '' : ', '}
                       </React.Fragment>
-                    );
+                    )
                   })}
                 </div>
               </div>
@@ -80,45 +73,45 @@ const GameOverview = () => {
                 <span>Tags</span>
                 <div>
                   {game.tags.map((tags, index) => {
-                    const lastItem = game.tags.length - 1 === index;
+                    const lastItem = game.tags.length - 1 === index
                     return (
                       <React.Fragment key={tags.id}>
                         <Link>{tags.name}</Link>
-                        {lastItem ? "" : ", "}
+                        {lastItem ? '' : ', '}
                       </React.Fragment>
-                    );
+                    )
                   })}
                 </div>
               </div>
             </Collapsable>
           </section>
-          <Collapsable size="large">
+          <Collapsable size='large'>
             <div
               className={classes.gameDescription}
               dangerouslySetInnerHTML={{
-                __html: justEnglishDescription(game.description),
+                __html: justEnglishDescription(game.description)
               }}
             />
             <div
               className={classes.gameDescription}
               dangerouslySetInnerHTML={{
-                __html: justEnglishDescription(game.description),
+                __html: justEnglishDescription(game.description)
               }}
             />
           </Collapsable>
         </article>
         {/* Game checkout */}
         <aside>
-          <img src={game.background_image} alt="Game Background Image" />
+          <img src={game.background_image} alt='Game Background Image' />
           <span>{randomPriceString()}</span>
-          <Button size="large" bgColor="blue">
+          <Button size='large' bgColor='blue'>
             Buy Now
           </Button>
 
-          <Button border size="large">
+          <Button border size='large'>
             Add to cart
           </Button>
-          <Button border size="large">
+          <Button border size='large'>
             <FontAwesomeIcon icon={faCirclePlus} />
             Add to wishlist
           </Button>
@@ -140,23 +133,23 @@ const GameOverview = () => {
             {achievements.results.map((achievement) => {
               return (
                 <div key={achievement.id} className={classes.achievementCard}>
-                  <img src={achievement.image} alt="Achievemenet image" />
-                  <h4 className="break_lines">{achievement.name}</h4>
-                  <p className="break_lines break_lines--three">
+                  <img src={achievement.image} alt='Achievemenet image' />
+                  <h4 className='break_lines'>{achievement.name}</h4>
+                  <p className='break_lines break_lines--three'>
                     {achievement.description}
                   </p>
                 </div>
-              );
+              )
             })}
           </div>
-          <Button size="large" bgColor="gray">
+          <Button size='large' bgColor='gray'>
             See All {achievements.count} Achievements
           </Button>
         </section>
       </section>
       {/* <Rating rating={game.rating} /> */}
-    </article>
-  );
+    </>
+  )
 }
 
 export default GameOverview

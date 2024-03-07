@@ -5,8 +5,10 @@ import Store from './Store/Store'
 import App from '../App'
 import { gamesLoader } from './Discover/Discover.loader'
 import Discover from './Discover/Discover'
-import ShowGame from './GameOverview/GameOverview'
-import { loader as singleGameLoader } from './GameOverview/GameOverviewLoader'
+import ShowGame from './ShowGame/ShowGame'
+import { loader as singleGameLoader } from './ShowGame/ShowGameLoader'
+import GameOverview from './GameOverview/GameOverview'
+import GameAchievements from './GameAchievements/GameAchievements'
 
 const Router = () => {
   const router = createBrowserRouter([
@@ -22,9 +24,20 @@ const Router = () => {
             { index: true, element: <Discover />, loader: gamesLoader },
             // { path: 'browse', element: <BrowseStore /> }
             {
+              id: 'showGame',
               path: 'games/:gameId',
               element: <ShowGame />,
-              loader: singleGameLoader
+              loader: singleGameLoader,
+              children: [
+                {
+                  index: true,
+                  element: <GameOverview />
+                },
+                {
+                  path: 'achievements',
+                  element: <GameAchievements />
+                }
+              ]
             }
           ]
         }
