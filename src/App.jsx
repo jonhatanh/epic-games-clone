@@ -1,18 +1,21 @@
 import { useEffect, useState } from 'react'
 import styles from './App.module.css'
-import { Link, Outlet, useLocation } from 'react-router-dom'
+import { Link, Outlet, ScrollRestoration, useLocation } from 'react-router-dom'
 import NavLink from './components/NavLink/NavLink'
 
 function App () {
   const currentRoute = useLocation()
   console.log(currentRoute)
 
-  const darkBody =
-    currentRoute.pathname !== '/'
+  const darkBody = currentRoute.pathname !== '/'
 
   return (
     <div className={styles.container}>
-      <div className={`${styles.containerBackground} ${darkBody && styles.containerBackgroundDark}`} />
+      <div
+        className={`${styles.containerBackground} ${
+          darkBody && styles.containerBackgroundDark
+        }`}
+      />
       <div className={styles.containerBody}>
         <header className={styles.containerHeader}>
           <h1>GAME STORE</h1>
@@ -34,6 +37,17 @@ function App () {
           <Outlet />
         </main>
       </div>
+      <ScrollRestoration
+        getKey={(location, matches) => {
+          const paths = ['/store']
+          console.log(location, matches)
+          return paths.includes(location.pathname)
+            ? // home and notifications restore by pathname
+            location.pathname
+            : // everything else by location like the browser
+            location.key
+        }}
+      />
     </div>
   )
 }

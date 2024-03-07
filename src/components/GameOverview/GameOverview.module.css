@@ -12,7 +12,7 @@
   nav {
     position: sticky;
     top: 60px;
-    z-index: 10;
+    z-index: 15;
     background-color: #141414;
     padding: 10px 0 10px;
   }
@@ -195,6 +195,7 @@
     gap: 40px;
     aside {
       position: static;
+      z-index: 0;
     }
   }
 }

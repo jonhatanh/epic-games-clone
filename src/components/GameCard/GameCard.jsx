@@ -1,3 +1,4 @@
+import { useNavigate } from 'react-router-dom'
 import { randomPriceString } from '../../helpers'
 import classes from './GameCard.module.css'
 import PropTypes from 'prop-types'
@@ -20,6 +21,7 @@ const GameCard = ({
   showDescription = false,
   cardSize = ''
 }) => {
+  const navigate = useNavigate()
   const extraCardClass = mainGameId
     ? id === mainGameId
       ? classes.cardActive
@@ -30,13 +32,15 @@ const GameCard = ({
   function handleClick () {
     if (changeMainGame) {
       changeMainGame(index - 1)
+    } else {
+      navigate(`games/${id}`)
     }
   }
   return (
     <div
       className={`${classes.card} ${cardSizeClass} ${extraCardClass}`}
       onAnimationEnd={() => index !== null && changeMainGame(index)}
-      onClick={()=> handleClick()}
+      onClick={() => handleClick()}
     >
       <img
         src={backgroundImage || '/assets/default_image.png'}

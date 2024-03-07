@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types'
 import classes from './Button.module.css'
+import { Link } from 'react-router-dom'
 
 const Button = ({
   children,
@@ -7,24 +8,39 @@ const Button = ({
   textSize = 'normal',
   size = 'normal',
   border = false,
+  link = false,
   ...extraProps
 }) => {
   bgColor = bgColor[0].toUpperCase() + bgColor.slice(1)
   textSize = textSize[0].toUpperCase() + textSize.slice(1)
   const sizeClass = size === 'large' ? classes.buttonLarge : ''
-  return (
-    <button
-      className={`${classes.button} 
+  return link
+    ? (
+      <Link
+        className={`${classes.button} 
       ${classes['button' + bgColor]} 
       ${classes['buttonText' + textSize]}
       ${sizeClass}
       ${border && classes.buttonBorder}
       `}
-      {...extraProps}
-    >
-      {children}
-    </button>
-  )
+        {...extraProps}
+      >
+        {children}
+      </Link>
+      )
+    : (
+      <button
+        className={`${classes.button} 
+      ${classes['button' + bgColor]} 
+      ${classes['buttonText' + textSize]}
+      ${sizeClass}
+      ${border && classes.buttonBorder}
+      `}
+        {...extraProps}
+      >
+        {children}
+      </button>
+      )
 }
 
 Button.propTypes = {
