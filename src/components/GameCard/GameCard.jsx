@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom'
-import { randomPriceString } from '../../helpers'
+import { randomPriceString } from '@/utils/helpers'
 import classes from './GameCard.module.css'
 import PropTypes from 'prop-types'
 

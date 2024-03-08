@@ -1,11 +1,10 @@
 import PropTypes from 'prop-types'
 import classes from './HeroMainGame.module.css'
-import globalClasses from '../../Global.module.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCirclePlus } from '@fortawesome/free-solid-svg-icons'
-import { randomPriceString } from '../../helpers'
+import { randomPriceString } from '@/utils/helpers'
 import { useEffect, useRef } from 'react'
-import Button from '../Button/Button'
+import Button from '@/components/Button/Button'
 import { Link } from 'react-router-dom'
 const HeroMainGame = ({ game }) => {
   const imageRef = useRef(null)
@@ -20,7 +19,7 @@ const HeroMainGame = ({ game }) => {
       <img
         ref={imageRef}
         className={classes.enterAnimation}
-        src={game.background_image || "/assets/default_image.png"}
+        src={game.background_image || '/assets/default_image.png'}
         alt={`${game.name} background image`}
       />
       <div className={classes.options}>
@@ -31,17 +30,17 @@ const HeroMainGame = ({ game }) => {
           Starting at <span>{randomPriceString()}</span>
         </p>
         <div>
-          <Button bgColor="white" link to={`games/${game.id}`}>
+          <Button bgColor='white' link to={`games/${game.id}`}>
             Buy Now
           </Button>
-          <Button textSize="small">
+          <Button textSize='small'>
             <FontAwesomeIcon icon={faCirclePlus} />
             Add to wishlist
           </Button>
         </div>
       </div>
     </div>
-  );
+  )
 }
 
 HeroMainGame.propTypes = {

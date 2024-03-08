@@ -1,10 +1,10 @@
 import { useLoaderData } from 'react-router-dom'
-import GamesHorizontal from '../GamesHorizontal/GamesHorizontal'
-import GamesHorizontalBig from '../GamesHorizontal/GamesHorizontalBig'
-import GamesVertical from '../GamesVertical/GamesVertical'
-import Hero from '../Hero/Hero'
-import classes from './Discover.module.css'
-export default function Discover () {
+import GamesHorizontal from '@/components/GamesHorizontal/GamesHorizontal'
+import GamesHorizontalBig from '@/components/GamesHorizontal/GamesHorizontalBig'
+import GamesVertical from '@/components/GamesVertical/GamesVertical'
+import Hero from '../HeroSection/HeroSection'
+import classes from './DiscoverPage.module.css';
+export default function DiscoverPage () {
   const { heroGames } = useLoaderData()
 
   return (

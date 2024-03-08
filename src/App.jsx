@@ -1,6 +1,5 @@
-import { useEffect, useState } from 'react'
 import styles from './App.module.css'
-import { Link, Outlet, ScrollRestoration, useLocation } from 'react-router-dom'
+import { Outlet, ScrollRestoration, useLocation } from 'react-router-dom'
 import NavLink from './components/NavLink/NavLink'
 
 function App () {

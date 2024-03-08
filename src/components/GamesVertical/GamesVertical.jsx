@@ -1,5 +1,4 @@
 import classes from './GamesVertical.module.css'
-import globalClasses from './../../Global.module.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {
   faChevronRight

@@ -1,6 +1,5 @@
 import PropTypes from 'prop-types'
 import classes from './Collapsable.module.css'
-import { centerIcon } from '../../Global.module.css'
 import { useEffect, useRef, useState } from 'react'
 import Button from '../Button/Button'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'

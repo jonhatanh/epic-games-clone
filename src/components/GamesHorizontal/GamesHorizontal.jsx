@@ -1,5 +1,5 @@
 import classes from './GamesHorizontal.module.css'
-import globalClasses from './../../Global.module.css'
+import globalClasses from '@/Global.module.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {
   faChevronLeft,

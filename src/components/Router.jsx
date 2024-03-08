@@ -1,14 +1,14 @@
 import { RouterProvider, createBrowserRouter } from 'react-router-dom'
 import ErrorPage from './ErrorPage'
-import Welcome from './Welcome/Welcome'
-import Store from './Store/Store'
-import App from '../App'
-import { gamesLoader } from './Discover/Discover.loader'
-import Discover from './Discover/Discover'
-import ShowGame from './ShowGame/ShowGame'
-import { loader as singleGameLoader } from './ShowGame/ShowGameLoader'
-import GameOverview from './GameOverview/GameOverview'
-import GameAchievements from './GameAchievements/GameAchievements'
+import Welcome from '@/views/Welcome/Welcome'
+import Store from '@/views/Store/StorePage/Store'
+import App from '@/App'
+import { gamesLoader } from '@/views/Store/views/Discover/DiscoverPage/DiscoverPage.loader'
+import Discover from '@/views/Store/views/Discover/DiscoverPage/DiscoverPage'
+import ShowGame from '@/views/Store/views/ShowGame/ShowGamePage/ShowGame'
+import { loader as singleGameLoader } from '@/views/Store/views/ShowGame/ShowGamePage/ShowGameLoader'
+import GameOverview from '@/views/Store/views/ShowGame/GameOverview/GameOverview'
+import GameAchievements from '@/views/Store/views/ShowGame/GameAchievements/GameAchievements'
 
 const Router = () => {
   const router = createBrowserRouter([

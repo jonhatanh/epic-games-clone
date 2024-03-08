@@ -1,9 +1,9 @@
-import classes from './Hero.module.css'
+import classes from './HeroSection.module.css'
 import PropTypes from 'prop-types'
 import HeroMainGame from '../HeroMainGame/HeroMainGame'
 import { useEffect, useState } from 'react'
-import GameCard from '../GameCard/GameCard'
-const Hero = ({ games }) => {
+import GameCard from '@/components/GameCard/GameCard'
+const HeroSection = ({ games }) => {
   const [mainGameId, setMainGameId] = useState(games[0].id)
   const mainGame = games.find((game) => game.id === mainGameId)
 
@@ -34,8 +34,8 @@ const Hero = ({ games }) => {
   )
 }
 
-Hero.propTypes = {
+HeroSection.propTypes = {
   games: PropTypes.arrayOf(PropTypes.object).isRequired
 }
 
-export default Hero
+export default HeroSection

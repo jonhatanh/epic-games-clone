@@ -1,6 +1,6 @@
-import { Outlet } from 'react-router-dom';
-import classes from './Store.module.css';
-import StoreNav from '../StoreNav/StoreNav';
+import { Outlet } from 'react-router-dom'
+import classes from './Store.module.css'
+import StoreNav from '../StoreNav/StoreNav'
 
 const Store = () => {
   return (
@@ -9,6 +9,6 @@ const Store = () => {
       <Outlet />
     </div>
   )
-};
+}
 
 export default Store
