@@ -8,11 +8,10 @@ import {
   faCirclePlus,
   faPlay
 } from '@fortawesome/free-solid-svg-icons'
-import { faStar } from '@fortawesome/free-regular-svg-icons'
 import Button from '@/components/Button/Button'
 import React from 'react'
 import Collapsable from '@/components/Collapsable/Collapsable'
-import Rating from '@/components/Rating/Rating'
+import GameGallery from '@/views/Store/views/ShowGame/GameGallery/GameGallery'
 
 function justEnglishDescription (description) {
   description = description.replaceAll('<br />', '<br /><br />')
@@ -29,45 +28,7 @@ const GameOverview = () => {
         {/* Game Info */}
         <article>
           {/* Media Player */}
-          <section className={classes.galleryContainer}>
-            <div className={classes.mainImage}>
-              <img src={game.background_image} alt='Game Image' />
-            </div>
-            <div className={classes.gallery}>
-              <button>
-                <FontAwesomeIcon icon={faChevronLeft} />
-              </button>
-              <div>
-                {movies.map((movie) => {
-                  return (
-                    <div
-                      key={movie.id}
-                      className={`${classes.videoWrapper} ${classes.active}`}
-                    >
-                      <FontAwesomeIcon icon={faPlay} />
-                      <img
-                        src={movie.preview}
-                        alt={movie.name + 'video preview'}
-                      />
-                    </div>
-                  )
-                })}
-                {screenshots.results.map((screenshot) => {
-                  return (
-                    <img
-                      key={screenshot.id}
-                      className={classes.active}
-                      src={screenshot.image}
-                      alt='Game Image'
-                    />
-                  )
-                })}
-              </div>
-              <button>
-                <FontAwesomeIcon icon={faChevronRight} />
-              </button>
-            </div>
-          </section>
+          <GameGallery allMedia={movies.results.concat(screenshots.results)} />
           <section className={classes.gameExtras}>
             <Collapsable>
               <div className={classes.genreTags}>
@@ -103,12 +64,6 @@ const GameOverview = () => {
             </Collapsable>
           </section>
           <Collapsable size='large'>
-            <div
-              className={classes.gameDescription}
-              dangerouslySetInnerHTML={{
-                __html: justEnglishDescription(game.description)
-              }}
-            />
             <div
               className={classes.gameDescription}
               dangerouslySetInnerHTML={{

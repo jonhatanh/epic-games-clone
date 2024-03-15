@@ -85,7 +85,7 @@
   }
 }
 
-.gallery__container {
+/* .gallery__container {
   display: flex;
   flex-direction: column;
   gap: 20px;
@@ -141,7 +141,7 @@
       height: 35px;
     }
   }
-}
+} */
 .game__extras {
   display: flex;
   flex-wrap: wrap;
@@ -202,6 +202,9 @@
   .game__details {
     flex-direction: column-reverse;
     gap: 40px;
+    article {
+      width: 100%;
+    }
     aside {
       position: static;
       z-index: 0;

@@ -9,5 +9,5 @@ export async function loader ({ gameId }) {
   const achievements = await Promise.resolve(gameAchievements)
   const screenshots = await Promise.resolve(gameScreenshots)
   const movies = await Promise.resolve(gameMovies)
-  return { game: response, achievements, screenshots, movies: movies.results.slice(0, 2) }
+  return { game: response, achievements, screenshots, movies }
 }

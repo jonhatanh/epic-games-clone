@@ -1,0 +1,48 @@
+  .gallery {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    > ul {
+      display: flex;
+      gap: 10px;
+      justify-content: center;
+      overflow: hidden;
+      flex-wrap: wrap;
+    }
+    img {
+      width: 100%;
+      max-width: 100px;
+      border-radius: 5px;
+      aspect-ratio: 16/9;
+      opacity: 0.6;
+    }
+    .active {
+      border: 1px solid white;
+      opacity: 1;
+    }
+    .media__wrapper {
+      position: relative;
+      width: 100%;
+      max-width: 100px;
+      border-radius: 5px;
+      cursor: pointer;
+      svg {
+        position: absolute;
+        left: 0;
+        top: 30%;
+        right: 0;
+        bottom: 0;
+        width: 100%;
+      }
+    }
+    button {
+      padding: 8px;
+      border-radius: 50%;
+      border: none;
+      background-color: #202020;
+      font-size: 12px;
+      width: 35px;
+      height: 35px;
+    }
+  }
