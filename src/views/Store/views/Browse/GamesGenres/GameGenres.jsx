@@ -7,7 +7,7 @@ const GameGenres = () => {
   const { genres } = useRouteLoaderData('BrowsePage')
 
   return (
-    <HorizontalScroll title='Game Genres' qtyOfItems={genres.length}>
+    <HorizontalScroll title='Game Genres'>
       {genres.results.map((genre) => {
         return <GenreCard key={genre.id} genre={genre} />
       })}

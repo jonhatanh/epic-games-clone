@@ -7,7 +7,7 @@ import {
 } from '@fortawesome/free-solid-svg-icons'
 import PropTypes from 'prop-types'
 import { useRef, useState } from 'react'
-const HorizontalScroll = ({ children, title, qtyOfItems }) => {
+const HorizontalScroll = ({ children, title }) => {
   const [leftButtonDisabled, setLeftButtonDisabled] = useState(true)
   const [rightButtonDisabled, setRightButtonDisabled] = useState(false)
   const contentContainerRef = useRef(null)
@@ -81,8 +81,8 @@ const HorizontalScroll = ({ children, title, qtyOfItems }) => {
 }
 
 HorizontalScroll.propTypes = {
-  children: PropTypes.element,
+  children: PropTypes.arrayOf(PropTypes.element),
   title: PropTypes.string.isRequired
-}
+};
 
 export default HorizontalScroll

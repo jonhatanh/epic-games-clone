@@ -1,0 +1,27 @@
+.list_of_games_horizontal {
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+  header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    h2 {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 10px;
+      font-weight: 400;
+      font-size: 1.3rem;
+    }
+    /* svg {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        } */
+    div {
+      display: flex;
+      gap: 0.8rem;
+    }
+  }
+}
