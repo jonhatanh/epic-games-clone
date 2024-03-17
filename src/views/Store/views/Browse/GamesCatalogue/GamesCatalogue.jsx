@@ -13,7 +13,7 @@ export default function GamesCatalogue ({ games }) {
             game={game}
             showPrice
             breakLines='three'
-            cardSize='small'
+            cardSize='big'
           />
         )
       })}

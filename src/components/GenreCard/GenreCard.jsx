@@ -6,7 +6,7 @@ const GenreCard = ({
   genre: { id, name, slug, image_background: backgroundImage }
 }) => {
   return (
-    <Link className={`${classes.card}`} to={`genre/${slug}`}>
+    <Link className={`${classes.card}`} to={`/store/genre/${slug}`}>
       <img
         src={backgroundImage || '/assets/default_image.png'}
         alt={`${name} genre background image`}

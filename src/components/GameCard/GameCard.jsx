@@ -27,13 +27,13 @@ const GameCard = ({
       ? classes.cardActive
       : ''
     : ''
-  const cardSizeClass = cardSize === 'small' ? classes.cardSmall : ''
+  const cardSizeClass = cardSize === 'small' ? classes.cardSmall : cardSize === 'big' ? classes.cardBig : ''
 
   function handleClick () {
     if (changeMainGame) {
       changeMainGame(index - 1)
     } else {
-      navigate(`games/${id}`)
+      navigate(`/store/games/${id}`)
     }
   }
   return (
