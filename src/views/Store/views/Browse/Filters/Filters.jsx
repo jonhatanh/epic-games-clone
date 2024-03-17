@@ -1,46 +1,71 @@
 import { useRouteLoaderData } from 'react-router-dom'
 import FilterItem from '@/components/FilterItem/FilterItem'
 import classes from './Filters.module.css'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import Button from '../../../../../components/Button/Button'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCheck, faXmark } from '@fortawesome/free-solid-svg-icons'
 
-const orderBy = [
+const filterItemIds = {
+  genre: 1,
+  orderBy: 2,
+  date: 3
+}
+
+const orderByItems = [
   {
     name: 'Name',
-    slug: 'orderName',
-    exclusive: 1
+    slug: 'name'
   },
   {
     name: 'Released',
-    slug: 'orderReleased',
-    exclusive: 1
+    slug: 'released'
   },
   {
     name: 'Added',
-    slug: 'orderAdded',
-    exclusive: 1
+    slug: 'added'
   },
   {
     name: 'Created',
-    slug: 'orderCreated',
-    exclusive: 1
+    slug: 'created'
   },
   {
     name: 'Rating',
-    slug: 'orderRating',
-    exclusive: 1
+    slug: 'rating'
   }
-]
+].map((item) =>
+  Object.create({
+    ...item,
+    exclusive: 1,
+    filterId: filterItemIds.orderBy
+  })
+)
 
 export default function Filters () {
   const { genres } = useRouteLoaderData('BrowsePage')
-  const [queryString, setQueryString] = useState('')
   const [descendingOrder, setDescendingOrder] = useState(false)
   const [fromDate, setFromDate] = useState('')
   const [toDate, setToDate] = useState('')
   const [filters, setFilters] = useState([])
+
+  useEffect(() => {
+    let queryString = '?'
+
+    const genreFilters = filters.filter(item => item.filterId === filterItemIds.genre).map(item => item.slug).join(',')
+
+    const orderByFilters = filters.filter(item => item.filterId === filterItemIds.orderBy).map(item => descendingOrder ? `-${item.slug}` : item.slug).join(',')
+
+    const dateFilter = filters.filter(item => item.filterId === filterItemIds.date)[0]
+
+    queryString += genreFilters ? `genres=${genreFilters}&` : ''
+    queryString += orderByFilters ? `ordering=${orderByFilters}&` : ''
+    queryString += dateFilter
+      ? `dates=${dateFilter.from}.${dateFilter.to}`
+      : ''
+
+    queryString = queryString.charAt(queryString.length - 1) === '&' ? queryString.substring(0, queryString.length - 1) : queryString
+    console.log(queryString)
+  }, [filters, descendingOrder])
 
   function toggleFilter (filter) {
     const index = filters.findIndex(
@@ -74,9 +99,7 @@ export default function Filters () {
       (filterItem) => filterItem.slug === filter.slug
     )
     setFilters(
-      index === -1
-        ? [...filters, filter]
-        : filters.toSpliced(index, 1, filter)
+      index === -1 ? [...filters, filter] : filters.toSpliced(index, 1, filter)
     )
   }
 
@@ -85,13 +108,16 @@ export default function Filters () {
       addDateFilter({
         name: `Date from ${fromDate} to ${toDate}`,
         slug: 'dateFilter',
-        exclusive: 2
+        from: fromDate,
+        to: toDate,
+        exclusive: 2,
+        filterId: filterItemIds.date
       })
     } else {
       const index = filters.findIndex(
         (filterItem) => filterItem.slug === 'dateFilter'
       )
-      if(index !== -1) {
+      if (index !== -1) {
         setFilters(filters.toSpliced(index, 1))
       }
     }
@@ -117,7 +143,7 @@ export default function Filters () {
       <div>
         <FilterItem title='Genres'>
           {genres.results.map((genre) => (
-            <li key={genre.id} onClick={() => toggleFilter(genre)}>
+            <li key={genre.id} onClick={() => toggleFilter({ ...genre, filterId: filterItemIds.genre })}>
               {genre.name}
               {isActive(genre.slug) && (
                 <FontAwesomeIcon style={{ marginLeft: '5px' }} icon={faCheck} />
@@ -126,7 +152,7 @@ export default function Filters () {
           ))}
         </FilterItem>
         <FilterItem title='Order By'>
-          {orderBy.map((item) => (
+          {orderByItems.map((item) => (
             <li key={item.id} onClick={() => toggleFilter(item)}>
               {item.name}
               {isActive(item.slug) && (
