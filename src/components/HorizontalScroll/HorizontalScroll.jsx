@@ -14,11 +14,13 @@ const HorizontalScroll = ({ children, title, linkTo = '' }) => {
   const contentContainerRef = useRef(null)
   const scrollEndRef = useRef(null)
   function moveScrollBar (moveToRight) {
-    const percentOfTotal = contentContainerRef.current.offsetWidth
+    const parentWidth = contentContainerRef.current.offsetWidth
+    const widthChilds = contentContainerRef.current.firstChild?.offsetWidth
+    const pxBaseOnChilds = widthChilds ? Math.floor(parentWidth / widthChilds) * widthChilds : parentWidth
     const pxMovedLeft = contentContainerRef.current.scrollLeft
     const pxToMove = moveToRight
-      ? pxMovedLeft + percentOfTotal
-      : pxMovedLeft - percentOfTotal
+      ? pxMovedLeft + pxBaseOnChilds
+      : pxMovedLeft - pxBaseOnChilds
     contentContainerRef.current.scrollTo(pxToMove, 0)
   }
 

@@ -11,7 +11,7 @@ const GamesHorizontal = ({ games }) => {
             game={game}
             showPrice
             breakLines='three'
-            cardSize='small'
+            cardSize='big'
           />
         )
       })}
