@@ -3,3 +3,11 @@
   flex-direction: column;
   gap: 3rem;
 }
+
+
+.main {
+  display: grid;
+  grid-template-columns: 80% 1fr;
+  gap: 20px;
+}
+

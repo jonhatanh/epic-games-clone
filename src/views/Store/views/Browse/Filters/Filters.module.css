@@ -1,0 +1,56 @@
+.filters {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+
+  h4 {
+    font-weight: 400;
+  }
+
+  ul {
+    list-style-type: none;
+    text-decoration: none;
+  }
+}
+li.active {
+  color: white;
+}
+
+.filter__clear {
+  position: relative;
+  button {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    justify-content: center;
+    padding: 10px;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+
+    &:hover {
+      background-color: rgba(255, 255, 255, 0.322);
+
+      & + .filters__applied {
+        display: block;
+      }
+    }
+  }
+}
+
+.filters__applied {
+  display: none;
+  position: absolute;
+  font-weight: 600;
+  background-color: inherit;
+  padding: 20px 0;
+  backdrop-filter: blur(5px);
+  width: 100%;
+  li {
+    font-weight: 400;
+    margin-left: 20px;
+  }
+  ul {
+    list-style: disc;
+  }
+}
