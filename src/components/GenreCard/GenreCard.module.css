@@ -2,8 +2,8 @@
   cursor: pointer;
   /* position: relative;
   overflow: hidden; */
-  padding: 20px;
-  gap: 10px;
+  padding: 20px 20px 15px 20px;
+  gap: 15px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -24,8 +24,8 @@
   }
 
   h5 {
-    font-weight: 500;
-    font-size: medium;
+    font-weight: 400;
+    font-size: large;
   }
   
 
