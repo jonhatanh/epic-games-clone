@@ -7,7 +7,8 @@ import {
 } from '@fortawesome/free-solid-svg-icons'
 import PropTypes from 'prop-types'
 import { useRef, useState } from 'react'
-const HorizontalScroll = ({ children, title, chevron = null }) => {
+import { Link } from 'react-router-dom'
+const HorizontalScroll = ({ children, title, linkTo = '' }) => {
   const [leftButtonDisabled, setLeftButtonDisabled] = useState(true)
   const [rightButtonDisabled, setRightButtonDisabled] = useState(false)
   const contentContainerRef = useRef(null)
@@ -42,13 +43,21 @@ const HorizontalScroll = ({ children, title, chevron = null }) => {
     <article className={classes.horizontalScroll}>
       <header>
         <h2>
-          {title}
-          <span>
-            <FontAwesomeIcon
-              className={globalClasses.centerIcon}
-              icon={faChevronRight}
-            />
-          </span>
+          {linkTo
+            ? (
+              <Link to={linkTo}>
+                {title}
+                <span>
+                  <FontAwesomeIcon
+                    className={globalClasses.centerIcon}
+                    icon={faChevronRight}
+                  />
+                </span>
+              </Link>
+              )
+            : (
+                title
+              )}
         </h2>
         <div>
           <button
@@ -82,7 +91,8 @@ const HorizontalScroll = ({ children, title, chevron = null }) => {
 
 HorizontalScroll.propTypes = {
   children: PropTypes.arrayOf(PropTypes.element),
-  title: PropTypes.string.isRequired
-};
+  title: PropTypes.string.isRequired,
+  linkTo: PropTypes.string
+}
 
 export default HorizontalScroll
