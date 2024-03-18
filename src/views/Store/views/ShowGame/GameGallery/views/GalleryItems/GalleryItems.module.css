@@ -9,6 +9,7 @@
       justify-content: center;
       overflow: hidden;
       flex-wrap: wrap;
+      margin: 0 auto;
     }
     img {
       width: 100%;

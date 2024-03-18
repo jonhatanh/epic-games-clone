@@ -28,7 +28,7 @@ const GameOverview = () => {
         {/* Game Info */}
         <article>
           {/* Media Player */}
-          <GameGallery allMedia={movies.results.concat(screenshots.results)} />
+          <GameGallery allMedia={movies.concat(screenshots)} />
           <section className={classes.gameExtras}>
             <Collapsable>
               <div className={classes.genreTags}>
@@ -97,28 +97,30 @@ const GameOverview = () => {
           </div>
         </aside>
       </section>
-      <section>
-        {/* Achievements section */}
-        <section className={classes.achievementsContainer}>
-          <h5>Available Achievements</h5>
-          <div>
-            {achievements.results.map((achievement) => {
-              return (
-                <div key={achievement.id} className={classes.achievementCard}>
-                  <img src={achievement.image} alt='Achievemenet image' />
-                  <h4 className='break_lines'>{achievement.name}</h4>
-                  <p className='break_lines break_lines--three'>
-                    {achievement.description}
-                  </p>
-                </div>
-              )
-            })}
-          </div>
-          <Button size='large' bgColor='gray' link to='achievements'>
-            See All {achievements.count} Achievements
-          </Button>
+      {achievements.count > 0 && (
+        <section>
+          {/* Achievements section */}
+          <section className={classes.achievementsContainer}>
+            <h5>Available Achievements</h5>
+            <div>
+              {achievements.results.map((achievement) => {
+                return (
+                  <div key={achievement.id} className={classes.achievementCard}>
+                    <img src={achievement.image} alt='Achievemenet image' />
+                    <h4 className='break_lines'>{achievement.name}</h4>
+                    <p className='break_lines break_lines--three'>
+                      {achievement.description}
+                    </p>
+                  </div>
+                )
+              })}
+            </div>
+            <Button size='large' bgColor='gray' link to='achievements'>
+              See All {achievements.count} Achievements
+            </Button>
+          </section>
         </section>
-      </section>
+      )}
       {/* <Rating rating={game.rating} /> */}
     </>
   )
