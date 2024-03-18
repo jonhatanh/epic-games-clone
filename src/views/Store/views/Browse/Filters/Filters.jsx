@@ -1,4 +1,4 @@
-import { useRouteLoaderData } from 'react-router-dom'
+import { useNavigate, useRouteLoaderData } from 'react-router-dom'
 import FilterItem from '@/components/FilterItem/FilterItem'
 import classes from './Filters.module.css'
 import { useEffect, useState } from 'react'
@@ -47,9 +47,10 @@ export default function Filters ({ genres = null }) {
   const [toDate, setToDate] = useState('')
   const [filters, setFilters] = useState([])
   const [filtersOpen, setFiltersOpen] = useState(false)
+  const navigate = useNavigate()
 
   useEffect(() => {
-    let queryString = '?'
+    let queryString = ''
 
     const genreFilters = filters
       .filter((item) => item.filterId === filterItemIds.genre)
@@ -75,8 +76,11 @@ export default function Filters ({ genres = null }) {
       queryString.charAt(queryString.length - 1) === '&'
         ? queryString.substring(0, queryString.length - 1)
         : queryString
-    console.log(queryString)
-  }, [filters, descendingOrder])
+
+    if (queryString) {
+      navigate({ search: '?' + queryString })
+    }
+  }, [filters, descendingOrder, navigate])
 
   function toggleFilter (filter) {
     const index = filters.findIndex(
