@@ -1,0 +1,21 @@
+.genre__games {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+
+  h2 {
+    font-weight: 400;
+    font-size: 2rem;
+  }
+  div {
+    margin-bottom: 30px;
+  }
+}
+
+
+.main {
+  display: grid;
+  grid-template-columns: 80% 1fr;
+  gap: 20px;
+}
+

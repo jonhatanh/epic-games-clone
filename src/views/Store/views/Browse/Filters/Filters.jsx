@@ -41,8 +41,7 @@ const orderByItems = [
   })
 )
 
-export default function Filters () {
-  const { genres } = useRouteLoaderData('BrowsePage')
+export default function Filters ({ genres = null }) {
   const [descendingOrder, setDescendingOrder] = useState(false)
   const [fromDate, setFromDate] = useState('')
   const [toDate, setToDate] = useState('')
@@ -51,11 +50,19 @@ export default function Filters () {
   useEffect(() => {
     let queryString = '?'
 
-    const genreFilters = filters.filter(item => item.filterId === filterItemIds.genre).map(item => item.slug).join(',')
+    const genreFilters = filters
+      .filter((item) => item.filterId === filterItemIds.genre)
+      .map((item) => item.slug)
+      .join(',')
 
-    const orderByFilters = filters.filter(item => item.filterId === filterItemIds.orderBy).map(item => descendingOrder ? `-${item.slug}` : item.slug).join(',')
+    const orderByFilters = filters
+      .filter((item) => item.filterId === filterItemIds.orderBy)
+      .map((item) => (descendingOrder ? `-${item.slug}` : item.slug))
+      .join(',')
 
-    const dateFilter = filters.filter(item => item.filterId === filterItemIds.date)[0]
+    const dateFilter = filters.filter(
+      (item) => item.filterId === filterItemIds.date
+    )[0]
 
     queryString += genreFilters ? `genres=${genreFilters}&` : ''
     queryString += orderByFilters ? `ordering=${orderByFilters}&` : ''
@@ -63,7 +70,10 @@ export default function Filters () {
       ? `dates=${dateFilter.from}.${dateFilter.to}`
       : ''
 
-    queryString = queryString.charAt(queryString.length - 1) === '&' ? queryString.substring(0, queryString.length - 1) : queryString
+    queryString =
+      queryString.charAt(queryString.length - 1) === '&'
+        ? queryString.substring(0, queryString.length - 1)
+        : queryString
     console.log(queryString)
   }, [filters, descendingOrder])
 
@@ -141,16 +151,25 @@ export default function Filters () {
         </div>
       )}
       <div>
-        <FilterItem title='Genres'>
-          {genres.results.map((genre) => (
-            <li key={genre.id} onClick={() => toggleFilter({ ...genre, filterId: filterItemIds.genre })}>
-              {genre.name}
-              {isActive(genre.slug) && (
-                <FontAwesomeIcon style={{ marginLeft: '5px' }} icon={faCheck} />
-              )}
-            </li>
-          ))}
-        </FilterItem>
+        {genres && (
+          <FilterItem title='Genres'>
+            {genres.results.map((genre) => (
+              <li
+                key={genre.id}
+                onClick={() =>
+                  toggleFilter({ ...genre, filterId: filterItemIds.genre })}
+              >
+                {genre.name}
+                {isActive(genre.slug) && (
+                  <FontAwesomeIcon
+                    style={{ marginLeft: '5px' }}
+                    icon={faCheck}
+                  />
+                )}
+              </li>
+            ))}
+          </FilterItem>
+        )}
         <FilterItem title='Order By'>
           {orderByItems.map((item) => (
             <li key={item.id} onClick={() => toggleFilter(item)}>
