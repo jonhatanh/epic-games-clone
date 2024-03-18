@@ -4,7 +4,7 @@ import classes from './Filters.module.css'
 import { useEffect, useState } from 'react'
 import Button from '../../../../../components/Button/Button'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faCheck, faXmark } from '@fortawesome/free-solid-svg-icons'
+import { faCheck, faFilter, faXmark } from '@fortawesome/free-solid-svg-icons'
 
 const filterItemIds = {
   genre: 1,
@@ -46,6 +46,7 @@ export default function Filters ({ genres = null }) {
   const [fromDate, setFromDate] = useState('')
   const [toDate, setToDate] = useState('')
   const [filters, setFilters] = useState([])
+  const [filtersOpen, setFiltersOpen] = useState(false)
 
   useEffect(() => {
     let queryString = '?'
@@ -133,85 +134,87 @@ export default function Filters ({ genres = null }) {
     }
   }
   return (
-    <aside className={classes.filters}>
-      <h4>Filters</h4>
-      {filters.length > 0 && (
-        <div className={classes.filterClear}>
-          <button onClick={() => setFilters([])}>
-            Clear filters <FontAwesomeIcon icon={faXmark} />
-          </button>
-          <div className={classes.filtersApplied}>
-            Active Filters:
-            <ul>
-              {filters.map((filter) => {
-                return <li key={filter.slug}>{filter.name}</li>
-              })}
-            </ul>
+    <aside className={`${classes.filters} ${filtersOpen ? classes.open : ''}`}>
+      <h4 onClick={() => setFiltersOpen(!filtersOpen)}>Filters <FontAwesomeIcon fontSize='15px' icon={faFilter} /></h4>
+      <div className={classes.filtersBody}>
+        {filters.length > 0 && (
+          <div className={classes.filterClear}>
+            <button onClick={() => setFilters([])}>
+              Clear filters <FontAwesomeIcon icon={faXmark} />
+            </button>
+            <div className={classes.filtersApplied}>
+              Active Filters:
+              <ul>
+                {filters.map((filter) => {
+                  return <li key={filter.slug}>{filter.name}</li>
+                })}
+              </ul>
+            </div>
           </div>
-        </div>
-      )}
-      <div>
-        {genres && (
-          <FilterItem title='Genres'>
-            {genres.results.map((genre) => (
-              <li
-                key={genre.id}
-                onClick={() =>
-                  toggleFilter({ ...genre, filterId: filterItemIds.genre })}
-              >
-                {genre.name}
-                {isActive(genre.slug) && (
-                  <FontAwesomeIcon
-                    style={{ marginLeft: '5px' }}
-                    icon={faCheck}
-                  />
+        )}
+        <div>
+          {genres && (
+            <FilterItem title='Genres'>
+              {genres.results.map((genre) => (
+                <li
+                  key={genre.id}
+                  onClick={() =>
+                    toggleFilter({ ...genre, filterId: filterItemIds.genre })}
+                >
+                  {genre.name}
+                  {isActive(genre.slug) && (
+                    <FontAwesomeIcon
+                      style={{ marginLeft: '5px' }}
+                      icon={faCheck}
+                    />
+                  )}
+                </li>
+              ))}
+            </FilterItem>
+          )}
+          <FilterItem title='Order By'>
+            {orderByItems.map((item) => (
+              <li key={item.id} onClick={() => toggleFilter(item)}>
+                {item.name}
+                {isActive(item.slug) && (
+                  <FontAwesomeIcon style={{ marginLeft: '5px' }} icon={faCheck} />
                 )}
               </li>
             ))}
-          </FilterItem>
-        )}
-        <FilterItem title='Order By'>
-          {orderByItems.map((item) => (
-            <li key={item.id} onClick={() => toggleFilter(item)}>
-              {item.name}
-              {isActive(item.slug) && (
-                <FontAwesomeIcon style={{ marginLeft: '5px' }} icon={faCheck} />
-              )}
+            <li>
+              <input
+                type='checkbox'
+                id='reverseSort'
+                value={descendingOrder}
+                onChange={() => setDescendingOrder(!descendingOrder)}
+              />
+              <label htmlFor='reverseSort' style={{ marginLeft: '5px' }}>
+                Descending Order
+              </label>
             </li>
-          ))}
-          <li>
+          </FilterItem>
+          <FilterItem title='By Release Date'>
             <input
-              type='checkbox'
-              id='reverseSort'
-              value={descendingOrder}
-              onChange={() => setDescendingOrder(!descendingOrder)}
+              type='date'
+              name='fromDate'
+              id='fromDateFilter'
+              min='1990-01-01'
+              max='2030-01-01'
+              value={fromDate}
+              onChange={(e) => setFromDate(e.target.value)}
             />
-            <label htmlFor='reverseSort' style={{ marginLeft: '5px' }}>
-              Descending Order
-            </label>
-          </li>
-        </FilterItem>
-        <FilterItem title='By Release Date'>
-          <input
-            type='date'
-            name='fromDate'
-            id='fromDateFilter'
-            min='1990-01-01'
-            max='2030-01-01'
-            value={fromDate}
-            onChange={(e) => setFromDate(e.target.value)}
-          />
-          <input
-            type='date'
-            name='toDate'
-            id='toDateFilter'
-            min='1990-01-01'
-            max='2030-01-01'
-            value={toDate}
-            onChange={(e) => setToDate(e.target.value)}
-          />
-          <button onClick={handleDateFilter}>Filter</button>
-        </FilterItem>
+            <input
+              type='date'
+              name='toDate'
+              id='toDateFilter'
+              min='1990-01-01'
+              max='2030-01-01'
+              value={toDate}
+              onChange={(e) => setToDate(e.target.value)}
+            />
+            <Button onClick={handleDateFilter} bgColor='gray' size='large'>Filter</Button>
+          </FilterItem>
+        </div>
       </div>
     </aside>
   )
