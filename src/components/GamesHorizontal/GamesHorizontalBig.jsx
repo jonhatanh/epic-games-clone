@@ -11,13 +11,8 @@ const GamesHorizontalBig = ({ games }) => {
     <article className={classes.listOfGamesHorizontal}>
       <header>
         <h2>
-          Best Of All Time
-          <span>
-            <FontAwesomeIcon
-              className={globalClasses.centerIcon}
-              icon={faChevronRight}
-            />
-          </span>
+          Games I Like :)
+          
         </h2>
       </header>
       <div
@@ -30,6 +25,7 @@ const GamesHorizontalBig = ({ games }) => {
               game={game}
               showDescription
               breakLines='three'
+              cardSize='big'
             />
           )
         })}

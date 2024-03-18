@@ -74,7 +74,7 @@ GameCard.propTypes = {
   breakLines: PropTypes.oneOf(['', 'two', 'three']),
   showPrice: PropTypes.bool,
   showDescription: PropTypes.bool,
-  cardSize: PropTypes.oneOf(['', 'small'])
+  cardSize: PropTypes.oneOf(['', 'small', 'big'])
 }
 
 export default GameCard
