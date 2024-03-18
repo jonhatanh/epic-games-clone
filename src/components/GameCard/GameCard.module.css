@@ -36,6 +36,20 @@
     align-self: end;
   }
 
+  >p {
+    height: 80px;
+    overflow: hidden;
+    position: relative;
+    &::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      height: 60px;
+      width: 100%;
+      background: linear-gradient(transparent, #141414a1);
+    }
+  }
+
   &:hover {
     background-color: #444444;
   }

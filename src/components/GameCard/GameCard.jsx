@@ -48,7 +48,14 @@ const GameCard = ({
       />
       <h3 className={`break_lines break_lines--${breakLines}`}>{name}</h3>
       {showPrice && price && <span>{price}</span>}
-      {showDescription && description && <p>{description}</p>}
+      {showDescription && description && (
+        <p
+          className={classes.gameDescription}
+          dangerouslySetInnerHTML={{
+            __html: description
+          }}
+        />
+      )}
     </div>
   )
 }

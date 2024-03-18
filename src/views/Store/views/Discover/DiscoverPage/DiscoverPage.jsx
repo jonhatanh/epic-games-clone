@@ -5,7 +5,7 @@ import GamesVertical from '@/components/GamesVertical/GamesVertical'
 import Hero from '../HeroSection/HeroSection'
 import classes from './DiscoverPage.module.css';
 export default function DiscoverPage () {
-  const { heroGames } = useLoaderData()
+  const { heroGames , gamesILike} = useLoaderData()
 
   return (
     <section className={classes.discover}>
@@ -21,7 +21,7 @@ export default function DiscoverPage () {
       />
 
       {/* all time best */}
-      <GamesHorizontalBig games={heroGames.results.slice(0, 6)} />
+      <GamesHorizontalBig games={gamesILike} />
     </section>
-  )
+  );
 }
