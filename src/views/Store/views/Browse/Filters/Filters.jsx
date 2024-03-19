@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react'
 import Button from '../../../../../components/Button/Button'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCheck, faFilter, faXmark } from '@fortawesome/free-solid-svg-icons'
-import { filterItemIds, orderByItems } from '@/constans'
+import { FILTERS_ID, FILTERS_ITEMS_ORDER_BY } from '@/constans'
 
 export default function Filters ({ genres = null, currentFilters = {} }) {
   const [descendingOrder, setDescendingOrder] = useState(false)
@@ -17,49 +17,49 @@ export default function Filters ({ genres = null, currentFilters = {} }) {
 
   // Loads filters
   useEffect(() => {
+    console.log({ currentFilters })
     if (currentFilters.genres) {
-      currentFilters.genres.forEach(filter => toggleFilter(filter))
+      currentFilters.genres.forEach((filter) => toggleFilter(filter))
     }
     if (currentFilters.orderBy) {
       toggleFilter(currentFilters.orderBy)
     }
-    if (currentFilters.ordering) { setToDate(currentFilters.dates.to) }
-    if (currentFilters.descending) { setDescendingOrder(currentFilters.descending) }
-    if (currentFilters.dates?.from) { setFromDate(currentFilters.dates.from) }
-    if (currentFilters.dates?.to) { setToDate(currentFilters.dates.to) }
+    if (currentFilters.ordering) {
+      setToDate(currentFilters.dates.to)
+    }
+    if (currentFilters.descending !== undefined) {
+      setDescendingOrder(currentFilters.descending)
+    }
+    if (currentFilters.dates) {
+      setFromDate(currentFilters.dates.from)
+      setToDate(currentFilters.dates.to)
+      handleDateFilter()
+    }
+    return clearFilters
   }, [])
 
   useEffect(() => {
-    let queryString = ''
+    const newURL = new URL(window.location.href)
 
     const genreFilters = filters
-      .filter((item) => item.filterId === filterItemIds.genre)
+      .filter((item) => item.filterId === FILTERS_ID.genre)
       .map((item) => item.slug)
       .join(',')
 
     const orderByFilters = filters
-      .filter((item) => item.filterId === filterItemIds.orderBy)
+      .filter((item) => item.filterId === FILTERS_ID.orderBy)
       .map((item) => (descendingOrder ? `-${item.slug}` : item.slug))
       .join(',')
 
     const dateFilter = filters.filter(
-      (item) => item.filterId === filterItemIds.date
+      (item) => item.filterId === FILTERS_ID.date
     )[0]
 
-    queryString += genreFilters ? `genres=${genreFilters}&` : ''
-    queryString += orderByFilters ? `ordering=${orderByFilters}&` : ''
-    queryString += dateFilter
-      ? `dates=${dateFilter.from},${dateFilter.to}`
-      : ''
-
-    queryString =
-      queryString.charAt(queryString.length - 1) === '&'
-        ? queryString.substring(0, queryString.length - 1)
-        : queryString
-
-    if (queryString) {
-      navigate({ search: '?page=1&' + queryString })
-    }
+    genreFilters && newURL.searchParams.set('genres', genreFilters)
+    orderByFilters && newURL.searchParams.set('ordering', orderByFilters)
+    dateFilter &&
+      newURL.searchParams.set('dates', `${dateFilter.from},${dateFilter.to}`)
+    if (filters.length > 0) { navigate(newURL.pathname + newURL.search) }
   }, [filters, descendingOrder, navigate])
 
   function toggleFilter (filter) {
@@ -71,16 +71,16 @@ export default function Filters ({ genres = null, currentFilters = {} }) {
         const exclusiveIndex = filters.findIndex(
           (filterItem) => filterItem.exclusive === filter.exclusive
         )
-        setFilters(
+        setFilters((prev) =>
           exclusiveIndex === -1
-            ? [...filters, filter]
-            : filters.toSpliced(exclusiveIndex, 1, filter)
+            ? [...prev, filter]
+            : prev.toSpliced(exclusiveIndex, 1, filter)
         )
       } else {
-        setFilters([...filters, filter])
+        setFilters((prev) => [...prev, filter])
       }
     } else {
-      setFilters(filters.toSpliced(index, 1))
+      setFilters((prev) => prev.toSpliced(index, 1))
     }
   }
 
@@ -93,8 +93,8 @@ export default function Filters ({ genres = null, currentFilters = {} }) {
     const index = filters.findIndex(
       (filterItem) => filterItem.slug === filter.slug
     )
-    setFilters(
-      index === -1 ? [...filters, filter] : filters.toSpliced(index, 1, filter)
+    setFilters((prev) =>
+      index === -1 ? [...prev, filter] : prev.toSpliced(index, 1, filter)
     )
   }
 
@@ -106,20 +106,24 @@ export default function Filters ({ genres = null, currentFilters = {} }) {
         from: fromDate,
         to: toDate,
         exclusive: 2,
-        filterId: filterItemIds.date
+        filterId: FILTERS_ID.date
       })
     } else {
       const index = filters.findIndex(
         (filterItem) => filterItem.slug === 'dateFilter'
       )
       if (index !== -1) {
-        setFilters(filters.toSpliced(index, 1))
+        setFilters((prev) => prev.toSpliced(index, 1))
       }
     }
   }
 
-  function clearFilters() {
+  function clearFilters () {
+    console.log('cleaning')
     setFilters([])
+    setFromDate('')
+    setToDate('')
+    setDescendingOrder(false)
     navigate('.')
   }
   return (
@@ -150,7 +154,7 @@ export default function Filters ({ genres = null, currentFilters = {} }) {
                 <li
                   key={genre.id}
                   onClick={() =>
-                    toggleFilter({ ...genre, filterId: filterItemIds.genre })}
+                    toggleFilter({ ...genre, filterId: FILTERS_ID.genre })}
                 >
                   {genre.name}
                   {isActive(genre.slug) && (
@@ -164,8 +168,8 @@ export default function Filters ({ genres = null, currentFilters = {} }) {
             </FilterItem>
           )}
           <FilterItem title='Order By'>
-            {orderByItems.map((item) => (
-              <li key={item.id} onClick={() => toggleFilter(item)}>
+            {FILTERS_ITEMS_ORDER_BY.map((item) => (
+              <li key={item.slug} onClick={() => toggleFilter(item)}>
                 {item.name}
                 {isActive(item.slug) && (
                   <FontAwesomeIcon
@@ -179,7 +183,7 @@ export default function Filters ({ genres = null, currentFilters = {} }) {
               <input
                 type='checkbox'
                 id='reverseSort'
-                value={descendingOrder}
+                checked={descendingOrder}
                 onChange={() => setDescendingOrder(!descendingOrder)}
               />
               <label htmlFor='reverseSort' style={{ marginLeft: '5px' }}>

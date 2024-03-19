@@ -4,14 +4,14 @@
 import bestGames from '@/utils/apiResponseSteam2.json'
 import gamesILikeJson from '@/utils/apiGamesILikeResponse.json'
 import { API_URL, DEFAULT_QUERY_STRING } from '@/constans.js'
+import { randomNumber } from '@/utils/helpers'
 import {
-  randomNumber,
   restMonths,
   getStringDate,
   parseGamesInApiResponse,
   parseSingleGameInApiResponse,
   makeApiCalls
-} from '@/utils/helpers'
+} from '@/utils/helpersApi'
 
 export async function loader () {
   const gamesResponse = await makeApiCalls([

@@ -4,7 +4,6 @@ import NavLink from './components/NavLink/NavLink'
 
 function App () {
   const currentRoute = useLocation()
-  console.log(currentRoute)
 
   const darkBody = currentRoute.pathname !== '/'
 

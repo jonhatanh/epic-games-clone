@@ -3,7 +3,7 @@ import gameAchievements from '@/utils/apiAchievements.json'
 import gameScreenshots from '@/utils/apiScreenshots.json'
 import gameMovies from '@/utils/apiMovies.json'
 import { API_KEY_PARAM, API_URL } from '@/constans'
-import { makeApiCalls } from '@/utils/helpers'
+import { makeApiCalls } from '@/utils/helpersApi'
 
 export async function loader ({ params: { gameId } }) {
   // get game from api

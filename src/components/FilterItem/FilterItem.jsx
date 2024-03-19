@@ -23,6 +23,6 @@ export default function FilterItem ({ title, children, itemsContainerClass }) {
 
 FilterItem.propTypes = {
   title: PropTypes.string.isRequired,
-  children: PropTypes.arrayOf(PropTypes.element),
+  children: PropTypes.any,
   itemsContainerClass: PropTypes.string
 }

@@ -14,13 +14,12 @@ import Button from '../../../../../components/Button/Button'
 
 export default function BrowsePage () {
   const { games, genres, currentFilters } = useLoaderData()
-  console.log(games)
   return (
     <section className={classes.browse}>
       <GameGenres />
 
       <div className={classes.main}>
-        <GamesCatalogue games={games} />
+        <GamesCatalogue games={games.results} />
         <Filters genres={genres} currentFilters={currentFilters} />
       </div>
 

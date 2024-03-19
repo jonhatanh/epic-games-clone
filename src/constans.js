@@ -3,12 +3,12 @@ const DEFAULT_QUERY_STRING = `?parent_platforms=1,2,3,7&stores=1,2,3,6,7,11&excl
   import.meta.env.VITE_RAWG_API
 }`
 const API_KEY_PARAM = `key=${import.meta.env.VITE_RAWG_API}`
-const filterItemIds = {
+const FILTERS_ID = {
   genre: 1,
   orderBy: 2,
   date: 3
 }
-const orderByItems = [
+const FILTERS_ITEMS_ORDER_BY = [
   {
     name: 'Name',
     slug: 'name'
@@ -33,13 +33,13 @@ const orderByItems = [
   return {
     ...item,
     exclusive: 1,
-    filterId: filterItemIds.orderBy
+    filterId: FILTERS_ID.orderBy
   }
 })
 export {
   API_URL,
   DEFAULT_QUERY_STRING,
   API_KEY_PARAM,
-  filterItemIds,
-  orderByItems
+  FILTERS_ID,
+  FILTERS_ITEMS_ORDER_BY
 }

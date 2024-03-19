@@ -6,7 +6,7 @@ import GameCard from '@/components/GameCard/GameCard'
 export default function GamesCatalogue ({ games }) {
   return (
     <section className={`${globalClasses.cardContainer} ${classes.catalogue}`}>
-      {games.results.map((game, index) => {
+      {games.map((game, index) => {
         return (
           <GameCard
             key={game.id}
