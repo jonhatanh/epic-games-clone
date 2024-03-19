@@ -5,49 +5,29 @@ import { useEffect, useState } from 'react'
 import Button from '../../../../../components/Button/Button'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCheck, faFilter, faXmark } from '@fortawesome/free-solid-svg-icons'
+import { filterItemIds, orderByItems } from '@/constans'
 
-const filterItemIds = {
-  genre: 1,
-  orderBy: 2,
-  date: 3
-}
-
-const orderByItems = [
-  {
-    name: 'Name',
-    slug: 'name'
-  },
-  {
-    name: 'Released',
-    slug: 'released'
-  },
-  {
-    name: 'Added',
-    slug: 'added'
-  },
-  {
-    name: 'Created',
-    slug: 'created'
-  },
-  {
-    name: 'Rating',
-    slug: 'rating'
-  }
-].map((item) =>
-  Object.create({
-    ...item,
-    exclusive: 1,
-    filterId: filterItemIds.orderBy
-  })
-)
-
-export default function Filters ({ genres = null }) {
+export default function Filters ({ genres = null, currentFilters = {} }) {
   const [descendingOrder, setDescendingOrder] = useState(false)
   const [fromDate, setFromDate] = useState('')
   const [toDate, setToDate] = useState('')
   const [filters, setFilters] = useState([])
   const [filtersOpen, setFiltersOpen] = useState(false)
   const navigate = useNavigate()
+
+  // Loads filters
+  useEffect(() => {
+    if (currentFilters.genres) {
+      currentFilters.genres.forEach(filter => toggleFilter(filter))
+    }
+    if (currentFilters.orderBy) {
+      toggleFilter(currentFilters.orderBy)
+    }
+    if (currentFilters.ordering) { setToDate(currentFilters.dates.to) }
+    if (currentFilters.descending) { setDescendingOrder(currentFilters.descending) }
+    if (currentFilters.dates?.from) { setFromDate(currentFilters.dates.from) }
+    if (currentFilters.dates?.to) { setToDate(currentFilters.dates.to) }
+  }, [])
 
   useEffect(() => {
     let queryString = ''
@@ -69,7 +49,7 @@ export default function Filters ({ genres = null }) {
     queryString += genreFilters ? `genres=${genreFilters}&` : ''
     queryString += orderByFilters ? `ordering=${orderByFilters}&` : ''
     queryString += dateFilter
-      ? `dates=${dateFilter.from}.${dateFilter.to}`
+      ? `dates=${dateFilter.from},${dateFilter.to}`
       : ''
 
     queryString =
@@ -78,7 +58,7 @@ export default function Filters ({ genres = null }) {
         : queryString
 
     if (queryString) {
-      navigate({ search: '?' + queryString })
+      navigate({ search: '?page=1&' + queryString })
     }
   }, [filters, descendingOrder, navigate])
 
@@ -137,13 +117,20 @@ export default function Filters ({ genres = null }) {
       }
     }
   }
+
+  function clearFilters() {
+    setFilters([])
+    navigate('.')
+  }
   return (
     <aside className={`${classes.filters} ${filtersOpen ? classes.open : ''}`}>
-      <h4 onClick={() => setFiltersOpen(!filtersOpen)}>Filters <FontAwesomeIcon fontSize='15px' icon={faFilter} /></h4>
+      <h4 onClick={() => setFiltersOpen(!filtersOpen)}>
+        Filters <FontAwesomeIcon fontSize='15px' icon={faFilter} />
+      </h4>
       <div className={classes.filtersBody}>
         {filters.length > 0 && (
           <div className={classes.filterClear}>
-            <button onClick={() => setFilters([])}>
+            <button onClick={clearFilters}>
               Clear filters <FontAwesomeIcon icon={faXmark} />
             </button>
             <div className={classes.filtersApplied}>
@@ -181,7 +168,10 @@ export default function Filters ({ genres = null }) {
               <li key={item.id} onClick={() => toggleFilter(item)}>
                 {item.name}
                 {isActive(item.slug) && (
-                  <FontAwesomeIcon style={{ marginLeft: '5px' }} icon={faCheck} />
+                  <FontAwesomeIcon
+                    style={{ marginLeft: '5px' }}
+                    icon={faCheck}
+                  />
                 )}
               </li>
             ))}
@@ -216,7 +206,9 @@ export default function Filters ({ genres = null }) {
               value={toDate}
               onChange={(e) => setToDate(e.target.value)}
             />
-            <Button onClick={handleDateFilter} bgColor='gray' size='large'>Filter</Button>
+            <Button onClick={handleDateFilter} bgColor='gray' size='large'>
+              Filter
+            </Button>
           </FilterItem>
         </div>
       </div>

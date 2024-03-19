@@ -12,6 +12,11 @@
   gap: 20px;
 }
 
+.pages__buttons {
+  display: flex;
+  justify-content: space-between;
+}
+
 @media (max-width: 767px) {
   .browse {
     gap: 70px;
