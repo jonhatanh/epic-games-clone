@@ -58,7 +58,9 @@
     display: none;
   }
 
-  div {
+  >div, >a {
+    text-decoration: none;
+    color: white;
     display: flex;
     flex-direction: column;
     gap: 10px;
@@ -91,7 +93,7 @@
   grid-auto-flow: row;
   /* grid-auto-columns: minmax(180px, 1fr); */
 
-  div {
+  > div, > a {
     img {
       aspect-ratio: 16 / 9;
     }
@@ -107,7 +109,7 @@
   .card_container--three {
     grid-template-columns: repeat(2, 1fr);
 
-    div {
+    > div, > a {
       img {
         aspect-ratio: 16 / 9;
       }

@@ -9,6 +9,8 @@
   transition: background-color 0.3s;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
+  color: white;
+  text-decoration: none;
 
   img {
     border-radius: 10px;

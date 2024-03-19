@@ -1,9 +1,10 @@
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { randomPriceString } from '@/utils/helpers'
 import classes from './GameCard.module.css'
 import PropTypes from 'prop-types'
 
-const defaultDesc = 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Enim delectus non dignissimos deserunt, tempore id commodi natus error sunt esse voluptatem.'
+const defaultDesc =
+  'Lorem ipsum dolor sit amet consectetur adipisicing elit. Enim delectus non dignissimos deserunt, tempore id commodi natus error sunt esse voluptatem.'
 
 const GameCard = ({
   game: {
@@ -27,37 +28,57 @@ const GameCard = ({
       ? classes.cardActive
       : ''
     : ''
-  const cardSizeClass = cardSize === 'small' ? classes.cardSmall : cardSize === 'big' ? classes.cardBig : ''
+  const cardSizeClass =
+    cardSize === 'small'
+      ? classes.cardSmall
+      : cardSize === 'big'
+        ? classes.cardBig
+        : ''
 
-  function handleClick () {
-    if (changeMainGame) {
-      changeMainGame(index - 1)
-    } else {
-      navigate(`/store/games/${id}`)
-    }
-  }
-  return (
-    <div
-      className={`${classes.card} ${cardSizeClass} ${extraCardClass}`}
-      onAnimationEnd={() => index !== null && changeMainGame(index)}
-      onClick={() => handleClick()}
-    >
-      <img
-        src={backgroundImage || '/assets/default_image.png'}
-        alt={`${name} background image`}
-      />
-      <h3 className={`break_lines break_lines--${breakLines}`}>{name}</h3>
-      {showPrice && price && <span>{price}</span>}
-      {showDescription && description && (
-        <p
-          className={classes.gameDescription}
-          dangerouslySetInnerHTML={{
-            __html: description
-          }}
+  return index && changeMainGame
+    ? (
+      <div
+        className={`${classes.card} ${cardSizeClass} ${extraCardClass}`}
+        onAnimationEnd={() => changeMainGame(index)}
+        onClick={() => changeMainGame(index - 1)}
+      >
+        <img
+          src={backgroundImage || '/assets/default_image.png'}
+          alt={`${name} background image`}
         />
-      )}
-    </div>
-  )
+        <h3 className={`break_lines break_lines--${breakLines}`}>{name}</h3>
+        {showPrice && price && <span>{price}</span>}
+        {showDescription && description && (
+          <p
+            className={classes.gameDescription}
+            dangerouslySetInnerHTML={{
+              __html: description
+            }}
+          />
+        )}
+      </div>
+      )
+    : (
+      <Link
+        className={`${classes.card} ${cardSizeClass} ${extraCardClass}`}
+        to={`/store/games/${id}`}
+      >
+        <img
+          src={backgroundImage || '/assets/default_image.png'}
+          alt={`${name} background image`}
+        />
+        <h3 className={`break_lines break_lines--${breakLines}`}>{name}</h3>
+        {showPrice && price && <span>{price}</span>}
+        {showDescription && description && (
+          <p
+            className={classes.gameDescription}
+            dangerouslySetInnerHTML={{
+              __html: description
+            }}
+          />
+        )}
+      </Link>
+      )
 }
 
 GameCard.propTypes = {
