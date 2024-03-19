@@ -6,13 +6,21 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    h2 {
+    h2, a {
       display: flex;
       justify-content: center;
       align-items: center;
       gap: 10px;
       font-weight: 400;
       font-size: 1.3rem;
+      color: white;
+      text-decoration: none;
+
+      &:hover {
+        span {
+          margin-left: 5px;
+        }
+      }
     }
     /* svg {
             display: flex;

@@ -5,15 +5,21 @@ import {
 } from '@fortawesome/free-solid-svg-icons'
 import PropTypes from 'prop-types'
 import GameCard from '../GameCard/GameCard'
+import { randomNumber } from '../../utils/helpers'
+import { Link } from 'react-router-dom'
+
+const urlReleases = '/store/browse?page=1&ordering=-released'
+const urlRandom = `/store/browse?page=${randomNumber()}`
+
 const GamesVertical = ({ randomGames, recentGames }) => {
   return (
     <article className={classes.listOfGamesVertical}>
       <div className={classes.listTitle}>
-        <h2>New Releases</h2>
+        <h2><Link to={urlReleases}>New Releases</Link></h2>
         <FontAwesomeIcon className={classes.centerIcon} icon={faChevronRight} />
       </div>
       <div className={`${classes.listTitle} ${classes.listTitleDouble}`}>
-        <h2>Random Games</h2>
+        <h2><Link to={urlRandom}>Random Games</Link></h2>
         <FontAwesomeIcon className={classes.centerIcon} icon={faChevronRight} />
       </div>
       <div className={classes.verticalList}>
