@@ -1,4 +1,4 @@
-import { API_URL, DEFAULT_QUERY_STRING, FILTERS_ID, FILTERS_ITEMS_ORDER_BY } from '../constans'
+import { API_KEY_PARAM, API_URL, DEFAULT_QUERY_STRING, FILTERS_ID, FILTERS_ITEMS_ORDER_BY } from '../constans'
 
 export function restMonths (date, months) {
   return new Date(date.setMonth(date.getMonth() - months))
@@ -66,14 +66,18 @@ export function parseApiUrlPrevNext (response, actualURL) {
   return response
 }
 
-export function getApiURL (currentRequestURL, currentPage) {
+export function getApiURL (currentRequestURL, currentPage, extraParams = '') {
   const apiURL = new URL(
     `${API_URL}/games${DEFAULT_QUERY_STRING}&page_size=20&${currentRequestURL.search.substring(
       1
-    )}`
+    )}${extraParams}`
   )
   apiURL.searchParams.set('page', currentPage)
   return apiURL
+}
+
+export function getBasicApiCall (endPoint) {
+  return `${API_URL}${endPoint}?${API_KEY_PARAM}`
 }
 
 export function getCurrentFilters (currentRequestURL, genres = []) {
@@ -99,6 +103,9 @@ export function getCurrentFilters (currentRequestURL, genres = []) {
   if (currentRequestURL.searchParams.get('dates')) {
     const [from, to] = currentRequestURL.searchParams.get('dates').split(',')
     currentFilters.dates = { from: from ?? '', to: to ?? '' }
+  }
+  if (Object.keys(currentFilters).length > 1) {
+    currentFilters.page = currentRequestURL.searchParams.get('page')
   }
   return currentFilters
 }

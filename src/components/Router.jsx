@@ -34,7 +34,7 @@ const Router = () => {
             },
             {
               id: 'GenrePage',
-              path: 'genre/:genreId',
+              path: 'genre/:genreSlug',
               element: <GenrePage />,
               loader: genreCatalogueLoader
             },

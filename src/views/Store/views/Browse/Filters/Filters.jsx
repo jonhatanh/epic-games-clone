@@ -1,7 +1,7 @@
-import { useNavigate, useRouteLoaderData } from 'react-router-dom'
+import { useLocation, useNavigate, useRouteLoaderData } from 'react-router-dom'
 import FilterItem from '@/components/FilterItem/FilterItem'
 import classes from './Filters.module.css'
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import Button from '../../../../../components/Button/Button'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCheck, faFilter, faXmark } from '@fortawesome/free-solid-svg-icons'
@@ -14,32 +14,50 @@ export default function Filters ({ genres = null, currentFilters = {} }) {
   const [filters, setFilters] = useState([])
   const [filtersOpen, setFiltersOpen] = useState(false)
   const navigate = useNavigate()
+  const location = useLocation()
+  console.log({ location })
+  const firstLoadRef = useRef(true)
 
   // Loads filters
   useEffect(() => {
     console.log({ currentFilters })
+    const newFiltersState = []
     if (currentFilters.genres) {
-      currentFilters.genres.forEach((filter) => toggleFilter(filter))
+      newFiltersState.push(...currentFilters.genres)
     }
     if (currentFilters.orderBy) {
-      toggleFilter(currentFilters.orderBy)
-    }
-    if (currentFilters.ordering) {
-      setToDate(currentFilters.dates.to)
+      newFiltersState.push(currentFilters.orderBy)
     }
     if (currentFilters.descending !== undefined) {
       setDescendingOrder(currentFilters.descending)
     }
-    if (currentFilters.dates) {
+    if (
+      currentFilters.dates &&
+      currentFilters.dates.from &&
+      currentFilters.dates.to
+    ) {
       setFromDate(currentFilters.dates.from)
       setToDate(currentFilters.dates.to)
-      handleDateFilter()
+      newFiltersState.push({
+        name: `Date from ${currentFilters.dates.from} to ${currentFilters.dates.to}`,
+        slug: 'dateFilter',
+        from: currentFilters.dates.from,
+        to: currentFilters.dates.to,
+        exclusive: 2,
+        filterId: FILTERS_ID.date
+      })
     }
-    return clearFilters
+    setFilters(newFiltersState)
+
+    return () => {
+      firstLoadRef.current = true
+    }
   }, [])
 
   useEffect(() => {
-    const newURL = new URL(window.location.href)
+    const newURL = new URL(
+      window.location.origin + location.pathname + location.search
+    )
 
     const genreFilters = filters
       .filter((item) => item.filterId === FILTERS_ID.genre)
@@ -55,11 +73,25 @@ export default function Filters ({ genres = null, currentFilters = {} }) {
       (item) => item.filterId === FILTERS_ID.date
     )[0]
 
-    genreFilters && newURL.searchParams.set('genres', genreFilters)
-    orderByFilters && newURL.searchParams.set('ordering', orderByFilters)
-    dateFilter &&
-      newURL.searchParams.set('dates', `${dateFilter.from},${dateFilter.to}`)
-    if (filters.length > 0) { navigate(newURL.pathname + newURL.search) }
+    genreFilters
+      ? newURL.searchParams.set('genres', genreFilters)
+      : newURL.searchParams.delete('genres')
+    orderByFilters
+      ? newURL.searchParams.set('ordering', orderByFilters)
+      : newURL.searchParams.delete('ordering')
+    dateFilter
+      ? newURL.searchParams.set('dates', `${dateFilter.from},${dateFilter.to}`)
+      : newURL.searchParams.delete('dates')
+    console.log('Changing page')
+    console.log({ currentFilters })
+    if (filters.length > 0) {
+      console.log('first', firstLoadRef.current);
+      if (!firstLoadRef.current) {
+        newURL.searchParams.set('page', 1)
+      }
+      firstLoadRef.current = false
+      navigate(newURL.pathname + newURL.search)
+    }
   }, [filters, descendingOrder, navigate])
 
   function toggleFilter (filter) {
@@ -124,7 +156,7 @@ export default function Filters ({ genres = null, currentFilters = {} }) {
     setFromDate('')
     setToDate('')
     setDescendingOrder(false)
-    navigate('.')
+    navigate({ search: '?page=1' })
   }
   return (
     <aside className={`${classes.filters} ${filtersOpen ? classes.open : ''}`}>

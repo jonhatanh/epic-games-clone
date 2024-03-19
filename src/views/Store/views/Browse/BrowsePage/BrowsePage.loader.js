@@ -23,13 +23,16 @@ export async function browseLoader ({ request }) {
 
   const genres = await Promise.resolve(genresJson)
 
-  const res = await fetch(apiURL.href)
-  if (res.status >= 400) {
-    throw new Response('Error fetching data :(', { status: 500 })
-  }
-  const games = parseApiUrlPrevNext(await res.json(), reqURL)
+  // const res = await fetch(apiURL.href)
+  // if (res.status >= 400) {
+  //   throw new Response('Error fetching data :(', { status: 500 })
+  // }
+  // const games = parseApiUrlPrevNext(await res.json(), reqURL)
 
-  // const games = parseApiUrlPrevNext(await Promise.resolve(gamesJson), reqURL)
+  const games = parseApiUrlPrevNext(
+    await Promise.resolve(gamesJson),
+    new URL(reqURL.href)
+  )
 
   const currentFilters = getCurrentFilters(reqURL, genres)
 
