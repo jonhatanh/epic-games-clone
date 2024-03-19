@@ -7,8 +7,9 @@ import { redirect } from 'react-router-dom'
 import {
   getApiURL,
   getCurrentFilters,
-  parseApiUrlPrevNext
-} from '../../../../../utils/helpersApi'
+  parseApiUrlPrevNext,
+  parseGamesInApiResponse
+} from '@/utils/helpersApi'
 
 export async function browseLoader ({ request }) {
   const reqURL = new URL(request.url)
@@ -29,9 +30,8 @@ export async function browseLoader ({ request }) {
   // }
   // const games = parseApiUrlPrevNext(await res.json(), reqURL)
 
-  const games = parseApiUrlPrevNext(
-    await Promise.resolve(gamesJson),
-    new URL(reqURL.href)
+  const games = parseGamesInApiResponse(
+    parseApiUrlPrevNext(await Promise.resolve(gamesJson), new URL(reqURL.href))
   )
 
   const currentFilters = getCurrentFilters(reqURL, genres)

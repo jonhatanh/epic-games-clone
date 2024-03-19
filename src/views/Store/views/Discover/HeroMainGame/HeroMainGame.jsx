@@ -27,7 +27,7 @@ const HeroMainGame = ({ game }) => {
           <Link to={`games/${game.id}`}>{game.name}</Link>
         </h3>
         <p className={classes.price}>
-          Starting at <span>{randomPriceString()}</span>
+          Starting at <span>{game.price}</span>
         </p>
         <div>
           <Button bgColor='white' link to={`games/${game.id}`}>

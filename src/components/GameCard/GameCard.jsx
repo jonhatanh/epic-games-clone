@@ -12,7 +12,7 @@ const GameCard = ({
     name,
     background_image: backgroundImage,
     description = defaultDesc,
-    price = randomPriceString()
+    price
   },
   mainGameId,
   index,
@@ -87,7 +87,7 @@ GameCard.propTypes = {
     name: PropTypes.string.isRequired,
     background_image: PropTypes.string.isRequired,
     description: PropTypes.string,
-    price: PropTypes.number
+    price: PropTypes.string
   }),
   mainGameId: PropTypes.number,
   index: PropTypes.number,

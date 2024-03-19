@@ -75,7 +75,7 @@ const GameOverview = () => {
         {/* Game checkout */}
         <aside>
           <img src={game.background_image} alt='Game Background Image' />
-          <span>{randomPriceString()}</span>
+          <span>{game.price}</span>
           <Button size='large' bgColor='blue'>
             Buy Now
           </Button>

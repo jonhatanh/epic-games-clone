@@ -8,8 +8,9 @@ import {
   getApiURL,
   getCurrentFilters,
   parseApiUrlPrevNext,
-  getBasicApiCall
-} from '../../../../../utils/helpersApi'
+  getBasicApiCall,
+  parseGamesInApiResponse
+} from '@/utils/helpersApi'
 
 export async function loader ({ request, params: { genreSlug } }) {
   const reqURL = new URL(request.url)
@@ -36,9 +37,8 @@ export async function loader ({ request, params: { genreSlug } }) {
   // }
   // const games = parseApiUrlPrevNext(await res.json(), reqURL)
 
-  const games = parseApiUrlPrevNext(
-    await Promise.resolve(gamesJson),
-    new URL(reqURL.href)
+  const games = parseGamesInApiResponse(
+    parseApiUrlPrevNext(await Promise.resolve(gamesJson), new URL(reqURL.href))
   )
 
   const currentFilters = getCurrentFilters(reqURL, genres)

@@ -1,4 +1,5 @@
 import { API_KEY_PARAM, API_URL, DEFAULT_QUERY_STRING, FILTERS_ID, FILTERS_ITEMS_ORDER_BY } from '../constans'
+import { randomPriceString } from './helpers'
 
 export function restMonths (date, months) {
   return new Date(date.setMonth(date.getMonth() - months))
@@ -19,7 +20,8 @@ export function parseGamesInApiResponse (response) {
       metacritic: game.metacritic,
       rating: game.rating,
       background_image: game.background_image,
-      parent_platforms: game.parent_platforms
+      parent_platforms: game.parent_platforms,
+      price: randomPriceString()
     }
   })
   return response
@@ -37,7 +39,9 @@ export function parseSingleGameInApiResponse (game) {
     metacritic: game.metacritic,
     rating: game.rating,
     background_image: game.background_image,
-    parent_platforms: game.parent_platforms
+    parent_platforms: game.parent_platforms,
+    publishers: game.publishers,
+    price: randomPriceString()
   }
 }
 

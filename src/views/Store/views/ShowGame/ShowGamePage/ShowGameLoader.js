@@ -4,6 +4,7 @@ import gameScreenshots from '@/utils/apiScreenshots.json'
 import gameMovies from '@/utils/apiMovies.json'
 import { API_KEY_PARAM, API_URL } from '@/constans'
 import { makeApiCalls } from '@/utils/helpersApi'
+import { parseSingleGameInApiResponse } from '../../../../../utils/helpersApi'
 
 export async function loader ({ params: { gameId } }) {
   // get game from api
@@ -16,9 +17,9 @@ export async function loader ({ params: { gameId } }) {
   ])
   console.log(gameResponses)
   return {
-    game: gameResponses[0],
+    game: parseSingleGameInApiResponse(gameResponses[0]),
     screenshots: gameResponses[1].results,
     movies: gameResponses[2].results,
     achievements: gameResponses[3]
-  }
+  };
 }
