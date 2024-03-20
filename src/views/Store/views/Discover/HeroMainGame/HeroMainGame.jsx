@@ -1,11 +1,12 @@
 import PropTypes from 'prop-types'
 import classes from './HeroMainGame.module.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faCirclePlus } from '@fortawesome/free-solid-svg-icons'
+import { faCircleMinus, faCirclePlus } from '@fortawesome/free-solid-svg-icons'
 import { randomPriceString } from '@/utils/helpers'
-import { useEffect, useRef } from 'react'
+import { useContext, useEffect, useRef } from 'react'
 import Button from '@/components/Button/Button'
 import { Link } from 'react-router-dom'
+import { StorageContext } from '../../../../../App'
 const HeroMainGame = ({ game }) => {
   const imageRef = useRef(null)
   useEffect(() => {
@@ -13,6 +14,9 @@ const HeroMainGame = ({ game }) => {
     imageRef.current.offsetWidth
     imageRef.current.classList.add(classes.enterAnimation)
   }, [game.id])
+
+  const { addGame, removeGame, gameInStorage } = useContext(StorageContext)
+  const gameInWishlist = gameInStorage(game.id, 'wishlist')
   return (
     <div className={classes.mainGame}>
       <div className={classes.imageShadow} />
@@ -33,9 +37,17 @@ const HeroMainGame = ({ game }) => {
           <Button bgColor='white' link to={`games/${game.id}`}>
             Buy Now
           </Button>
-          <Button textSize='small'>
-            <FontAwesomeIcon icon={faCirclePlus} />
-            Add to wishlist
+          <Button
+            textSize='small'
+            onClick={() =>
+              gameInWishlist
+                ? removeGame(game.id, 'wishlist')
+                : addGame(game.id, 'wishlist')}
+          >
+            <FontAwesomeIcon
+              icon={gameInWishlist ? faCircleMinus : faCirclePlus}
+            />
+            {gameInWishlist ? 'Remove frmo wishlist' : 'Add to wishlist'}
           </Button>
         </div>
       </div>

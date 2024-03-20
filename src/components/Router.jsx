@@ -5,7 +5,7 @@ import Store from '@/views/Store/StorePage/Store'
 import App from '@/App'
 import { loader as DiscoverLoader } from '@/views/Store/views/Discover/DiscoverPage/DiscoverPage.loader'
 import { browseLoader } from '@/views/Store/views/Browse/BrowsePage/BrowsePage.loader'
-import { loader as genreCatalogueLoader } from '@/views/Store/views/Browse/GenrePage/GenrePage.loader';
+import { loader as genreCatalogueLoader } from '@/views/Store/views/Browse/GenrePage/GenrePage.loader'
 import Discover from '@/views/Store/views/Discover/DiscoverPage/DiscoverPage'
 import ShowGame from '@/views/Store/views/ShowGame/ShowGamePage/ShowGame'
 import { loader as singleGameLoader } from '@/views/Store/views/ShowGame/ShowGamePage/ShowGameLoader'
@@ -51,14 +51,14 @@ const Router = () => {
                 {
                   path: 'achievements',
                   element: <GameAchievements />
-                },
+                }
               ]
-            },
+            }
           ]
-        },
+        }
       ],
       errorElement: <ErrorPage />
-    },
+    }
     // {
     //   path: 'games/:gameId'
     // }

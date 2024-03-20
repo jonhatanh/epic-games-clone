@@ -35,7 +35,7 @@ const GameCard = ({
         ? classes.cardBig
         : ''
 
-  return index && changeMainGame
+  return index !== undefined && changeMainGame
     ? (
       <div
         className={`${classes.card} ${cardSizeClass} ${extraCardClass}`}

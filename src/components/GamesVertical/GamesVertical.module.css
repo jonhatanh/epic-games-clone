@@ -18,6 +18,16 @@
   h2 {
     font-weight: 500;
     font-size: 1.2rem;
+    &:hover {
+      a {
+        padding-right: 5px;
+      }
+    }
+  }
+  a {
+    color: white;
+    text-decoration: none;
+    transition: all 0.3s all ease-in-out;
   }
 }
 .list_title--double {

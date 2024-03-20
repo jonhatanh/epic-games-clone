@@ -1,18 +1,19 @@
-import { Link, useRouteLoaderData } from 'react-router-dom'
+import { Link, Navigate, useOutletContext, useRouteLoaderData } from 'react-router-dom'
 import classes from './GameOverview.module.css'
 import { randomPriceString } from '@/utils/helpers'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {
   faChevronLeft,
   faChevronRight,
+  faCircleMinus,
   faCirclePlus,
   faPlay
 } from '@fortawesome/free-solid-svg-icons'
 import Button from '@/components/Button/Button'
-import React from 'react'
+import React, { useContext } from 'react'
 import Collapsable from '@/components/Collapsable/Collapsable'
 import GameGallery from '@/views/Store/views/ShowGame/GameGallery/GameGallery'
-
+import { StorageContext } from '../../../../../App'
 function justEnglishDescription (description) {
   description = description.replaceAll('<br />', '<br /><br />')
   return description.split('Español')[0]
@@ -21,7 +22,11 @@ function justEnglishDescription (description) {
 const GameOverview = () => {
   const { game, achievements, screenshots, movies } =
     useRouteLoaderData('showGame')
-  console.log(game)
+
+  const { addGame, removeGame, gameInStorage } = useContext(StorageContext)
+  const gameInCart = gameInStorage(game.id, 'cart')
+  const gameInWishlist = gameInStorage(game.id, 'wishlist')
+  const gameInLibrary = gameInStorage(game.id, 'library')
   return (
     <>
       <section className={classes.gameDetails}>
@@ -76,16 +81,38 @@ const GameOverview = () => {
         <aside>
           <img src={game.background_image} alt='Game Background Image' />
           <span>{game.price}</span>
-          <Button size='large' bgColor='blue'>
-            Buy Now
+          <Button
+            size='large'
+            bgColor='blue'
+            link={gameInLibrary}
+            to='/store/library'
+            onClick={() => (gameInLibrary ? '' : addGame(game.id, 'library'))}
+          >
+            {gameInLibrary ? 'In library' : 'Buy Now'}
           </Button>
 
-          <Button border size='large'>
-            Add to cart
+          <Button
+            border
+            size='large'
+            onClick={() =>
+              gameInCart
+                ? removeGame(game.id, 'cart')
+                : addGame(game.id, 'cart')}
+          >
+            {gameInCart ? 'Remove from cart' : 'Add to cart'}
           </Button>
-          <Button border size='large'>
-            <FontAwesomeIcon icon={faCirclePlus} />
-            Add to wishlist
+          <Button
+            border
+            size='large'
+            onClick={() =>
+              gameInWishlist
+                ? removeGame(game.id, 'wishlist')
+                : addGame(game.id, 'wishlist')}
+          >
+            <FontAwesomeIcon
+              icon={gameInWishlist ? faCircleMinus : faCirclePlus}
+            />
+            {gameInWishlist ? 'Remove frmo wishlist' : 'Add to wishlist'}
           </Button>
           <div>
             <span>Publisher</span>
