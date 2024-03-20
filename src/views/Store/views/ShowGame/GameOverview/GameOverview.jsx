@@ -95,9 +95,7 @@ const GameOverview = () => {
             storageName='library'
             gameId={game.id}
             removeDefaultClick
-          >
-            {gameInLibrary ? 'In library' : 'Buy Now'}
-          </ActionStorageButton>
+          />
           {/* <Button
             size='large'
             bgColor='blue'

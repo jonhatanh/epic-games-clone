@@ -10,25 +10,44 @@ const ActionStorageButton = ({
   storageName,
   gameId,
   extraActions = null,
-  autoText = false,
+  // autoText = false,
   icon = null,
   children,
-  removeDefaultClick = false,
+  // removeDefaultClick = false,
   ...extraProps
 }) => {
   const { addGame, removeGame, gameInStorage } = useContext(StorageContext)
+  // const gameInCart = gameInStorage(gameId, 'cart')
+  // const gameInWishlist = gameInStorage(gameId, 'wishlist')
+  const gameInLibrary = gameInStorage(gameId, 'library')
   const gameStored = gameInStorage(gameId, storageName)
-  const buttonText = autoText
-    ? gameStored
-      ? `Remove from ${storageName}`
-      : `Add to ${storageName}`
-    : ''
+  let buttonText = gameStored
+    ? `Remove from ${storageName}`
+    : `Add to ${storageName}`
+  // let buttonOnClickAction = handleClick
 
-  console.log(buttonText, gameStored)
+  if (storageName !== 'library' && gameInLibrary) return null
+  if (storageName === 'library') {
+    buttonText = gameStored ? 'Go to library' : 'Buy now'
+  }
+
+  // switch(storageName) {
+  //   case "library": {
+  //     buttonText = gameStored ? 'Go to library' : 'Buy now'
+  //   }
+  //   case "cart": {
+  //     if(ga)
+
+  //   }
+  //   case "wishlist": {
+
+  //   }
+  // }
+
   function handleClick () {
     extraActions && extraActions()
-    if (removeDefaultClick) return
     if (gameStored) {
+      if (storageName === 'library') return
       removeGame(gameId, storageName)
       toast.error(`Game removed from ${storageName}`)
     } else {
@@ -42,13 +61,14 @@ const ActionStorageButton = ({
         <FontAwesomeIcon icon={gameStored ? icon.negative : icon.positive} />
       )}
       {buttonText}
+
       {children}
     </Button>
   )
 }
 
 ActionStorageButton.propTypes = {
-  storageName: PropTypes.oneOf(['card', 'library', 'wishlist']).isRequired,
+  storageName: PropTypes.oneOf(['cart', 'library', 'wishlist']).isRequired,
   gameId: PropTypes.number.isRequired,
   extraActions: PropTypes.func,
   icon: PropTypes.shape({
@@ -57,7 +77,7 @@ ActionStorageButton.propTypes = {
   }),
   autoText: PropTypes.bool,
   removeDefaultClick: PropTypes.bool,
-  children: PropTypes.element
+  children: PropTypes.any
 }
 
 export default ActionStorageButton

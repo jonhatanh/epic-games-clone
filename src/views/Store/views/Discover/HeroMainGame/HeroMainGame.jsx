@@ -43,7 +43,7 @@ const HeroMainGame = ({ game }) => {
             Buy Now
           </Button>
           <ActionStorageButton
-            storageName='wishlish'
+            storageName='wishlist'
             gameId={game.id}
             autoText
             icon={{ positive: faCirclePlus, negative: faCircleMinus }}

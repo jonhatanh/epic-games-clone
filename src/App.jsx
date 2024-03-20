@@ -5,7 +5,7 @@ import {
   ScrollRestoration,
   useLocation
 } from 'react-router-dom'
-import { createContext, useState } from 'react'
+import { createContext, useEffect, useState } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {
   faHome,
@@ -19,14 +19,20 @@ export const StorageContext = createContext({
   wishlist: [],
   library: []
 })
+
 function App () {
   const currentRoute = useLocation()
   const darkBody = currentRoute.pathname !== '/'
 
-  const [idsStorage, setIdsStorage] = useState({
-    cart: [],
-    wishlist: [],
-    library: []
+  const [idsStorage, setIdsStorage] = useState(() => {
+    const storage = localStorage.getItem('idsStorage')
+    return storage
+      ? JSON.parse(storage)
+      : {
+          cart: [],
+          wishlist: [],
+          library: []
+        }
   })
   function addGame (gameId, category) {
     const newCategory = [...idsStorage[category], gameId]
@@ -37,8 +43,12 @@ function App () {
     setIdsStorage({ ...idsStorage, [category]: newCategory })
   }
   function gameInStorage (gameId, category) {
-    return idsStorage[category].findIndex(id => id === gameId) !== -1
+    return idsStorage[category].findIndex((id) => id === gameId) !== -1
   }
+
+  useEffect(() => {
+    localStorage.setItem('idsStorage', JSON.stringify(idsStorage))
+  }, [idsStorage])
 
   const navClass = ({ isActive, isPending }) =>
     isActive ? classes.active : ''
