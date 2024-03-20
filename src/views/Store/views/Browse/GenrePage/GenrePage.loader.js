@@ -25,13 +25,13 @@ export async function loader ({ request, params: { genreSlug } }) {
   const genres = await Promise.resolve(genresJson)
   const genreId = genres.results.find((genre) => genre.slug === genreSlug)?.id
   const genreApiUrl = getBasicApiCall(`/genres/${genreId}`)
-  const resGenre = await fetch(genreApiUrl)
+  const resGenre = await fetch(genreApiUrl, { mode: 'cors' })
   if (resGenre.status >= 400) {
     throw new Response('Error fetching data :(', { status: 500 })
   }
   const genre = await resGenre.json()
 
-  // const res = await fetch(apiURL.href)
+  // const res = await fetch(apiURL.href,{ mode: 'cors' })
   // if (res.status >= 400) {
   //   throw new Response('Error fetching data :(', { status: 500 })
   // }

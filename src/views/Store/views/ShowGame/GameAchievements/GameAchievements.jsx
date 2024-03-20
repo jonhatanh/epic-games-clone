@@ -10,7 +10,7 @@ const GameAchievements = () => {
   const [allAchievements, setAllAchievements] = useState(achievements.results)
 
   async function handleClick () {
-    const res = await fetch(nextPage)
+    const res = await fetch(nextPage, { mode: 'cors' })
     const newAchievements = await res.json()
     setNextPage(newAchievements.next)
     setAllAchievements([...allAchievements, ...newAchievements.results])

@@ -46,7 +46,7 @@ export function parseSingleGameInApiResponse (game) {
 }
 
 export async function makeApiCalls (urls) {
-  const promisesRes = await Promise.all(urls.map((url) => fetch(url)))
+  const promisesRes = await Promise.all(urls.map((url) => fetch(url, { mode: 'cors' })))
 
   const jsonPromises = promisesRes.map((res) => {
     if (res.ok) {
