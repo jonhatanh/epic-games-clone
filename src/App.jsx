@@ -12,6 +12,7 @@ import {
   faShop,
   faShoppingCart
 } from '@fortawesome/free-solid-svg-icons'
+import { Toaster } from 'react-hot-toast'
 
 export const StorageContext = createContext({
   cart: [],
@@ -44,6 +45,7 @@ function App () {
 
   return (
     <div className={classes.container}>
+      <Toaster />
       <div
         className={`${classes.containerBackground} ${
           darkBody && classes.containerBackgroundDark
