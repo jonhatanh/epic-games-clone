@@ -7,9 +7,16 @@
   /* line-height: 1.5; */
   font-weight: 400;
 
+  --color-primary: red;
+  --background-color: #141414;
+  --background-secondary: #212121;
+  --color-paragraph: #9e9e9e;
+  
+  
   color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
   background-color: #141414;
+  
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;

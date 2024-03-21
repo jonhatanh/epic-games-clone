@@ -21,6 +21,7 @@ export function parseGamesInApiResponse (response) {
       rating: game.rating,
       background_image: game.background_image,
       parent_platforms: game.parent_platforms,
+      esrb_rating: game.esrb_rating,
       price: randomPriceString()
     }
   })
@@ -41,8 +42,9 @@ export function parseSingleGameInApiResponse (game) {
     background_image: game.background_image,
     parent_platforms: game.parent_platforms,
     publishers: game.publishers,
+    esrb_rating: game.esrb_rating,
     price: randomPriceString()
-  }
+  };
 }
 
 export async function makeApiCalls (urls) {

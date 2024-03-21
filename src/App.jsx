@@ -8,7 +8,9 @@ import {
 import { createContext, useEffect, useState } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {
+  faGamepad,
   faHome,
+  faMeteor,
   faShop,
   faShoppingCart
 } from '@fortawesome/free-solid-svg-icons'
@@ -79,10 +81,22 @@ function App () {
                 </NavLink>
               </li>
               <li>
+                <NavLink to='/wishlist' className={navClass}>
+                  <FontAwesomeIcon icon={faMeteor} />
+                  Wishlist
+                </NavLink>
+              </li>
+              <li>
                 <NavLink to='/cart' className={navClass}>
                   <FontAwesomeIcon icon={faShoppingCart} />
                   Cart
                   <span>{idsStorage.cart.length}</span>
+                </NavLink>
+              </li>
+              <li>
+                <NavLink to='/cart' className={navClass}>
+                  <FontAwesomeIcon icon={faGamepad} />
+                  Library
                 </NavLink>
               </li>
             </ul>
