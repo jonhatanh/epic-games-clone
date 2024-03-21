@@ -7,6 +7,7 @@
 
   h2 {
     font-size: 2rem;
+    font-weight: normal;
     span {
       color: var(--color-paragraph);
     }

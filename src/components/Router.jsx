@@ -16,7 +16,9 @@ import GenrePage from '../views/Store/views/Browse/GenrePage/GenrePage'
 import Wishlist from '../views/Wishlist/Wishlist'
 import { loader as WishlistLoader } from '../views/Wishlist/Wishlist.loader.js'
 import { loader as CartLoader } from '../views/Cart/Cart.loader.js';
+import { loader as LibraryLoader } from '../views/Library/Library.loader.js'
 import Cart from '../views/Cart/Cart.jsx'
+import Library from '../views/Library/Library.jsx'
 
 const Router = () => {
   const router = createBrowserRouter([
@@ -81,6 +83,11 @@ const Router = () => {
               path: 'cart',
               element: <Cart />,
               loader: CartLoader
+            },
+            {
+              path: 'library',
+              element: <Library />,
+              loader: LibraryLoader
             }
           ]
         }
