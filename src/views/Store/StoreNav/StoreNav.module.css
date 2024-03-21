@@ -27,9 +27,75 @@
   }
 }
 
+.search__container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  position: relative;
+
+  svg {
+    display: none;
+    font-size: 20px;
+    &.active {
+      display: block;
+    }
+  }
+
+  p {
+    font-weight: bold;
+  }
+
+  a {
+    color: white;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  h3 {
+    font-size: 1.1rem;
+    font-weight: normal;
+  }
+
+  section {
+    display: none;
+    flex-direction: column;
+    gap: 15px;
+    position: absolute;
+    top: 130%;
+    left: 0;
+    width: clamp(150px, 180%, 200%);
+    padding: 20px;
+    border-radius: 10px;
+    backdrop-filter: blur(8px);
+    background-color: var(--background-secondary);
+    /* background-color: red; */
+
+    &.open {
+      display: flex
+    }
+    img {
+      max-width: 50px;
+      aspect-ratio: 9 / 13;
+      object-fit: cover;
+      border-radius: 5px;
+    }
+  }
+}
 .search__bar {
   padding: 0.6rem 1rem;
   border-radius: 20px;
   border-width: 0px;
   color: white;
 }
+
+@media (max-width: 400px) {
+  .search__container {
+    section {
+      left: -30px;
+      width: 90vw;
+    }
+  }
+}
+
