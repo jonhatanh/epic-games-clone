@@ -4,7 +4,7 @@
   align-items: center;
   list-style: none;
   position: sticky;
-  top: 0;
+  top: var(--store-header-height);
   z-index: 20;
   max-height: 80px;
   padding: 15px 0;

@@ -8,6 +8,7 @@ import {
 import { createContext, useEffect, useState } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {
+  faBars,
   faGamepad,
   faHome,
   faMeteor,
@@ -26,6 +27,7 @@ export const StorageContext = createContext({
 function App () {
   const currentRoute = useLocation()
   const darkBody = currentRoute.pathname !== '/'
+  const [openNav, setOpenNav] = useState(false)
 
   const [idsStorage, setIdsStorage] = useState(() => {
     const storage = localStorage.getItem('idsStorage')
@@ -87,7 +89,8 @@ function App () {
         <header className={classes.containerHeader}>
           <h1>GAME STORE</h1>
           <nav>
-            <ul className={classes.containerNav}>
+            <button onClick={()=> setOpenNav(!openNav)}><FontAwesomeIcon icon={faBars}/></button>
+            <ul className={`${classes.containerNav} ${openNav ? classes.open : ''}`}>
               <li>
                 <NavLink to='/' className={navClass}>
                   <FontAwesomeIcon icon={faHome} />
