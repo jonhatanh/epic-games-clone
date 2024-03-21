@@ -106,6 +106,5 @@
 }
 
 .container__main {
-  border: 2px solid red;
   flex: 1;
 }

@@ -16,11 +16,12 @@ export async function loader ({ params: { gameId } }) {
   //   `${API_URL}/games/${gameId}/achievements?${API_KEY_PARAM}`
   // ])
 
+   
   const gameResponses = [
     await Promise.resolve(game),
     await Promise.resolve(gameScreenshots),
     await Promise.resolve(gameMovies),
-    await Promise.resolve(gameAchievements),
+    await Promise.resolve(gameAchievements)
   ]
 
   return {
