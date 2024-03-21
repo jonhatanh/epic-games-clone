@@ -21,7 +21,7 @@ const Button = ({
       ${classes['button' + bgColor]} 
       ${classes['buttonText' + textSize]}
       ${sizeClass}
-      ${border && classes.buttonBorder}
+      ${border ? classes.buttonBorder : ''}
       `}
         {...extraProps}
       >
@@ -34,7 +34,7 @@ const Button = ({
       ${classes['button' + bgColor]} 
       ${classes['buttonText' + textSize]}
       ${sizeClass}
-      ${border && classes.buttonBorder}
+      ${border ? classes.buttonBorder : ''}
       `}
         {...extraProps}
       >

@@ -1,7 +1,9 @@
+import { parsePrice } from '../../utils/helpers'
 import classes from './GameCartCard.module.css'
 import { Link } from 'react-router-dom'
 
 const GameCartCard = ({ game, children }) => {
+  console.log(game);
   return (
     <article key={game.id} className={classes.card}>
       <main>
@@ -9,7 +11,7 @@ const GameCartCard = ({ game, children }) => {
           <img src={game.background_image} alt={`${game.name} Image`} />
           <ul>
             <p>Game platforms</p>
-            {game.parent_platforms.map(({ platform: { id, name } }) => {
+            {game.parent_platforms?.map(({ platform: { id, name } }) => {
               return <li key={id}>{name}</li>
             })}
           </ul>
@@ -19,10 +21,14 @@ const GameCartCard = ({ game, children }) => {
             <h3>
               <Link to={`/store/games/${game.id}`}>{game.name}</Link>
             </h3>
-            <span>{game.price}</span>
+            <span>
+              {typeof game.price === 'number'
+                ? parsePrice(game.price)
+                : game.price}
+            </span>
           </header>
           <div>
-            <span>ESRB Rating: {game.esrb_rating.name}</span>
+            <span>ESRB Rating: {game.esrb_rating?.name || 'Undefined'}</span>
             <p>
               {game.tags.reduce((tags, tag, index) => {
                 tags +=

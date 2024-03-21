@@ -15,6 +15,7 @@ import {
   faShoppingCart
 } from '@fortawesome/free-solid-svg-icons'
 import { Toaster } from 'react-hot-toast'
+import { library } from '@fortawesome/fontawesome-svg-core'
 
 export const StorageContext = createContext({
   cart: [],
@@ -37,15 +38,34 @@ function App () {
         }
   })
   function addGame (gameId, category) {
+    console.log({ gameId, category, idsStorage })
+    if (idsStorage[category].includes(gameId)) return
     const newCategory = [...idsStorage[category], gameId]
-    setIdsStorage({ ...idsStorage, [category]: newCategory })
+    setIdsStorage((latestStorage) => ({
+      ...latestStorage,
+      [category]: newCategory
+    }))
   }
   function removeGame (gameId, category) {
     const newCategory = idsStorage[category].filter((id) => id !== gameId)
-    setIdsStorage({ ...idsStorage, [category]: newCategory })
+    setIdsStorage((latestStorage) => ({
+      ...latestStorage,
+      [category]: newCategory
+    }))
   }
   function gameInStorage (gameId, category) {
-    return idsStorage[category].findIndex((id) => id === gameId) !== -1
+    console.log({ gameId, category, idsStorage })
+    return idsStorage[category].includes(gameId)
+  }
+  function buyGamesInCart () {
+    const newWishlist = idsStorage.wishlist.filter(
+      (gameId) => !idsStorage.cart.includes(gameId)
+    )
+    setIdsStorage((latestStorage) => ({
+      wishlist: newWishlist,
+      cart: [],
+      library: [...latestStorage.library, ...latestStorage.cart]
+    }))
   }
 
   useEffect(() => {
@@ -94,7 +114,7 @@ function App () {
                 </NavLink>
               </li>
               <li>
-                <NavLink to='/cart' className={navClass}>
+                <NavLink to='/library' className={navClass}>
                   <FontAwesomeIcon icon={faGamepad} />
                   Library
                 </NavLink>
@@ -104,7 +124,13 @@ function App () {
         </header>
         <main className={classes.containerMain}>
           <StorageContext.Provider
-            value={{ idsStorage, addGame, removeGame, gameInStorage }}
+            value={{
+              idsStorage,
+              addGame,
+              removeGame,
+              gameInStorage,
+              buyGamesInCart
+            }}
           >
             <Outlet />
           </StorageContext.Provider>

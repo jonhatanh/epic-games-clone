@@ -18,6 +18,7 @@ const Wishlist = () => {
       <section>
         {games.map((game) => {
           const gameInCart = gameInStorage(game.id, 'cart')
+          if (!gameInStorage(game.id, 'wishlist')) return null
           return (
             <GameCartCard key={game.id} game={game}>
               <Button
@@ -33,8 +34,10 @@ const Wishlist = () => {
                 to='/cart'
                 border
                 onClick={() => {
-                  addGame(game.id, 'cart')
-                  toast.success('Game added to cart')
+                  if (!gameInCart) {
+                    addGame(game.id, 'cart')
+                    toast.success('Game added to cart')
+                  }
                 }}
               >
                 {gameInCart ? 'See in cart' : 'Add to cart'}

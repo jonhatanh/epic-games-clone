@@ -1,30 +1,70 @@
+.toast__checkout {
+  p {
+    font-weight: bold;
+    margin-bottom: 20px;
+  }
+  footer {
+    padding: 10px 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+}
+
 .container {
   position: relative;
-  flex: 1;
   display: flex;
   flex-direction: column;
   gap: 50px;
+  
+  > main {
+    flex: 1;
+    display: flex;
+    gap: 30px;
 
+    /* Card container */
+    > section {
+      display: flex;
+      flex-direction: column;
+      gap: 30px;
+    }
+    
+  }
   h2 {
     font-size: 2rem;
+    font-weight: 400;
     span {
       color: var(--color-paragraph);
     }
   }
 
-  /* Card container */
-  > section {
-    display: flex;
-    flex-direction: column;
-    gap: 30px;
-  }
+
+  aside {
+      flex-shrink: 0;
+      min-width: 200px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+
+      p {
+        display: flex;
+        justify-content: space-between;
+        span:nth-child(2) {
+          font-weight: bold;
+        }
+      }
+      h3 {
+        font-weight: normal;
+        font-size: 2rem;
+      }
+    }
 }
 
 
 @media (max-width: 767px) {
-  .card__body {
+  /* .card__body {
     p {
       max-width: 100%;
     }
-  }
+  } */
 }

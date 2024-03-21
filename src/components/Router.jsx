@@ -14,7 +14,8 @@ import GameAchievements from '@/views/Store/views/ShowGame/GameAchievements/Game
 import BrowsePage from '@/views/Store/views/Browse/BrowsePage/BrowsePage'
 import GenrePage from '../views/Store/views/Browse/GenrePage/GenrePage'
 import Wishlist from '../views/Wishlist/Wishlist'
-import { loader as WishlistLoader , loader as CartLoader } from '../views/Wishlist/Wishlist.loader.js';
+import { loader as WishlistLoader } from '../views/Wishlist/Wishlist.loader.js'
+import { loader as CartLoader } from '../views/Cart/Cart.loader.js';
 import Cart from '../views/Cart/Cart.jsx'
 
 const Router = () => {

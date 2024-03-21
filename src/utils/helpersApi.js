@@ -1,5 +1,5 @@
 import { API_KEY_PARAM, API_URL, DEFAULT_QUERY_STRING, FILTERS_ID, FILTERS_ITEMS_ORDER_BY } from '../constans'
-import { randomPriceString } from './helpers'
+import { randomPrice, randomPriceString } from './helpers'
 
 export function restMonths (date, months) {
   return new Date(date.setMonth(date.getMonth() - months))
@@ -28,7 +28,7 @@ export function parseGamesInApiResponse (response) {
   return response
 }
 
-export function parseSingleGameInApiResponse (game) {
+export function parseSingleGameInApiResponse (game, priceNumber = false) {
   return {
     id: game.id,
     slug: game.slug,
@@ -43,8 +43,8 @@ export function parseSingleGameInApiResponse (game) {
     parent_platforms: game.parent_platforms,
     publishers: game.publishers,
     esrb_rating: game.esrb_rating,
-    price: randomPriceString()
-  };
+    price: priceNumber ? randomPrice() : randomPriceString()
+  }
 }
 
 export async function makeApiCalls (urls) {
