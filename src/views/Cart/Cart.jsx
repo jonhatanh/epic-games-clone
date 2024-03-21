@@ -1,43 +1,40 @@
 import { useLoaderData } from 'react-router-dom'
-import classes from './Wishlist.module.css'
+import classes from './Cart.module.css'
 import { useContext } from 'react'
 import { StorageContext } from '../../App'
 import GameCartCard from '../../components/GameCartCard/GameCartCard'
 import Button from '../../components/Button/Button'
 import toast from 'react-hot-toast'
-const Wishlist = () => {
+const Cart = () => {
   const { games } = useLoaderData()
-  const { addGame, removeGame, gameInStorage, idsStorage } =
+  const { removeGame, idsStorage } =
     useContext(StorageContext)
 
   return (
     <div className={classes.container}>
       <h2>
-        Wishlist <span>({idsStorage.wishlist.length})</span>
+        Cart <span>({idsStorage.cart.length})</span>
       </h2>
       <section>
         {games.map((game) => {
-          const gameInCart = gameInStorage(game.id, 'cart')
           return (
             <GameCartCard key={game.id} game={game}>
               <Button
                 onClick={() => {
-                  removeGame(game.id, 'wishlist')
-                  toast.success('Game removed from wishlist')
+                  removeGame(game.id, 'cart')
+                  toast.success('Game removed from cart')
                 }}
               >
                 Remove
               </Button>
               <Button
-                link={gameInCart}
-                to='/cart'
                 border
                 onClick={() => {
-                  addGame(game.id, 'cart')
-                  toast.success('Game added to cart')
+                  removeGame(game.id, 'cart')
+                  toast.success('Moved to wishlist')
                 }}
               >
-                {gameInCart ? 'See in cart' : 'Add to cart'}
+                Move to wishlist
               </Button>
             </GameCartCard>
           )
@@ -47,4 +44,4 @@ const Wishlist = () => {
   )
 }
 
-export default Wishlist
+export default Cart

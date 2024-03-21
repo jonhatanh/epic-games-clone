@@ -13,7 +13,7 @@ export default function ErrorPage () {
       <p className={classes.statusText}>
         <i>{error.statusText || error.message}</i>
       </p>
-      <Link to="/">Go to home page <FontAwesomeIcon icon={faArrowRight} /></Link>
+      <Link to='/'>Go to home page <FontAwesomeIcon icon={faArrowRight} /></Link>
     </div>
   )
 }
