@@ -5,6 +5,7 @@ import toast from 'react-hot-toast'
 import { useContext } from 'react'
 import { StorageContext } from '../../App'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { ToastCheckOutForm } from '../../views/Cart/Cart'
 
 const ActionStorageButton = ({
   storageName,
@@ -16,7 +17,8 @@ const ActionStorageButton = ({
   // removeDefaultClick = false,
   ...extraProps
 }) => {
-  const { addGame, removeGame, gameInStorage } = useContext(StorageContext)
+  const { addGame, removeGame, gameInStorage, buySingleGame } =
+    useContext(StorageContext)
   // const gameInCart = gameInStorage(gameId, 'cart')
   // const gameInWishlist = gameInStorage(gameId, 'wishlist')
   const gameInLibrary = gameInStorage(gameId, 'library')
@@ -43,6 +45,10 @@ const ActionStorageButton = ({
 
   //   }
   // }
+  function handlePurchase () {
+    buySingleGame(gameId)
+    toast.success('Game added to your library!')
+  }
 
   function handleClick () {
     extraActions && extraActions()
@@ -51,6 +57,14 @@ const ActionStorageButton = ({
       removeGame(gameId, storageName)
       toast.error(`Game removed from ${storageName}`)
     } else {
+      if (storageName === 'library') {
+        toast(ToastCheckOutForm, {
+          id: "checkout",
+          duration: Infinity,
+          onConfirm: () => handlePurchase(),
+        });
+        return
+      }
       addGame(gameId, storageName)
       toast.success(`Game added to ${storageName}`)
     }

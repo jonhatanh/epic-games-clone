@@ -28,7 +28,7 @@ function App () {
   const currentRoute = useLocation()
   const darkBody = currentRoute.pathname !== '/'
   const [openNav, setOpenNav] = useState(false)
-
+  console.log({ currentRoute })
   const [idsStorage, setIdsStorage] = useState(() => {
     const storage = localStorage.getItem('idsStorage')
     return storage
@@ -48,7 +48,14 @@ function App () {
       [category]: newCategory
     }))
   }
-  function removeGame (gameId, category) {
+  function removeGame (gameId, category, allGames = false) {
+    if (allGames) {
+      setIdsStorage((latestStorage) => ({
+        ...latestStorage,
+        [category]: []
+      }))
+      return
+    }
     const newCategory = idsStorage[category].filter((id) => id !== gameId)
     setIdsStorage((latestStorage) => ({
       ...latestStorage,
@@ -69,6 +76,16 @@ function App () {
       library: [...latestStorage.library, ...latestStorage.cart]
     }))
   }
+  function buySingleGame (gameId) {
+    const newWishlist = idsStorage.wishlist.filter((id) => id !== gameId)
+    const newCart = idsStorage.cart.filter((id) => id !== gameId)
+    setIdsStorage((latestStorage) => ({
+      ...latestStorage,
+      wishlist: newWishlist,
+      cart: newCart,
+      library: [...latestStorage.library, gameId]
+    }))
+  }
 
   useEffect(() => {
     localStorage.setItem('idsStorage', JSON.stringify(idsStorage))
@@ -86,11 +103,22 @@ function App () {
         }`}
       />
       <div className={classes.containerBody}>
-        <header className={classes.containerHeader}>
+        <header
+          className={classes.containerHeader}
+          style={{
+            backgroundColor: currentRoute.pathname === '/' ? 'transparent' : '',
+          }}
+        >
           <h1>GAME STORE</h1>
           <nav>
-            <button onClick={()=> setOpenNav(!openNav)}><FontAwesomeIcon icon={faBars}/></button>
-            <ul className={`${classes.containerNav} ${openNav ? classes.open : ''}`}>
+            <button onClick={() => setOpenNav(!openNav)}>
+              <FontAwesomeIcon icon={faBars} />
+            </button>
+            <ul
+              className={`${classes.containerNav} ${
+                openNav ? classes.open : ''
+              }`}
+            >
               <li>
                 <NavLink to='/' className={navClass}>
                   <FontAwesomeIcon icon={faHome} />
@@ -132,7 +160,8 @@ function App () {
               addGame,
               removeGame,
               gameInStorage,
-              buyGamesInCart
+              buyGamesInCart,
+              buySingleGame
             }}
           >
             <Outlet />

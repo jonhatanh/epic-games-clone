@@ -91,7 +91,7 @@ const GameOverview = () => {
             size='large'
             bgColor='blue'
             link={gameInLibrary}
-            to='/store/library'
+            to='/library'
             storageName='library'
             gameId={game.id}
             removeDefaultClick

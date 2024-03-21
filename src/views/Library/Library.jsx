@@ -12,15 +12,28 @@ const Library = () => {
   const { addGame, removeGame, gameInStorage, idsStorage } =
     useContext(StorageContext)
 
+  function handleClick () {
+    removeGame(0, 'library', true)
+    toast.success('Your library was deleted. Good thing it was free...')
+  }
   return (
     <div className={classes.container}>
-      <h2>
-        Library <span>({idsStorage.library.length})</span>
-      </h2>
+      <header>
+        <h2>
+          Library <span>({idsStorage.library.length})</span>
+        </h2>
+        {idsStorage.library.length > 0 && (
+          <Button bgColor='gray' onClick={handleClick}>
+            Clear library
+          </Button>
+        )}
+      </header>
       {idsStorage.library?.length > 0
         ? (
           <div className={classes.library}>
-            <GamesCatalogue games={games} showPrice={false}> </GamesCatalogue>
+            <GamesCatalogue games={games} showPrice={false}>
+              {' '}
+            </GamesCatalogue>
           </div>
           )
         : (
