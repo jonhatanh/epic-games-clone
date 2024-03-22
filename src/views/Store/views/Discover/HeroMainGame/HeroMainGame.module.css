@@ -14,7 +14,7 @@
     z-index: 5;
   }
   img {
-  width: 100%;
+    width: 100%;
     aspect-ratio: 16 / 9;
     object-fit: cover;
     border-radius: 25px;
@@ -56,7 +56,7 @@
 }
 
 .enter_animation {
-  animation: enter forwards 0.7s ;
+  animation: enter forwards 0.7s;
 }
 
 @keyframes enter {
@@ -71,9 +71,25 @@
 }
 
 @media (max-width: 767px) {
-.main_game {
+  .main_game {
     grid-column: span 6;
     /* grid-row: span 3; */
   }
 }
-
+@media (max-width: 450px) {
+  .main_game {
+    width: 100%;
+    height: 100%;
+    .image_shadow {
+      box-shadow: inset 0px -150px 50px 0px rgba(0, 0, 0, 0.5);
+    }
+    .options {
+      left: 10px;
+      right: 10px;
+      bottom: 15px;
+      div {
+        flex-direction: column;
+      }
+    }
+  }
+}

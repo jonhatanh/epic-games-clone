@@ -2,7 +2,7 @@ import { Link, NavLink } from 'react-router-dom'
 import classes from './StoreNav.module.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSpinner } from '@fortawesome/free-solid-svg-icons'
-import { useSearchBar } from '../../../hooks/useSearchBar'
+import { useSearchBar } from '@/hooks/useSearchBar'
 export default function StoreNav () {
   const navClass = ({ isActive, isPending }) =>
     isActive ? classes.active : isPending ? '' : ''
@@ -24,8 +24,6 @@ export default function StoreNav () {
       <div className={classes.searchContainer}>
         <input
           type='search'
-          name='search'
-          id='search'
           placeholder='Search store'
           className={classes.searchBar}
           onChange={(e) => handleChange(e)}

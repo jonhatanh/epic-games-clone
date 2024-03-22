@@ -54,7 +54,7 @@
   gap: 1rem;
   justify-content: space-between;
   align-items: center;
-  height: var(--store-header-height);
+  height: var(--main-nav-height);
 
   h1 {
     font-size: 1.75rem;

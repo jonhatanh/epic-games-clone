@@ -16,3 +16,9 @@
   }
 
 }
+
+@media (max-width: 450px) {
+  .hero_games {
+    grid-template-rows: 450px;
+  }
+}
