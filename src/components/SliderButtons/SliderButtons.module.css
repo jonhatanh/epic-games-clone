@@ -1,0 +1,52 @@
+.hover__container {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  grid-column: 1 / -1;
+
+  &:hover {
+    .button__container {
+      button {
+        opacity: 1;
+      }
+      &:first-child {
+        left: 0;
+      }
+      &:last-child {
+        right: 0;
+      }
+    }
+  }
+  .button__container {
+    position: absolute;
+    pointer-events: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    top: 0;
+    bottom: 0;
+    width: 80px;
+    z-index: 10;
+    transition: 0.1s all ease-out;
+
+    button {
+      padding: 15px;
+      font-size: 1.5rem;
+      background-color: transparent;
+      border: none;
+      pointer-events: all;
+      cursor: pointer;
+      opacity: 0;
+      transition: 0.1s all ease-out;
+    }
+
+    &:first-child {
+      background: linear-gradient(to left, transparent, rgba(0, 0, 0, 0.4));
+      left: -80px;
+    }
+    &:last-child {
+      right: -80px;
+      background: linear-gradient(to right, transparent, rgba(0, 0, 0, 0.4));
+    }
+  }
+}
