@@ -1,12 +1,12 @@
-import classes from './App.module.css'
+import classes from './App.module.css';
 import {
   NavLink,
   Outlet,
   ScrollRestoration,
   useLocation
-} from 'react-router-dom'
-import { createContext, useEffect, useState } from 'react'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+} from 'react-router-dom';
+import { createContext, useEffect, useState } from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faBars,
   faGamepad,
@@ -14,9 +14,10 @@ import {
   faMeteor,
   faShop,
   faShoppingCart
-} from '@fortawesome/free-solid-svg-icons'
-import { Toaster } from 'react-hot-toast'
-import { library } from '@fortawesome/fontawesome-svg-core'
+} from '@fortawesome/free-solid-svg-icons';
+import { Toaster } from 'react-hot-toast';
+import { library } from '@fortawesome/fontawesome-svg-core';
+import { useGamesStorage } from './hooks/useGamesStorage';
 
 export const StorageContext = createContext({
   cart: [],
@@ -26,73 +27,20 @@ export const StorageContext = createContext({
 
 function App () {
   const currentRoute = useLocation()
-  const darkBody = currentRoute.pathname !== '/'
+  const darkBody = currentRoute.pathname !== '/';
   const [openNav, setOpenNav] = useState(false)
   console.log({ currentRoute })
-  const [idsStorage, setIdsStorage] = useState(() => {
-    const storage = localStorage.getItem('idsStorage')
-    return storage
-      ? JSON.parse(storage)
-      : {
-          cart: [],
-          wishlist: [],
-          library: []
-        }
-  })
-  function addGame (gameId, category) {
-    console.log({ gameId, category, idsStorage })
-    if (idsStorage[category].includes(gameId)) return
-    const newCategory = [...idsStorage[category], gameId]
-    setIdsStorage((latestStorage) => ({
-      ...latestStorage,
-      [category]: newCategory
-    }))
-  }
-  function removeGame (gameId, category, allGames = false) {
-    if (allGames) {
-      setIdsStorage((latestStorage) => ({
-        ...latestStorage,
-        [category]: []
-      }))
-      return
-    }
-    const newCategory = idsStorage[category].filter((id) => id !== gameId)
-    setIdsStorage((latestStorage) => ({
-      ...latestStorage,
-      [category]: newCategory
-    }))
-  }
-  function gameInStorage (gameId, category) {
-    console.log({ gameId, category, idsStorage })
-    return idsStorage[category].includes(gameId)
-  }
-  function buyGamesInCart () {
-    const newWishlist = idsStorage.wishlist.filter(
-      (gameId) => !idsStorage.cart.includes(gameId)
-    )
-    setIdsStorage((latestStorage) => ({
-      wishlist: newWishlist,
-      cart: [],
-      library: [...latestStorage.library, ...latestStorage.cart]
-    }))
-  }
-  function buySingleGame (gameId) {
-    const newWishlist = idsStorage.wishlist.filter((id) => id !== gameId)
-    const newCart = idsStorage.cart.filter((id) => id !== gameId)
-    setIdsStorage((latestStorage) => ({
-      ...latestStorage,
-      wishlist: newWishlist,
-      cart: newCart,
-      library: [...latestStorage.library, gameId]
-    }))
-  }
-
-  useEffect(() => {
-    localStorage.setItem('idsStorage', JSON.stringify(idsStorage))
-  }, [idsStorage])
+  const {
+    idsStorage,
+    addGame,
+    removeGame,
+    gameInStorage,
+    buyGamesInCart,
+    buySingleGame
+  } = useGamesStorage()
 
   const navClass = ({ isActive, isPending }) =>
-    isActive ? classes.active : ''
+    isActive ? classes.active : '';
 
   return (
     <div className={classes.container}>
