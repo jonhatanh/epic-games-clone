@@ -1,7 +1,7 @@
 import { useLoaderData } from "react-router-dom";
 import classes from "./Cart.module.css";
 import { useContext } from "react";
-import { StorageContext } from "../../App";
+import { StorageContext } from "@/hooks/useGamesStorage";
 import GameCartCard from "../../components/GameCartCard/GameCartCard";
 import Button from "../../components/Button/Button";
 import toast from "react-hot-toast";

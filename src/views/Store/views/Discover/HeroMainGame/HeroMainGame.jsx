@@ -10,7 +10,7 @@ import { randomPriceString } from '@/utils/helpers'
 import { useContext, useEffect, useRef } from 'react'
 import Button from '@/components/Button/Button'
 import { Link } from 'react-router-dom'
-import { StorageContext } from '../../../../../App'
+import { StorageContext } from "@/hooks/useGamesStorage";
 import ActionStorageButton from '../../../../../components/ActionStorageButton/ActionStorageButton'
 const HeroMainGame = ({ game }) => {
   const imageRef = useRef(null)

@@ -1,4 +1,10 @@
-import { useEffect, useState } from 'react'
+import { createContext, useEffect, useState } from 'react'
+
+export const StorageContext = createContext({
+  cart: [],
+  wishlist: [],
+  library: []
+})
 
 export function useGamesStorage () {
   const [idsStorage, setIdsStorage] = useState(() => {

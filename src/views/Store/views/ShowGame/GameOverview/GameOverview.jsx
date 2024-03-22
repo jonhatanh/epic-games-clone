@@ -18,7 +18,7 @@ import Button from '@/components/Button/Button'
 import React, { useContext } from 'react'
 import Collapsable from '@/components/Collapsable/Collapsable'
 import GameGallery from '@/views/Store/views/ShowGame/GameGallery/GameGallery'
-import { StorageContext } from '../../../../../App'
+import { StorageContext } from "@/hooks/useGamesStorage";
 import ActionStorageButton from '../../../../../components/ActionStorageButton/ActionStorageButton'
 function justEnglishDescription (description) {
   description = description.replaceAll('<br />', '<br /><br />')

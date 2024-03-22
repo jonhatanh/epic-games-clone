@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import Button from '../Button/Button'
 import toast from 'react-hot-toast'
 import { useContext } from 'react'
-import { StorageContext } from '../../App'
+import { StorageContext } from '@/hooks/useGamesStorage'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { ToastCheckOutForm } from '../../views/Cart/Cart'
 

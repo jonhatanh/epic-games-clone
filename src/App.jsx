@@ -5,7 +5,7 @@ import {
   ScrollRestoration,
   useLocation
 } from 'react-router-dom';
-import { createContext, useEffect, useState } from 'react';
+import { createContext, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faBars,
@@ -16,14 +16,17 @@ import {
   faShoppingCart
 } from '@fortawesome/free-solid-svg-icons';
 import { Toaster } from 'react-hot-toast';
-import { library } from '@fortawesome/fontawesome-svg-core';
-import { useGamesStorage } from './hooks/useGamesStorage';
+import { StorageContext, useGamesStorage } from './hooks/useGamesStorage';
 
-export const StorageContext = createContext({
-  cart: [],
-  wishlist: [],
-  library: []
-})
+const NavItem = ({ children, to, icon }) => {
+  const navClass = ({ isActive }) => (isActive ? classes.active : '')
+  return (
+    <NavLink to={to} className={navClass}>
+      <FontAwesomeIcon icon={icon} />
+      {children}
+    </NavLink>
+  )
+};
 
 function App () {
   const currentRoute = useLocation()
@@ -39,11 +42,12 @@ function App () {
     buySingleGame
   } = useGamesStorage()
 
-  const navClass = ({ isActive, isPending }) =>
-    isActive ? classes.active : '';
+  const homePage = currentRoute.pathname === '/';
 
   return (
-    <div className={classes.container}>
+    <div
+      className={`${classes.container} ${homePage ? classes.innerShadow : ''}`}
+    >
       <Toaster />
       <div
         className={`${classes.containerBackground} ${
@@ -54,7 +58,7 @@ function App () {
         <header
           className={classes.containerHeader}
           style={{
-            backgroundColor: currentRoute.pathname === '/' ? 'transparent' : '',
+            backgroundColor: homePage ? 'transparent' : '',
           }}
         >
           <h1>GAME STORE</h1>
@@ -68,35 +72,30 @@ function App () {
               }`}
             >
               <li>
-                <NavLink to='/' className={navClass}>
-                  <FontAwesomeIcon icon={faHome} />
+                <NavItem to='/' icon={faHome}>
                   Home
-                </NavLink>
+                </NavItem>
               </li>
               <li>
-                <NavLink to='/store' className={navClass}>
-                  <FontAwesomeIcon icon={faShop} />
+                <NavItem to='store' icon={faShop}>
                   Store
-                </NavLink>
+                </NavItem>
               </li>
               <li>
-                <NavLink to='/wishlist' className={navClass}>
-                  <FontAwesomeIcon icon={faMeteor} />
+                <NavItem to='wishlist' icon={faMeteor}>
                   Wishlist
-                </NavLink>
+                </NavItem>
               </li>
               <li>
-                <NavLink to='/cart' className={navClass}>
-                  <FontAwesomeIcon icon={faShoppingCart} />
+                <NavItem to='cart' icon={faShoppingCart}>
                   Cart
                   <span>{idsStorage.cart.length}</span>
-                </NavLink>
+                </NavItem>
               </li>
               <li>
-                <NavLink to='/library' className={navClass}>
-                  <FontAwesomeIcon icon={faGamepad} />
+                <NavItem to='library' icon={faGamepad}>
                   Library
-                </NavLink>
+                </NavItem>
               </li>
             </ul>
           </nav>
