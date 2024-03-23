@@ -3,10 +3,15 @@ import classes from './StoreNav.module.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSpinner } from '@fortawesome/free-solid-svg-icons'
 import { useSearchBar } from '@/hooks/useSearchBar'
+import { useOutsideClick } from '@/hooks/useOutsideClick'
 export default function StoreNav () {
   const navClass = ({ isActive, isPending }) =>
     isActive ? classes.active : isPending ? '' : ''
 
+  const closeTabOnClickOutside = () => {
+    handleOpenTab(false)
+  }
+  const tagRef = useOutsideClick(closeTabOnClickOutside)
   const { games, loading, error, handleChange, openTab, setOpenTab } =
     useSearchBar()
 
@@ -21,14 +26,13 @@ export default function StoreNav () {
 
   return (
     <nav className={classes.nav}>
-      <div className={classes.searchContainer}>
+      <div ref={tagRef} className={classes.searchContainer}>
         <input
           type='search'
           placeholder='Search store'
           className={classes.searchBar}
           onChange={(e) => handleChange(e)}
           onFocus={() => handleOpenTab(true)}
-          onBlur={() => handleOpenTab(false)}
           autoComplete='off'
         />
         <FontAwesomeIcon
@@ -39,7 +43,11 @@ export default function StoreNav () {
           {error && <p>{error}</p>}
           {games?.map((game) => {
             return (
-              <Link key={game.id} to={`/store/games/${game.id}`}>
+              <Link
+                key={game.id}
+                to={`/store/games/${game.id}`}
+                onClick={() => handleOpenTab(false)}
+              >
                 <img src={game.background_image} alt={`${game.name} cover`} />
                 <h3>{game.name}</h3>
               </Link>

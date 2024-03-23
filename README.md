@@ -14,6 +14,6 @@ Initially, I aimed to create a simple game store, drawing inspiration from the [
 
 
 
-### 🔗 **Live preview** of the project is [here](https://memory-card-pokemon.jonhatanhiguera.me/).
+### 🔗 **Live preview** of the project is [here](https://game-store.jonhatanhiguera.me/).
 
 ![Store Preview](/store_preview.png)
