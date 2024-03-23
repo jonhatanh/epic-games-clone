@@ -39,7 +39,7 @@
   padding: 15px 30px;
   gap: 1.5rem;
 
-  footer {
+  > footer {
     text-align: center;
     padding: 10px 0;
     a {

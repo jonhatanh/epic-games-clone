@@ -45,6 +45,11 @@ function App () {
 
   const homePage = currentRoute.pathname === '/'
 
+  function handleClick (e) {
+    if (e.target.nodeName === 'A') {
+      setOpenNav(false)
+    }
+  }
   return (
     <div
       className={`${classes.container} ${homePage ? classes.innerShadow : ''}`}
@@ -59,7 +64,7 @@ function App () {
         <header
           className={classes.containerHeader}
           style={{
-            backgroundColor: homePage ? 'transparent' : '',
+            backgroundColor: homePage ? 'transparent' : ''
           }}
         >
           <h1>GAME STORE</h1>
@@ -68,6 +73,7 @@ function App () {
               <FontAwesomeIcon icon={faBars} />
             </button>
             <ul
+              onClick={handleClick}
               className={`${classes.containerNav} ${
                 openNav ? classes.open : ''
               }`}
