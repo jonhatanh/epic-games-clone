@@ -17,8 +17,8 @@ const GenreCard = ({
 }
 
 GenreCard.propTypes = {
-  game: PropTypes.shape({
-    id: PropTypes.number.isRequired,
+  genre: PropTypes.shape({
+    id: PropTypes.number,
     name: PropTypes.string.isRequired,
     slug: PropTypes.string.isRequired,
     image_background: PropTypes.string.isRequired

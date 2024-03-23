@@ -16,7 +16,9 @@ const HorizontalScroll = ({ children, title, linkTo = '' }) => {
   function moveScrollBar (moveToRight) {
     const parentWidth = contentContainerRef.current.offsetWidth
     const widthChilds = contentContainerRef.current.firstChild?.offsetWidth
-    let pxBaseOnChilds = widthChilds ? Math.floor(parentWidth / widthChilds) * widthChilds : parentWidth
+    let pxBaseOnChilds = widthChilds
+      ? Math.floor(parentWidth / widthChilds) * widthChilds
+      : parentWidth
     pxBaseOnChilds = pxBaseOnChilds || 150
     const pxMovedLeft = contentContainerRef.current.scrollLeft
     const pxToMove = moveToRight

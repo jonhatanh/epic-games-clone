@@ -5,7 +5,7 @@ import {
 } from '@fortawesome/free-solid-svg-icons'
 import PropTypes from 'prop-types'
 import GameCard from '../GameCard/GameCard'
-import { randomNumber } from '../../utils/helpers'
+import { randomNumber } from '@/utils/helpers'
 import { Link } from 'react-router-dom'
 
 const urlReleases = '/store/browse?page=1&ordering=-released'
@@ -23,12 +23,12 @@ const GamesVertical = ({ randomGames, recentGames }) => {
         <FontAwesomeIcon className={classes.centerIcon} icon={faChevronRight} />
       </div>
       <div className={classes.verticalList}>
-        {recentGames.map((game, index) => {
+        {recentGames.map((game) => {
           return <GameCard key={game.id} game={game} cardSize='small' />
         })}
       </div>
       <div className={`${classes.verticalList} ${classes.verticalListDouble}`}>
-        {randomGames.map((game, index) => {
+        {randomGames.map((game) => {
           return <GameCard key={game.id} game={game} cardSize='small' />
         })}
       </div>

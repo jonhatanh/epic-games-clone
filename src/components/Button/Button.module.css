@@ -27,18 +27,18 @@
 }
 .button.button--blue {
   color: white;
-  background-color: rgb(109, 109, 248);
+  background-color: var(--btn-primary);
 
   &:hover {
-    background-color:rgb(134, 134, 255);
+    background-color: var(--btn-primary-hover);
   }
 }
 .button.button--gray {
   color: white;
-  background-color: rgb(65, 65, 65);
+  background-color: var(--btn-secondary);
 
   &:hover {
-    background-color:rgb(143, 143, 143);
+    background-color: var(--btn-secondary-hover);
   }
 }
 .button.button--transparent {
@@ -46,12 +46,10 @@
   background-color: transparent;
 
   &:hover {
-    background-color: rgba(255, 255, 255, 0.199);
+    background-color: rgba(255, 255, 255, 0.2);
   }
 }
-.button--text-normal {
-  /* font-size: 0.5rem; */
-}
+
 .button--text-small {
   font-size: 0.5rem;
 }

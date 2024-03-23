@@ -48,7 +48,8 @@ Button.propTypes = {
   bgColor: PropTypes.oneOf(['transparent', 'white', 'blue', 'gray']),
   textSize: PropTypes.oneOf(['small', 'normal', 'large']),
   size: PropTypes.oneOf(['small', 'normal', 'large']),
-  border: PropTypes.bool
+  border: PropTypes.bool,
+  link: PropTypes.bool
 }
 
 export default Button

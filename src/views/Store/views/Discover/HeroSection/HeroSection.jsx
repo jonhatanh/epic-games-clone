@@ -3,11 +3,12 @@ import PropTypes from 'prop-types'
 import HeroMainGame from '../HeroMainGame/HeroMainGame'
 import { useState } from 'react'
 import GameCard from '@/components/GameCard/GameCard'
-import { useMediaQuery } from '../../../../../hooks/useMediaQuery'
+import { useMediaQuery } from '@/hooks/useMediaQuery'
 const HeroSection = ({ games }) => {
+  const match = useMediaQuery('(max-width: 450px)')
   const [mainGameId, setMainGameId] = useState(games[0].id)
   const mainGame = games.find((game) => game.id === mainGameId)
-  const match = useMediaQuery('(max-width: 450px)')
+  const mainGameIndex = games.findIndex(game => game.id === mainGameId)
 
   function changeMainGame (index) {
     const newIndex = index === games.length - 1 ? 0 : index + 1
@@ -23,7 +24,6 @@ const HeroSection = ({ games }) => {
     }
     setMainGameId(games[newIndex].id)
   }
-  const mainGameIndex = games.findIndex(game => game.id === mainGameId)
   return (
     <article className={classes.heroGames}>
       <HeroMainGame

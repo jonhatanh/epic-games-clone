@@ -5,7 +5,8 @@ import {
   ScrollRestoration,
   useLocation
 } from 'react-router-dom'
-import { createContext, useState } from 'react'
+import PropTypes from 'prop-types'
+import { useState } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {
   faBars,
@@ -27,6 +28,11 @@ const NavItem = ({ children, to, icon }) => {
       {children}
     </NavLink>
   )
+}
+NavItem.propTypes = {
+  children: PropTypes.any,
+  to: PropTypes.string,
+  icon: PropTypes.any
 }
 
 function App () {

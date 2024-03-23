@@ -44,7 +44,7 @@
       color: white;
       transition: background-color 0.3s ease-out;
       &:hover {
-        background-color: rgba(255, 255, 255, 0.3);
+        background-color: var(--btn-transparent-hover);
       }
     }
     svg {

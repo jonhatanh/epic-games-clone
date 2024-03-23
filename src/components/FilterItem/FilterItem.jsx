@@ -4,6 +4,11 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faChevronDown } from '@fortawesome/free-solid-svg-icons'
 import PropTypes from 'prop-types'
 
+/**
+ *
+ * @TODO
+ * Delete itemsContainerClass
+ */
 export default function FilterItem ({ title, children, itemsContainerClass }) {
   const [open, setOpen] = useState(false)
 

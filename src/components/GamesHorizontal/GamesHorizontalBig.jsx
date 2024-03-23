@@ -1,24 +1,17 @@
 import classes from './GamesHorizontal.module.css'
-import globalClasses from './../../Global.module.css'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import {
-  faChevronRight,
-} from '@fortawesome/free-solid-svg-icons'
+import globalClasses from '@/Global.module.css'
 import PropTypes from 'prop-types'
 import GameCard from '../GameCard/GameCard'
 const GamesHorizontalBig = ({ games }) => {
   return (
     <article className={classes.listOfGamesHorizontal}>
       <header>
-        <h2>
-          Games I Like :)
-          
-        </h2>
+        <h2>Games I Like :)</h2>
       </header>
       <div
         className={`${globalClasses.cardContainer} ${globalClasses.cardContainerThree}`}
       >
-        {games.map((game, index) => {
+        {games.map((game) => {
           return (
             <GameCard
               key={game.id}

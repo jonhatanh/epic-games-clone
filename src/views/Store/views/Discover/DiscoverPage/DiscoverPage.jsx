@@ -6,7 +6,6 @@ import Hero from '../HeroSection/HeroSection'
 import classes from './DiscoverPage.module.css'
 export default function DiscoverPage () {
   const { heroGames, lastYear, newGames, randomGames, gamesILike } = useLoaderData()
-  console.log({ heroGames, lastYear, newGames, randomGames, gamesILike });
   return (
     <section className={classes.discover}>
       <Hero games={heroGames} />

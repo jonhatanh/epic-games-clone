@@ -14,6 +14,13 @@
   --main-nav-height: 40px;
   --store-nav-height: 80px;
 
+  --btn-primary: rgb(109, 109, 248);
+  --btn-primary-hover: rgb(134, 134, 255);
+  --btn-secondary: rgb(65, 65, 65);
+  --btn-secondary-hover: rgb(143, 143, 143);
+  --btn-transparent-hover: rgba(255, 255, 255, 0.2);
+  
+
   color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
   background-color: #141414;

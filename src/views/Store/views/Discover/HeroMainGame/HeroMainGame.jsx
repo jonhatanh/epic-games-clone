@@ -1,9 +1,6 @@
 import PropTypes from 'prop-types'
 import classes from './HeroMainGame.module.css'
-import {
-  faCircleMinus,
-  faCirclePlus,
-} from '@fortawesome/free-solid-svg-icons'
+import { faCircleMinus, faCirclePlus } from '@fortawesome/free-solid-svg-icons'
 import { useEffect, useRef } from 'react'
 import Button from '@/components/Button/Button'
 import { Link } from 'react-router-dom'
