@@ -1,12 +1,12 @@
-import classes from './App.module.css';
+import classes from './App.module.css'
 import {
   NavLink,
   Outlet,
   ScrollRestoration,
   useLocation
-} from 'react-router-dom';
-import { createContext, useState } from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+} from 'react-router-dom'
+import { createContext, useState } from 'react'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {
   faBars,
   faGamepad,
@@ -14,9 +14,10 @@ import {
   faMeteor,
   faShop,
   faShoppingCart
-} from '@fortawesome/free-solid-svg-icons';
-import { Toaster } from 'react-hot-toast';
-import { StorageContext, useGamesStorage } from './hooks/useGamesStorage';
+} from '@fortawesome/free-solid-svg-icons'
+import { Toaster } from 'react-hot-toast'
+import { StorageContext, useGamesStorage } from './hooks/useGamesStorage'
+import { faGithub } from '@fortawesome/free-brands-svg-icons'
 
 const NavItem = ({ children, to, icon }) => {
   const navClass = ({ isActive }) => (isActive ? classes.active : '')
@@ -26,11 +27,11 @@ const NavItem = ({ children, to, icon }) => {
       {children}
     </NavLink>
   )
-};
+}
 
 function App () {
   const currentRoute = useLocation()
-  const darkBody = currentRoute.pathname !== '/';
+  const darkBody = currentRoute.pathname !== '/'
   const [openNav, setOpenNav] = useState(false)
   console.log({ currentRoute })
   const {
@@ -42,7 +43,7 @@ function App () {
     buySingleGame
   } = useGamesStorage()
 
-  const homePage = currentRoute.pathname === '/';
+  const homePage = currentRoute.pathname === '/'
 
   return (
     <div
@@ -114,6 +115,12 @@ function App () {
             <Outlet />
           </StorageContext.Provider>
         </main>
+        <footer>
+          Game Store - Made by{' '}
+          <a href='https://github.com/jonhatanh'>
+            jonhatanh <FontAwesomeIcon icon={faGithub} />
+          </a>
+        </footer>
       </div>
       <ScrollRestoration
         getKey={(location, matches) => {
