@@ -29,9 +29,7 @@ const GameOverview = () => {
   const { game, achievements, screenshots, movies } =
     useRouteLoaderData('showGame')
 
-  const { addGame, removeGame, gameInStorage } = useContext(StorageContext)
-  const gameInCart = gameInStorage(game.id, 'cart')
-  const gameInWishlist = gameInStorage(game.id, 'wishlist')
+  const { gameInStorage } = useContext(StorageContext)
   const gameInLibrary = gameInStorage(game.id, 'library')
   return (
     <>
@@ -46,13 +44,13 @@ const GameOverview = () => {
                 <span>Genres</span>
                 <div>
                   {game.genres.map((genre, index) => {
-                    const lastItem = game.genres.length - 1 === index
+                    const lastItem = game.genres.length - 1 === index;
                     return (
                       <React.Fragment key={genre.id}>
                         <Link>{genre.name}</Link>
-                        {lastItem ? '' : ', '}
+                        {lastItem ? "" : ", "}
                       </React.Fragment>
-                    )
+                    );
                   })}
                 </div>
               </div>
@@ -62,37 +60,37 @@ const GameOverview = () => {
                 <span>Tags</span>
                 <div>
                   {game.tags.map((tags, index) => {
-                    const lastItem = game.tags.length - 1 === index
+                    const lastItem = game.tags.length - 1 === index;
                     return (
                       <React.Fragment key={tags.id}>
                         <Link>{tags.name}</Link>
-                        {lastItem ? '' : ', '}
+                        {lastItem ? "" : ", "}
                       </React.Fragment>
-                    )
+                    );
                   })}
                 </div>
               </div>
             </Collapsable>
           </section>
-          <Collapsable size='large'>
+          <Collapsable size="large">
             <div
               className={classes.gameDescription}
               dangerouslySetInnerHTML={{
-                __html: justEnglishDescription(game.description)
+                __html: justEnglishDescription(game.description),
               }}
             />
           </Collapsable>
         </article>
         {/* Game checkout */}
         <aside>
-          <img src={game.background_image} alt='Game Background Image' />
+          <img src={game.background_image} alt="Game Background Image" />
           <span>{game.price}</span>
           <ActionStorageButton
-            size='large'
-            bgColor='blue'
+            size="large"
+            bgColor="blue"
             link={gameInLibrary}
-            to='/library'
-            storageName='library'
+            to="/library"
+            storageName="library"
             gameId={game.id}
             removeDefaultClick
           />
@@ -106,18 +104,18 @@ const GameOverview = () => {
             {gameInLibrary ? 'In library' : 'Buy Now'}
           </Button> */}
           <ActionStorageButton
-            storageName='cart'
+            storageName="cart"
             gameId={game.id}
             autoText
             border
-            size='large'
+            size="large"
           />
           <ActionStorageButton
-            storageName='wishlist'
+            storageName="wishlist"
             gameId={game.id}
             autoText
             border
-            size='large'
+            size="large"
             icon={{ positive: faCirclePlus, negative: faCircleMinus }}
           />
           <div>
@@ -127,6 +125,10 @@ const GameOverview = () => {
           <div>
             <span>Release Date</span>
             <span>{game.released}</span>
+          </div>
+          <div>
+            <span>ESRB Rating</span>
+            <span>{game.esrb_rating?.name || 'Undefined'}</span>
           </div>
         </aside>
       </section>
@@ -139,16 +141,16 @@ const GameOverview = () => {
               {achievements.results.map((achievement) => {
                 return (
                   <div key={achievement.id} className={classes.achievementCard}>
-                    <img src={achievement.image} alt='Achievemenet image' />
-                    <h4 className='break_lines'>{achievement.name}</h4>
-                    <p className='break_lines break_lines--three'>
+                    <img src={achievement.image} alt="Achievemenet image" />
+                    <h4 className="break_lines">{achievement.name}</h4>
+                    <p className="break_lines break_lines--three">
                       {achievement.description}
                     </p>
                   </div>
-                )
+                );
               })}
             </div>
-            <Button size='large' bgColor='gray' link to='achievements'>
+            <Button size="large" bgColor="gray" link to="achievements">
               See All {achievements.count} Achievements
             </Button>
           </section>
@@ -156,7 +158,7 @@ const GameOverview = () => {
       )}
       {/* <Rating rating={game.rating} /> */}
     </>
-  )
+  );
 }
 
 export default GameOverview

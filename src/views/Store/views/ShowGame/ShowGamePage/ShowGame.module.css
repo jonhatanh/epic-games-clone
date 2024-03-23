@@ -19,6 +19,7 @@
 
   ul {
     display: flex;
+    flex-wrap: wrap;
     gap: 30px;
     list-style-type: none;
     a {
@@ -43,5 +44,13 @@
   }
 }
 
-@media (max-width: 767px) {
+@media (max-width: 450px) {
+  .container {
+    h1 {
+      text-align: center;
+    }
+    ul {
+      justify-content: center;
+    }
+  }
 }

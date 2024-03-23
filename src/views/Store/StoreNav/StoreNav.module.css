@@ -6,7 +6,7 @@
   position: sticky;
   top: var(--main-nav-height);
   z-index: 20;
-  height: var(--store-nav-height);
+  /* height: var(--store-nav-height); */
   padding: 15px 0;
   background-color: var(--background-color);;
 

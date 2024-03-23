@@ -211,3 +211,14 @@
     }
   }
 }
+@media (max-width: 450px) {
+  .achievements__container {
+    > div {
+      place-content: center;
+    }
+  }
+  .game__extras {
+    flex-direction: column;
+    gap: 20px;
+  }
+}
