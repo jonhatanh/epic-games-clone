@@ -115,3 +115,9 @@
     grid-column: span 1;
   }
 }
+
+@media (max-width: 450px) {
+  .card--big {
+    grid-column: span 2;
+  }
+}
