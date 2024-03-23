@@ -71,3 +71,14 @@
     }
   }
 }
+@media (max-width: 450px) {
+ .card {
+  main {
+    flex-direction: column;
+  }
+ }
+
+ footer {
+  flex-direction: column;
+ }
+}

@@ -1,6 +1,6 @@
 @font-face {
-  font-family: 'Inter';
-  src: url('/src/assets/Inter-VariableFont_slnt\,wght.ttf');
+  font-family: "Inter";
+  src: url("/src/assets/Inter-VariableFont_slnt\,wght.ttf");
 }
 :root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
@@ -13,18 +13,17 @@
   --color-paragraph: #9e9e9e;
   --main-nav-height: 40px;
   --store-nav-height: 80px;
-  
-  
+
   color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
   background-color: #141414;
-  
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+
 * {
   box-sizing: border-box;
   min-width: 0;
@@ -37,7 +36,6 @@ body {
   min-height: 100dvh;
 }
 #root {
-
   width: 100%;
   display: flex;
 }
@@ -64,5 +62,11 @@ body {
   :root {
     color: #213547;
     background-color: #ffffff;
+  }
+}
+@media (max-width: 450px) {
+  :root {
+    --main-nav-height: 75px;
+    --store-nav-height: 80px;
   }
 }

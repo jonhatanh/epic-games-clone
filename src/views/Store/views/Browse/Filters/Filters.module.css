@@ -96,3 +96,10 @@ li.active {
     }
   }
 }
+@media (max-width: 450px) {
+ .filters {
+  .filters__body {
+    width: 133%;
+  }
+ } 
+}

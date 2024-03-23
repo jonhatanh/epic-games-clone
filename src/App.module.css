@@ -187,5 +187,14 @@
  .container__body {
   padding: 5px 10px;
  }
+ .container__header {
+  flex-direction: column;
+  height: max-content;
+  .container__nav {
+    transform: translateX(-30%);
+    right: auto;
+    left: auto;
+  }
+ }
 }
 
