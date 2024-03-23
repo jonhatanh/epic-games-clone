@@ -4,9 +4,11 @@
   gap: 0.7rem;
   header {
     display: flex;
+    flex-wrap: wrap;
     justify-content: space-between;
     align-items: center;
-    h2, a {
+    h2,
+    a {
       display: flex;
       justify-content: center;
       align-items: center;
@@ -30,6 +32,15 @@
     div {
       display: flex;
       gap: 0.8rem;
+    }
+  }
+}
+
+@media (max-width: 450px) {
+  .horizontal__scroll {
+    header {
+      flex-direction: column;
+      justify-content: start;
     }
   }
 }

@@ -36,7 +36,7 @@
   margin: 0 auto;
   display: flex;
   flex-direction: column;
-  padding: 1rem 2rem;
+  padding: 15px 30px;
   gap: 1.5rem;
 }
 
@@ -156,3 +156,10 @@
     }
   }
 }
+
+@media (max-width: 450px) {
+ .container__body {
+  padding: 5px 10px;
+ }
+}
+
