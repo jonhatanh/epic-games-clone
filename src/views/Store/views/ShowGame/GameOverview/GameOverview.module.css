@@ -1,45 +1,3 @@
-.container {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-  position: relative;
-
-  h1 {
-    font-size: x-large;
-    font-weight: 400;
-  }
-
-  nav {
-    position: sticky;
-    top: 60px;
-    z-index: 15;
-    background-color: #141414;
-    padding: 10px 0 10px;
-  }
-
-  ul {
-    display: flex;
-    gap: 30px;
-    list-style-type: none;
-    li {
-      cursor: pointer;
-      color: var(--color-paragraph);
-      font-size: large;
-      font-weight: 500;
-      padding-bottom: 4px;
-      transition: border-color 0.2s ease-in-out;
-      border-bottom: 2px solid transparent;
-      &:hover {
-        border-bottom: 2px solid var(--color-paragraph);
-      }
-      &.active {
-        color: white;
-        border-bottom: 2px solid white;
-      }
-    }
-  }
-}
-
 .game__details {
   display: flex;
   gap: 20px;
@@ -85,63 +43,6 @@
   }
 }
 
-/* .gallery__container {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-
-  .main__image {
-    aspect-ratio: 16/9;
-    img {
-      width: 100%;
-    }
-  }
-
-  .gallery {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-
-    > div {
-      display: flex;
-      gap: 10px;
-      justify-content: center;
-    }
-    img {
-      width: 100%;
-      max-width: 100px;
-      border-radius: 5px;
-      aspect-ratio: 16/9;
-      opacity: 0.6;
-    }
-    .active {
-      border: 1px solid white;
-      opacity: 1;
-    }
-    .video_wrapper {
-      position: relative;
-      width: 100%;
-      border-radius: 5px;
-      svg {
-        position: absolute;
-        left: 0;
-        top: 30%;
-        right: 0;
-        bottom: 0;
-        width: 100%;
-      }
-    }
-    button {
-      padding: 8px;
-      border-radius: 50%;
-      border: none;
-      background-color: #202020;
-      font-size: 12px;
-      width: 35px;
-      height: 35px;
-    }
-  }
-} */
 .game__extras {
   display: flex;
   flex-wrap: wrap;

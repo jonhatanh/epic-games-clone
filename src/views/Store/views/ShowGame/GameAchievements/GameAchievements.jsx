@@ -5,7 +5,6 @@ import { useState } from 'react'
 
 const GameAchievements = () => {
   const { game, achievements } = useRouteLoaderData('showGame')
-  console.log(game)
   const [nextPage, setNextPage] = useState(achievements.next)
   const [allAchievements, setAllAchievements] = useState(achievements.results)
 

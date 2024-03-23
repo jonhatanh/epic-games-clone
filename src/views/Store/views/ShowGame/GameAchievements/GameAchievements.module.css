@@ -72,18 +72,6 @@
   }
 }
 
-
-
-@media (max-width: 767px) {
-  .game__details {
-    flex-direction: column-reverse;
-    gap: 40px;
-    aside {
-      position: static;
-    }
-  }
-}
-
 @media (max-width: 450px) { 
 .achievement__card {
   flex-direction: column;

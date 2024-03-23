@@ -1,5 +1,4 @@
 import PropTypes from 'prop-types'
-import { Link } from 'react-router-dom'
 import Button from '../Button/Button'
 import toast from 'react-hot-toast'
 import { useContext } from 'react'
@@ -11,40 +10,23 @@ const ActionStorageButton = ({
   storageName,
   gameId,
   extraActions = null,
-  // autoText = false,
   icon = null,
   children,
-  // removeDefaultClick = false,
   ...extraProps
 }) => {
   const { addGame, removeGame, gameInStorage, buySingleGame } =
     useContext(StorageContext)
-  // const gameInCart = gameInStorage(gameId, 'cart')
-  // const gameInWishlist = gameInStorage(gameId, 'wishlist')
   const gameInLibrary = gameInStorage(gameId, 'library')
   const gameStored = gameInStorage(gameId, storageName)
   let buttonText = gameStored
     ? `Remove from ${storageName}`
     : `Add to ${storageName}`
-  // let buttonOnClickAction = handleClick
 
   if (storageName !== 'library' && gameInLibrary) return null
   if (storageName === 'library') {
     buttonText = gameStored ? 'Go to library' : 'Buy now'
   }
 
-  // switch(storageName) {
-  //   case "library": {
-  //     buttonText = gameStored ? 'Go to library' : 'Buy now'
-  //   }
-  //   case "cart": {
-  //     if(ga)
-
-  //   }
-  //   case "wishlist": {
-
-  //   }
-  // }
   function handlePurchase () {
     buySingleGame(gameId)
     toast.success('Game added to your library!')
@@ -59,10 +41,10 @@ const ActionStorageButton = ({
     } else {
       if (storageName === 'library') {
         toast(ToastCheckOutForm, {
-          id: "checkout",
+          id: 'checkout',
           duration: Infinity,
-          onConfirm: () => handlePurchase(),
-        });
+          onConfirm: () => handlePurchase()
+        })
         return
       }
       addGame(gameId, storageName)

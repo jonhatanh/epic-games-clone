@@ -1,6 +1,3 @@
-// import heroGames from '../../apiResponse.json'
-// import bestGames from '../../apiResponseTest.json'
-// import bestGames from '../../apiResponseTest2.json'
 import genresJson from '@/utils/apiGenresResponse.json'
 import gamesJson from '@/utils/apiResponseSteam2.json'
 import { redirect } from 'react-router-dom'
@@ -24,15 +21,21 @@ export async function browseLoader ({ request }) {
 
   const genres = await Promise.resolve(genresJson)
 
-  // const res = await fetch(apiURL.href, { mode: 'cors' })
-  // if (res.status >= 400) {
-  //   throw new Response('Error fetching data :(', { status: 500 })
-  // }
-  // const games = parseApiUrlPrevNext(await res.json(), reqURL)
-
-  const games = parseGamesInApiResponse(
-    parseApiUrlPrevNext(await Promise.resolve(gamesJson), new URL(reqURL.href))
-  )
+  let games = []
+  if (import.meta.env.PROD) {
+    const res = await fetch(apiURL.href, { mode: 'cors' })
+    if (res.status >= 400) {
+      throw new Response('Error fetching data :(', { status: 500 })
+    }
+    games = parseApiUrlPrevNext(await res.json(), reqURL)
+  } else {
+    games = parseGamesInApiResponse(
+      parseApiUrlPrevNext(
+        await Promise.resolve(gamesJson),
+        new URL(reqURL.href)
+      )
+    )
+  }
 
   const currentFilters = getCurrentFilters(reqURL, genres)
 

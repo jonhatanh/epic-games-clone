@@ -79,28 +79,16 @@ const GameOverview = () => {
             to='/library'
             storageName='library'
             gameId={game.id}
-            removeDefaultClick
           />
-          {/* <Button
-            size='large'
-            bgColor='blue'
-            link={gameInLibrary}
-            to='/store/library'
-            onClick={() => (gameInLibrary ? '' : addGame(game.id, 'library'))}
-          >
-            {gameInLibrary ? 'In library' : 'Buy Now'}
-          </Button> */}
           <ActionStorageButton
             storageName='cart'
             gameId={game.id}
-            autoText
             border
             size='large'
           />
           <ActionStorageButton
             storageName='wishlist'
             gameId={game.id}
-            autoText
             border
             size='large'
             icon={{ positive: faCirclePlus, negative: faCircleMinus }}
@@ -143,7 +131,6 @@ const GameOverview = () => {
           </section>
         </section>
       )}
-      {/* <Rating rating={game.rating} /> */}
     </>
   )
 }
