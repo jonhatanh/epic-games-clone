@@ -29,7 +29,7 @@
   max-height: 200px;
 }
 .collapsable--false {
-  max-height: none;
+  max-height: 300px;
   overflow: initial;
   button {
     position: relative;

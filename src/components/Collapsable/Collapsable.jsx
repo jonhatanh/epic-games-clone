@@ -11,11 +11,22 @@ const Collapsable = ({ children, size = 'normal' }) => {
   const collapseRef = useRef(null)
 
   useEffect(() => {
-    const collapseMaxHeight = collapseRef.current.offsetHeight
-    const childHeight = collapseRef.current.firstChild.offsetHeight
-    console.log(collapseMaxHeight, childHeight)
-    setShowCollapseButton(childHeight > collapseMaxHeight)
-    setCollapsed(childHeight > collapseMaxHeight)
+    function buttonIsNecessary () {
+      const collapseMaxHeight = collapseRef.current.offsetHeight
+      const childHeight = collapseRef.current.firstChild.offsetHeight
+      console.log(collapseMaxHeight, childHeight)
+      return childHeight > collapseMaxHeight
+    }
+    const handler = () => {
+      const show = buttonIsNecessary()
+      setShowCollapseButton(show)
+      setCollapsed(show)
+    }
+    handler()
+    window.addEventListener('resize', handler)
+    return () => {
+      window.removeEventListener('resize', handler)
+    }
   }, [])
 
   const collapsableClass = collapsed ? '' : classes.collapsableFalse
@@ -34,6 +45,7 @@ const Collapsable = ({ children, size = 'normal' }) => {
     <div
       ref={collapseRef}
       className={`${classes.collapsable} ${collapsableClass} ${collapsableSizeClass}`}
+      style={{ maxHeight: !collapsed && showCollapseButton ? 'max-content' : '' }}
     >
       {children}
       {showCollapseButton && (
