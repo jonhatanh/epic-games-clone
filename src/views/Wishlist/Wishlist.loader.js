@@ -9,7 +9,6 @@ export async function loader () {
     gamesIds.map((gameId) => `${API_URL}/games/${gameId}?${API_KEY_PARAM}`)
   )
 
-  console.log({ gameResponses })
   // const games = await Promise.resolve(favs)
   return {
     games: gameResponses.map(parseSingleGameInApiResponse)

@@ -3,10 +3,11 @@
     font-weight: bold;
     margin-bottom: 20px;
   }
-  footer {
+  .footer {
     padding: 10px 0;
     display: flex;
-    flex-wrap: wrap;
+    gap: 10px;
+    row-gap: 10px;
     justify-content: space-between;
   }
 }

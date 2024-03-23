@@ -3,7 +3,6 @@ import classes from './GameCartCard.module.css'
 import { Link } from 'react-router-dom'
 
 const GameCartCard = ({ game, children }) => {
-  console.log(game);
   return (
     <article key={game.id} className={classes.card}>
       <main>

@@ -14,7 +14,6 @@ const Collapsable = ({ children, size = 'normal' }) => {
     function buttonIsNecessary () {
       const collapseMaxHeight = collapseRef.current.offsetHeight
       const childHeight = collapseRef.current.firstChild.offsetHeight
-      console.log(collapseMaxHeight, childHeight)
       return childHeight > collapseMaxHeight
     }
     const handler = () => {

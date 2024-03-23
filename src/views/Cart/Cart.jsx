@@ -12,7 +12,7 @@ export function ToastCheckOutForm (t) {
   return (
     <div className={classes.toastCheckout}>
       <p>Do you want to confirm this purchase?</p>
-      <footer>
+      <footer className={classes.footer}>
         <Button bgColor='gray' onClick={() => toast.dismiss(t.id)}>
           Maybe later...
         </Button>

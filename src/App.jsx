@@ -39,7 +39,6 @@ function App () {
   const currentRoute = useLocation()
   const darkBody = currentRoute.pathname !== '/'
   const [openNav, setOpenNav] = useState(false)
-  console.log({ currentRoute })
   const {
     idsStorage,
     addGame,
@@ -129,7 +128,7 @@ function App () {
         </main>
         <footer>
           Game Store - Made by{' '}
-          <a href='https://github.com/jonhatanh'>
+          <a href='https://github.com/jonhatanh' target='_blank' rel='noreferrer'>
             jonhatanh <FontAwesomeIcon icon={faGithub} />
           </a>
         </footer>

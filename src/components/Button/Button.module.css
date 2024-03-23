@@ -59,3 +59,8 @@
 .button--border {
   border: 1px solid white;
 }
+@media (max-width: 450px) {
+  .button {
+    width: 100%;
+  }
+}

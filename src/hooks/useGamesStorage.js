@@ -18,7 +18,6 @@ export function useGamesStorage () {
         }
   })
   function addGame (gameId, category) {
-    console.log({ gameId, category, idsStorage })
     if (idsStorage[category].includes(gameId)) return
     const newCategory = [...idsStorage[category], gameId]
     setIdsStorage((latestStorage) => ({
@@ -41,7 +40,6 @@ export function useGamesStorage () {
     }))
   }
   function gameInStorage (gameId, category) {
-    console.log({ gameId, category, idsStorage })
     return idsStorage[category].includes(gameId)
   }
   function buyGamesInCart () {

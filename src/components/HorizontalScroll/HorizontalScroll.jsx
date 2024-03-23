@@ -30,7 +30,6 @@ const HorizontalScroll = ({ children, title, linkTo = '' }) => {
   function checkButtonStatus (e) {
     if (scrollEndRef.current === null) {
       scrollEndRef.current = setTimeout(() => {
-        console.log('chekcing', e)
         const leftButtonIsDisabled =
           contentContainerRef.current?.scrollLeft === 0
         const rightButtonIsDisabled =
