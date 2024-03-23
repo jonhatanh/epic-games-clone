@@ -1,6 +1,6 @@
 @font-face {
   font-family: "Inter";
-  src: url("/src/assets/Inter-VariableFont_slnt\,wght.ttf");
+  src: url("/src/assets/Inter-font.ttf");
 }
 :root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
