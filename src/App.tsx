@@ -18,7 +18,7 @@ import {
   IconDefinition
 } from '@fortawesome/free-solid-svg-icons'
 import { Toaster } from 'react-hot-toast'
-import { StorageContext, useGamesStorage } from './hooks/useGamesStorage'
+import { StorageContext, useGamesStorage } from './hooks/useGamesStorage.ts'
 import { faGithub } from '@fortawesome/free-brands-svg-icons'
 
 type NavItemType = {

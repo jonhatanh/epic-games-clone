@@ -1,13 +1,37 @@
 import { createContext, useEffect, useState } from 'react'
 
-export const StorageContext = createContext({
-  cart: [],
-  wishlist: [],
-  library: []
+
+type StorageType = {
+  cart: number[]
+  wishlist: number[]
+  library: number[]
+}
+type StorageName = keyof StorageType
+
+type StorageContextType = {
+  idsStorage: StorageType;
+  addGame: (gameId: number, category: StorageName) => void;
+  removeGame: (gameId: number, category: StorageName, allGames?: boolean) => void;
+  gameInStorage: (gameId: number, category: StorageName) => boolean;
+  buyGamesInCart: () => void;
+  buySingleGame: (gameId: number) => void;
+}
+
+export const StorageContext = createContext<StorageContextType>({
+  idsStorage: {
+    cart: [],
+    wishlist: [],
+    library: []
+  },
+  addGame: () => { },
+  removeGame: () => { },
+  gameInStorage: () => false,
+  buyGamesInCart: () => { },
+  buySingleGame: () => { }
 })
 
 export function useGamesStorage () {
-  const [idsStorage, setIdsStorage] = useState(() => {
+  const [idsStorage, setIdsStorage] = useState<StorageType>(() => {
     const storage = localStorage.getItem('idsStorage')
     return storage
       ? JSON.parse(storage)
@@ -17,7 +41,7 @@ export function useGamesStorage () {
           library: []
         }
   })
-  function addGame (gameId, category) {
+  function addGame (gameId: number, category: StorageName) {
     if (idsStorage[category].includes(gameId)) return
     const newCategory = [...idsStorage[category], gameId]
     setIdsStorage((latestStorage) => ({
@@ -25,7 +49,7 @@ export function useGamesStorage () {
       [category]: newCategory
     }))
   }
-  function removeGame (gameId, category, allGames = false) {
+  function removeGame (gameId: number, category: StorageName, allGames = false) {
     if (allGames) {
       setIdsStorage((latestStorage) => ({
         ...latestStorage,
@@ -39,7 +63,7 @@ export function useGamesStorage () {
       [category]: newCategory
     }))
   }
-  function gameInStorage (gameId, category) {
+  function gameInStorage (gameId: number, category: StorageName) {
     return idsStorage[category].includes(gameId)
   }
   function buyGamesInCart () {
@@ -52,7 +76,7 @@ export function useGamesStorage () {
       library: [...latestStorage.library, ...latestStorage.cart]
     }))
   }
-  function buySingleGame (gameId) {
+  function buySingleGame (gameId: number) {
     const newWishlist = idsStorage.wishlist.filter((id) => id !== gameId)
     const newCart = idsStorage.cart.filter((id) => id !== gameId)
     setIdsStorage((latestStorage) => ({
