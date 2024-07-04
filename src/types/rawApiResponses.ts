@@ -56,6 +56,7 @@ export interface GameDetailsApiResponse {
   clip: StringOrNull
   description_raw: string
 }
+export type GameDetailsType = Pick<GameDetailsApiResponse, 'id' | 'slug' | 'name' | 'description' | 'released' | 'genres' | 'tags' | 'metacritic' | 'rating' | 'background_image' | 'parent_platforms' | 'publishers' | 'esrb_rating'> & { price: string | number }
 
 interface MetacriticPlatform {
   metascore: number
@@ -178,7 +179,7 @@ interface EsrbRating {
 
 
 //* Games Catalog
-export interface GamesApiResponse {
+export interface GameApiResponse {
   slug: string
   name: string
   playtime: number
@@ -210,7 +211,8 @@ export interface GamesApiResponse {
   parent_platforms: ParentPlatform[]
   genres: Genre[]
 }
-
+type GameType = Pick<GameApiResponse, 'id' | 'slug' | 'name' | 'released' | 'genres' | 'tags' | 'metacritic' | 'rating' | 'background_image' | 'parent_platforms' | 'esrb_rating'> & { price: string }
+export type GamesApiResponse = ApiResponseTemplate<GameApiResponse | GameType>
 
 interface Store {
   store: Store2

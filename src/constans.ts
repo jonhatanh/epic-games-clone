@@ -1,7 +1,7 @@
 const API_URL = 'https://api.rawg.io/api'
 const DEFAULT_QUERY_STRING = `?parent_platforms=1,2,3,7&stores=1,2,3,6,7,11&exclude_additions=true&key=${
   import.meta.env.VITE_RAWG_API
-}`
+}` as const
 const API_KEY_PARAM = `key=${import.meta.env.VITE_RAWG_API}`
 const FILTERS_ID = {
   genre: 1,
@@ -36,6 +36,7 @@ const FILTERS_ITEMS_ORDER_BY = [
     filterId: FILTERS_ID.orderBy
   }
 })
+export type FilterOrderByItem = typeof FILTERS_ITEMS_ORDER_BY[number]
 export {
   API_URL,
   DEFAULT_QUERY_STRING,

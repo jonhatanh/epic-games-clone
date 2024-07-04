@@ -15,7 +15,7 @@ export type GenreType = {
   image_background: string,
   description: string
 }
-type GenreApiResponse = {
+export type GenreApiResponse = {
   id: number
   name: string
   slug: string

@@ -1,14 +1,16 @@
-import { API_KEY_PARAM, API_URL, DEFAULT_QUERY_STRING, FILTERS_ID, FILTERS_ITEMS_ORDER_BY } from '../constans'
+import { API_KEY_PARAM, API_URL, DEFAULT_QUERY_STRING, FilterOrderByItem, FILTERS_ID, FILTERS_ITEMS_ORDER_BY } from '../constans'
+import { GenreApiResponse, GenreApiType } from '../types'
+import { GameDetailsApiResponse, GameDetailsType, GamesApiResponse } from '../types/rawApiResponses'
 import { randomPrice, randomPriceString } from './helpers'
 
-export function restMonths (date, months) {
+export function restMonths (date: Date, months: number) {
   return new Date(date.setMonth(date.getMonth() - months))
 }
-export function getStringDate (date) {
+export function getStringDate (date: Date) {
   return date.toISOString().split('T')[0]
 }
 
-export function parseGamesInApiResponse (response) {
+export function parseGamesInApiResponse (response: GamesApiResponse) {
   response.results = response.results.map((game) => {
     return {
       id: game.id,
@@ -28,7 +30,7 @@ export function parseGamesInApiResponse (response) {
   return response
 }
 
-export function parseSingleGameInApiResponse (game, priceNumber = false) {
+export function parseSingleGameInApiResponse (game: GameDetailsApiResponse, priceNumber = false): GameDetailsType {
   return {
     id: game.id,
     slug: game.slug,
@@ -47,32 +49,32 @@ export function parseSingleGameInApiResponse (game, priceNumber = false) {
   }
 }
 
-export async function makeApiCalls (urls) {
+export async function makeApiCalls<T>(urls: string[]): Promise<T[]> {
   const promisesRes = await Promise.all(urls.map((url) => fetch(url, { mode: 'cors' })))
 
   const jsonPromises = promisesRes.map((res) => {
     if (res.ok) {
-      return res.json()
+      return res.json() as Promise<T>
     }
     throw new Response('Error Fetching Data :(', { status: 500 })
   })
   return await Promise.all(jsonPromises)
 }
 
-export function parseApiUrlPrevNext (response, actualURL) {
+export function parseApiUrlPrevNext<T>(response: ApiResponseTemplate<T>, actualURL: URL) {
   const currentPage = Number(actualURL.searchParams.get('page'))
   if (response.next) {
-    actualURL.searchParams.set('page', currentPage + 1)
+    actualURL.searchParams.set('page', String(currentPage + 1))
     response.next = actualURL.href
   }
   if (response.previous) {
-    actualURL.searchParams.set('page', currentPage - 1)
+    actualURL.searchParams.set('page', String(currentPage - 1))
     response.previous = actualURL.href
   }
   return response
 }
 
-export function getApiURL (currentRequestURL, currentPage, extraParams = '') {
+export function getApiURL (currentRequestURL: URL, currentPage: string, extraParams = '') {
   const apiURL = new URL(
     `${API_URL}/games${DEFAULT_QUERY_STRING}&page_size=20&${currentRequestURL.search.substring(
       1
@@ -82,23 +84,39 @@ export function getApiURL (currentRequestURL, currentPage, extraParams = '') {
   return apiURL
 }
 
-export function getBasicApiCall (endPoint) {
+export function getBasicApiCall (endPoint: string) {
   return `${API_URL}${endPoint}?${API_KEY_PARAM}`
 }
 
-export function getCurrentFilters (currentRequestURL, genres = []) {
-  const currentFilters = {}
-  if (genres && currentRequestURL.searchParams.get('genres')) {
-    currentFilters.genres = currentRequestURL.searchParams
-      .get('genres')
+
+type GenreTypeWithFilter = GenreApiResponse & { filterId: number }
+type FiltersType = {
+  genres?: GenreTypeWithFilter[],
+  orderBy?: FilterOrderByItem,
+  descending?: boolean,
+  dates?: { from: string, to: string },
+  page?: string
+}
+export function getCurrentFilters (currentRequestURL: URL, genres?: GenreApiType) {
+  const currentFilters : FiltersType = {}
+  const requestParams = {
+    genres: currentRequestURL.searchParams.get('genres'),
+    ordering: currentRequestURL.searchParams.get('ordering'),
+    dates: currentRequestURL.searchParams.get('dates')
+  }
+  if (genres && requestParams.genres) {
+    currentFilters.genres = requestParams.genres
       .split(',')
       .map((genreSlug) => {
         const genre = genres.results.find((genre) => genre.slug === genreSlug)
+        if (!genre) {
+          throw new Error('Genre not found')
+        }
         return { ...genre, filterId: FILTERS_ID.genre }
       })
   }
-  if (currentRequestURL.searchParams.get('ordering')) {
-    const orderBy = currentRequestURL.searchParams.get('ordering')
+  if (requestParams.ordering) {
+    const orderBy = requestParams.ordering
     const descendingActivated = orderBy.substring(0, 1) === '-'
     const orderByString = descendingActivated ? orderBy.substring(1) : orderBy
     currentFilters.orderBy = FILTERS_ITEMS_ORDER_BY.find(
@@ -106,12 +124,12 @@ export function getCurrentFilters (currentRequestURL, genres = []) {
     )
     currentFilters.descending = descendingActivated
   }
-  if (currentRequestURL.searchParams.get('dates')) {
-    const [from, to] = currentRequestURL.searchParams.get('dates').split(',')
+  if (requestParams.dates) {
+    const [from, to] = requestParams.dates.split(',')
     currentFilters.dates = { from: from ?? '', to: to ?? '' }
   }
   if (Object.keys(currentFilters).length > 1) {
-    currentFilters.page = currentRequestURL.searchParams.get('page')
+    currentFilters.page = currentRequestURL.searchParams.get('page') ?? '1'
   }
   return currentFilters
 }
