@@ -4,7 +4,7 @@ Shopping Cart assignment from "The Odin Project"
 
 ## Background
 
-This project is an assignment from [The Odin Project ⚡](https://www.theodinproject.com/lessons/node-path-react-new-shopping-cart').
+This project is an assignment from [The Odin Project ⚡](https://www.theodinproject.com/lessons/node-path-react-new-shopping-cart).
 
 
 The purpose of this project is to learn React Router and deepen our understanding of React in general.
