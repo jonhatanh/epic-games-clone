@@ -7,7 +7,7 @@ const FILTERS_ID = {
   genre: 1,
   orderBy: 2,
   date: 3
-}
+} as const
 const FILTERS_ITEMS_ORDER_BY = [
   {
     name: 'Name',

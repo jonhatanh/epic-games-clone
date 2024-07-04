@@ -6,7 +6,7 @@ import {
   useLocation
 } from 'react-router-dom'
 import PropTypes from 'prop-types'
-import { useState } from 'react'
+import React, { useState } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {
   faBars,
@@ -14,14 +14,21 @@ import {
   faHome,
   faMeteor,
   faShop,
-  faShoppingCart
+  faShoppingCart,
+  IconDefinition
 } from '@fortawesome/free-solid-svg-icons'
 import { Toaster } from 'react-hot-toast'
 import { StorageContext, useGamesStorage } from './hooks/useGamesStorage'
 import { faGithub } from '@fortawesome/free-brands-svg-icons'
 
-const NavItem = ({ children, to, icon }) => {
-  const navClass = ({ isActive }) => (isActive ? classes.active : '')
+type NavItemType = {
+  children: React.ReactNode,
+  to: string
+  icon: IconDefinition
+}
+
+const NavItem = ({ children, to, icon }: NavItemType) => {
+  const navClass = ({ isActive }: {isActive: boolean}) => (isActive ? classes.active : '')
   return (
     <NavLink to={to} className={navClass}>
       <FontAwesomeIcon icon={icon} />
@@ -50,8 +57,9 @@ function App () {
 
   const homePage = currentRoute.pathname === '/'
 
-  function handleClick (e) {
-    if (e.target.nodeName === 'A') {
+  function handleClick (e: React.MouseEvent<HTMLUListElement>) {
+    const target = e.target as HTMLElement
+    if (target.nodeName === 'A') {
       setOpenNav(false)
     }
   }
@@ -134,7 +142,7 @@ function App () {
         </footer>
       </div>
       <ScrollRestoration
-        getKey={(location, matches) => {
+        getKey={(location) => {
           const paths = ['/store']
           return paths.includes(location.pathname)
             ? // home and notifications restore by pathname
