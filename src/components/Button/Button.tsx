@@ -1,6 +1,16 @@
-import PropTypes from 'prop-types'
+import React from 'react'
 import classes from './Button.module.css'
-import { Link } from 'react-router-dom'
+import { Link, LinkProps } from 'react-router-dom'
+
+type ButtonProps = {
+  children: React.ReactNode,
+  bgColor?: string,
+  textSize?: string,
+  size?: string,
+  border?: boolean,
+  link?: boolean,
+} & React.ButtonHTMLAttributes<HTMLButtonElement> & LinkProps
+  
 
 const Button = ({
   children,
@@ -10,7 +20,7 @@ const Button = ({
   border = false,
   link = false,
   ...extraProps
-}) => {
+}: ButtonProps) => {
   bgColor = bgColor[0].toUpperCase() + bgColor.slice(1)
   textSize = textSize[0].toUpperCase() + textSize.slice(1)
   const sizeClass = size === 'large' ? classes.buttonLarge : ''
@@ -41,15 +51,6 @@ const Button = ({
         {children}
       </button>
       )
-}
-
-Button.propTypes = {
-  children: PropTypes.node,
-  bgColor: PropTypes.oneOf(['transparent', 'white', 'blue', 'gray']),
-  textSize: PropTypes.oneOf(['small', 'normal', 'large']),
-  size: PropTypes.oneOf(['small', 'normal', 'large']),
-  border: PropTypes.bool,
-  link: PropTypes.bool
 }
 
 export default Button

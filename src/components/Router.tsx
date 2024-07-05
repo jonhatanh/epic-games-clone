@@ -1,5 +1,5 @@
 import { RouterProvider, createBrowserRouter } from 'react-router-dom'
-import ErrorPage from './ErrorPage'
+import ErrorPage from './ErrorPage.js'
 import Welcome from '@/views/Welcome/Welcome'
 import Store from '@/views/Store/StorePage/Store'
 import App from '@/App'
@@ -12,8 +12,8 @@ import { loader as singleGameLoader } from '@/views/Store/views/ShowGame/ShowGam
 import GameOverview from '@/views/Store/views/ShowGame/GameOverview/GameOverview'
 import GameAchievements from '@/views/Store/views/ShowGame/GameAchievements/GameAchievements'
 import BrowsePage from '@/views/Store/views/Browse/BrowsePage/BrowsePage'
-import GenrePage from '../views/Store/views/Browse/GenrePage/GenrePage'
-import Wishlist from '../views/Wishlist/Wishlist'
+import GenrePage from '../views/Store/views/Browse/GenrePage/GenrePage.jsx'
+import Wishlist from '../views/Wishlist/Wishlist.jsx'
 import { loader as WishlistLoader } from '../views/Wishlist/Wishlist.loader.js'
 import { loader as CartLoader } from '../views/Cart/Cart.loader.js';
 import { loader as LibraryLoader } from '../views/Library/Library.loader.js'
