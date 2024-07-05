@@ -1,15 +1,17 @@
 import { useEffect, useRef, useState } from 'react'
 import { API_URL, DEFAULT_QUERY_STRING } from '../constans'
+import { GameApiResponse, GamesApiResponse } from '@/types/rawApiResponses'
 
 export function useSearchBar () {
-  const typingRef = useRef(null)
-  const abortController = useRef(null)
+  const typingRef = useRef<number | null>(null)
+  const abortController = useRef<AbortController | null>(null)
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState(false)
-  const [games, setGames] = useState([])
+  const [games, setGames] = useState<GameApiResponse[]>([])
   const [openTab, setOpenTab] = useState(false)
-  function handleChange (e) {
-    clearTimeout(typingRef.current)
+  function handleChange (e: React.ChangeEvent<HTMLInputElement>) {
+    if(typingRef.current)
+      clearTimeout(typingRef.current)
     abortController.current?.abort()
     setLoading(true)
     setError(false)
@@ -26,10 +28,10 @@ export function useSearchBar () {
 
       fetch(apiUrl, { signal })
         .then((res) => {
-          if (res >= 400) {
+          if (res.status >= 400) {
             throw new Error('Error fetching games :(')
           }
-          return res.json()
+          return res.json() as Promise<GamesApiResponse>
         })
         .then((gamesResponse) => {
           if (gamesResponse.results.length > 0) {

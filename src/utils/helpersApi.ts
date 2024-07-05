@@ -1,6 +1,6 @@
 import { API_KEY_PARAM, API_URL, DEFAULT_QUERY_STRING, FilterOrderByItem, FILTERS_ID, FILTERS_ITEMS_ORDER_BY } from '../constans'
 import { GenreApiResponse, GenreApiType } from '../types'
-import { GameDetailsApiResponse, GameDetailsType, GamesApiResponse } from '../types/rawApiResponses'
+import {  GameDetailsApiResponse, GameDetailsType, GamesApiResponse, GamesTypeWithApiInfo, GameType } from '../types/rawApiResponses'
 import { randomPrice, randomPriceString } from './helpers'
 
 export function restMonths (date: Date, months: number) {
@@ -10,8 +10,12 @@ export function getStringDate (date: Date) {
   return date.toISOString().split('T')[0]
 }
 
-export function parseGamesInApiResponse (response: GamesApiResponse) {
-  response.results = response.results.map((game) => {
+export function parseGamesInApiResponse (response: GamesApiResponse): GamesTypeWithApiInfo {
+  const gameTypeCopy: GamesTypeWithApiInfo = {
+    ...response,
+    results: []
+  }
+  gameTypeCopy.results = response.results.map((game): GameType => {
     return {
       id: game.id,
       slug: game.slug,
@@ -27,7 +31,7 @@ export function parseGamesInApiResponse (response: GamesApiResponse) {
       price: randomPriceString()
     }
   })
-  return response
+  return gameTypeCopy
 }
 
 export function parseSingleGameInApiResponse (game: GameDetailsApiResponse, priceNumber = false): GameDetailsType {

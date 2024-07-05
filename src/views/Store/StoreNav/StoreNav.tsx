@@ -3,19 +3,19 @@ import classes from './StoreNav.module.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSpinner } from '@fortawesome/free-solid-svg-icons'
 import { useSearchBar } from '@/hooks/useSearchBar'
-import { useOutsideClick } from '@/hooks/useOutsideClick'
-export default function StoreNav () {
-  const navClass = ({ isActive, isPending }) =>
+import { useOutsideClick } from '@/hooks/useOutsideClick.ts'
+
+export default function StoreNav() {
+  const navClass = ({ isActive, isPending }: { isActive: boolean, isPending: boolean }) =>
     isActive ? classes.active : isPending ? '' : ''
 
   const closeTabOnClickOutside = () => {
     handleOpenTab(false)
   }
-  const tagRef = useOutsideClick(closeTabOnClickOutside)
-  const { games, loading, error, handleChange, openTab, setOpenTab } =
-    useSearchBar()
+  const tagRef = useOutsideClick<HTMLDivElement>(closeTabOnClickOutside)
+  const { games, loading, error, handleChange, openTab, setOpenTab } = useSearchBar()
 
-  function handleOpenTab (open) {
+  function handleOpenTab(open: boolean) {
     if (open && (error || games?.length > 0)) {
       // if(open) {
       setOpenTab(true)

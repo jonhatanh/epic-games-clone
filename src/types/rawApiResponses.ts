@@ -211,8 +211,9 @@ export interface GameApiResponse {
   parent_platforms: ParentPlatform[]
   genres: Genre[]
 }
-type GameType = Pick<GameApiResponse, 'id' | 'slug' | 'name' | 'released' | 'genres' | 'tags' | 'metacritic' | 'rating' | 'background_image' | 'parent_platforms' | 'esrb_rating'> & { price: string }
-export type GamesApiResponse = ApiResponseTemplate<GameApiResponse | GameType>
+export type GameType = Pick<GameApiResponse, 'id' | 'slug' | 'name' | 'released' | 'genres' | 'tags' | 'metacritic' | 'rating' | 'background_image' | 'parent_platforms' | 'esrb_rating'> & { price?: string }
+export type GamesApiResponse = ApiResponseTemplate<GameApiResponse>
+export type GamesTypeWithApiInfo = ApiResponseTemplate<GameType>
 
 interface Store {
   store: Store2
