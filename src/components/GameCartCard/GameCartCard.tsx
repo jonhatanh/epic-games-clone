@@ -1,8 +1,11 @@
 import { parsePrice } from '../../utils/helpers'
 import classes from './GameCartCard.module.css'
 import { Link } from 'react-router-dom'
+import { PropsWithChildren } from 'react'
+import { GameDetailsType } from '@/types/rawApiResponses'
 
-const GameCartCard = ({ game, children }) => {
+
+const GameCartCard = ({game, children}: PropsWithChildren<{game: GameDetailsType}>) => {
   return (
     <article key={game.id} className={classes.card}>
       <main>

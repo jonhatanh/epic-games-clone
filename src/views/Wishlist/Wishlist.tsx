@@ -2,12 +2,13 @@ import { useLoaderData } from 'react-router-dom'
 import classes from './Wishlist.module.css'
 import { useContext } from 'react'
 import { StorageContext } from "@/hooks/useGamesStorage";
-import GameCartCard from '@/components/GameCartCard/GameCartCard'
+import GameCartCard from '@/components/GameCartCard/GameCartCard.ts'
 import Button from '@/components/Button/Button'
 import toast from 'react-hot-toast'
-import Empty from '@/components/Empty/Empty'
+import Empty from '@/components/Empty/Empty.ts'
+import { GameDetailsType } from '@/types/rawApiResponses';
 const Wishlist = () => {
-  const { games } = useLoaderData()
+  const { games } = useLoaderData() as { games: GameDetailsType[] }
   const { addGame, removeGame, gameInStorage, idsStorage } =
     useContext(StorageContext)
 

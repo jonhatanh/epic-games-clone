@@ -13,7 +13,7 @@ import GameOverview from '@/views/Store/views/ShowGame/GameOverview/GameOverview
 import GameAchievements from '@/views/Store/views/ShowGame/GameAchievements/GameAchievements'
 import BrowsePage from '@/views/Store/views/Browse/BrowsePage/BrowsePage'
 import GenrePage from '../views/Store/views/Browse/GenrePage/GenrePage.jsx'
-import Wishlist from '../views/Wishlist/Wishlist.jsx'
+import Wishlist from '../views/Wishlist/Wishlist.js'
 import { loader as WishlistLoader } from '../views/Wishlist/Wishlist.loader.js'
 import { loader as CartLoader } from '../views/Cart/Cart.loader.js';
 import { loader as LibraryLoader } from '../views/Library/Library.loader.js'

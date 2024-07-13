@@ -2,15 +2,23 @@ import React from 'react'
 import classes from './Button.module.css'
 import { Link, LinkProps } from 'react-router-dom'
 
-type ButtonProps = {
-  children: React.ReactNode,
-  bgColor?: string,
-  textSize?: string,
-  size?: string,
-  border?: boolean,
-  link?: boolean,
-} & React.ButtonHTMLAttributes<HTMLButtonElement> & LinkProps
-  
+type BaseButtonProps = {
+  children: React.ReactNode
+  bgColor?: string
+  textSize?: string
+  size?: string
+  border?: boolean
+  link?: boolean
+}
+
+type ButtonProps = BaseButtonProps & React.ButtonHTMLAttributes<HTMLButtonElement>;
+
+// type OptionalLinkProps = Omit<LinkProps, 'to'> & Partial<Pick<LinkProps, 'to'>>;
+// type LinkButtonProps = BaseButtonProps & OptionalLinkProps;
+
+type LinkButtonProps = BaseButtonProps & LinkProps;
+
+type ButtonType = ButtonProps | LinkButtonProps;
 
 const Button = ({
   children,
@@ -20,7 +28,7 @@ const Button = ({
   border = false,
   link = false,
   ...extraProps
-}: ButtonProps) => {
+}: ButtonType) => {
   bgColor = bgColor[0].toUpperCase() + bgColor.slice(1)
   textSize = textSize[0].toUpperCase() + textSize.slice(1)
   const sizeClass = size === 'large' ? classes.buttonLarge : ''
@@ -33,7 +41,7 @@ const Button = ({
       ${sizeClass}
       ${border ? classes.buttonBorder : ''}
       `}
-        {...extraProps}
+        {...extraProps as LinkButtonProps}
       >
         {children}
       </Link>
@@ -46,7 +54,7 @@ const Button = ({
       ${sizeClass}
       ${border ? classes.buttonBorder : ''}
       `}
-        {...extraProps}
+        {...extraProps as ButtonProps}
       >
         {children}
       </button>

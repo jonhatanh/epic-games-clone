@@ -1,7 +1,7 @@
 import { createContext, useEffect, useState } from 'react'
 
 
-type StorageType = {
+export type StorageType = {
   cart: number[]
   wishlist: number[]
   library: number[]
