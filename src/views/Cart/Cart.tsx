@@ -4,11 +4,18 @@ import { useContext } from 'react'
 import { StorageContext } from '@/hooks/useGamesStorage'
 import GameCartCard from '@/components/GameCartCard/GameCartCard'
 import Button from '@/components/Button/Button'
-import toast from 'react-hot-toast'
+import toast, { Toast } from 'react-hot-toast'
 import { parsePrice } from '@/utils/helpers'
 import Empty from '@/components/Empty/Empty'
+import { GameDetailsType } from '@/types/rawApiResponses'
 
-export function ToastCheckOutForm (t) {
+type ToastProps = Toast & {
+  onConfirm?: () => void
+}
+type CustomToastProps = ToastProps & {
+  onConfirm?: () => void
+}
+export function ToastCheckOutForm (t: ToastProps) {
   return (
     <div className={classes.toastCheckout}>
       <p>Do you want to confirm this purchase?</p>
@@ -19,7 +26,7 @@ export function ToastCheckOutForm (t) {
         <Button
           bgColor='blue'
           onClick={() => {
-            t.onConfirm()
+            if (t.onConfirm) t.onConfirm()
             toast.dismiss(t.id)
           }}
         >
@@ -30,11 +37,11 @@ export function ToastCheckOutForm (t) {
   )
 }
 const Cart = () => {
-  const { games } = useLoaderData()
+  const { games } = useLoaderData() as { games: GameDetailsType[] }
   const { addGame, removeGame, idsStorage, gameInStorage, buyGamesInCart } =
     useContext(StorageContext)
 
-  const total = games.reduce((sum, game) => sum + game.price, 0)
+  const total = games.reduce((sum, game) => sum + Number(game.price), 0)
 
   function handlePurchase () {
     buyGamesInCart()
@@ -90,7 +97,7 @@ const Cart = () => {
                       id: 'checkout',
                       duration: Infinity,
                       onConfirm: () => handlePurchase()
-                    })}
+                    } as CustomToastProps)}
                 >
                   Check out
                 </Button>
