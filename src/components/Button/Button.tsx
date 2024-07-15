@@ -18,7 +18,7 @@ type ButtonProps = BaseButtonProps & React.ButtonHTMLAttributes<HTMLButtonElemen
 
 type LinkButtonProps = BaseButtonProps & LinkProps;
 
-type ButtonType = ButtonProps | LinkButtonProps;
+export type ButtonType = ButtonProps | LinkButtonProps;
 
 const Button = ({
   children,

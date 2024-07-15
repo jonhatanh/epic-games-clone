@@ -1,4 +1,3 @@
-import PropTypes from 'prop-types'
 import classes from './HeroMainGame.module.css'
 import { faCircleMinus, faCirclePlus } from '@fortawesome/free-solid-svg-icons'
 import { useEffect, useRef } from 'react'
@@ -6,11 +5,19 @@ import Button from '@/components/Button/Button'
 import { Link } from 'react-router-dom'
 import ActionStorageButton from '@/components/ActionStorageButton/ActionStorageButton'
 import { useMediaQuery } from '@/hooks/useMediaQuery'
-import SliderButtons from '@/components/SliderButtons/SliderButtons'
-const HeroMainGame = ({ game, changeMainGame, index }) => {
+import SliderButtons from '@/components/SliderButtons/SliderButtons.tsx'
+import { GameType } from '@/types/rawApiResponses'
+
+type HeroMainGameProps = {
+  game: GameType,
+  changeMainGame: (index: number) => void,
+  index: number
+}
+const HeroMainGame = ({ game, changeMainGame, index } : HeroMainGameProps) => {
   const match = useMediaQuery('(max-width: 450px)')
-  const imageRef = useRef(null)
+  const imageRef = useRef<HTMLImageElement>(null)
   useEffect(() => {
+    if(!imageRef.current) return
     imageRef.current.classList.remove(classes.enterAnimation)
     imageRef.current.offsetWidth
     imageRef.current.classList.add(classes.enterAnimation)
@@ -47,6 +54,7 @@ const HeroMainGame = ({ game, changeMainGame, index }) => {
             size={match ? 'large' : 'normal'}
             icon={{ positive: faCirclePlus, negative: faCircleMinus }}
             textSize='small'
+            children={null}
           />
         </div>
       </div>
@@ -63,12 +71,6 @@ const HeroMainGame = ({ game, changeMainGame, index }) => {
     )
   }
   return component
-}
-
-HeroMainGame.propTypes = {
-  game: PropTypes.object.isRequired,
-  changeMainGame: PropTypes.func.isRequired,
-  index: PropTypes.number.isRequired
 }
 
 export default HeroMainGame

@@ -1,19 +1,29 @@
-import PropTypes from 'prop-types'
-import Button from '../Button/Button'
-import toast from 'react-hot-toast'
+import Button, { ButtonType } from '../Button/Button'
+import toast, { ToastOptions } from 'react-hot-toast'
 import { useContext } from 'react'
-import { StorageContext } from '@/hooks/useGamesStorage'
+import { StorageContext, StorageName } from '@/hooks/useGamesStorage'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { ToastCheckOutForm } from '../../views/Cart/Cart'
+import { IconDefinition } from '@fortawesome/fontawesome-svg-core'
+
+type ActionStorageProps = {
+  storageName: StorageName
+  gameId: number
+  extraActions?: (() => void)
+  icon?: { positive: IconDefinition; negative: IconDefinition }
+  autoText?: boolean
+  removeDefaultClick?: boolean
+  children: React.ReactNode
+}
 
 const ActionStorageButton = ({
   storageName,
   gameId,
-  extraActions = null,
-  icon = null,
-  children,
+  extraActions,
+  icon,
+  children = null,
   ...extraProps
-}) => {
+}: ActionStorageProps & ButtonType) => {
   const { addGame, removeGame, gameInStorage, buySingleGame } =
     useContext(StorageContext)
   const gameInLibrary = gameInStorage(gameId, 'library')
@@ -44,7 +54,7 @@ const ActionStorageButton = ({
           id: 'checkout',
           duration: Infinity,
           onConfirm: () => handlePurchase()
-        })
+        } as ToastOptions)
         return
       }
       addGame(gameId, storageName)
@@ -63,17 +73,5 @@ const ActionStorageButton = ({
   )
 }
 
-ActionStorageButton.propTypes = {
-  storageName: PropTypes.oneOf(['cart', 'library', 'wishlist']).isRequired,
-  gameId: PropTypes.number.isRequired,
-  extraActions: PropTypes.func,
-  icon: PropTypes.shape({
-    positive: PropTypes.any,
-    negative: PropTypes.any
-  }),
-  autoText: PropTypes.bool,
-  removeDefaultClick: PropTypes.bool,
-  children: PropTypes.any
-}
 
 export default ActionStorageButton

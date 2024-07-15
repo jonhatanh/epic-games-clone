@@ -4,8 +4,18 @@ import GamesHorizontalBig from '@/components/GamesHorizontal/GamesHorizontalBig'
 import GamesVertical from '@/components/GamesVertical/GamesVertical'
 import Hero from '../HeroSection/HeroSection'
 import classes from './DiscoverPage.module.css'
+import { GameDetailsType, GameType } from '@/types/rawApiResponses'
+
+type DiscoverPageData = {
+  heroGames: GameType[];
+  lastYear: GameType[];
+  newGames: GameType[];
+  randomGames: GameType[];
+  gamesILike: GameDetailsType[];
+}
+
 export default function DiscoverPage () {
-  const { heroGames, lastYear, newGames, randomGames, gamesILike } = useLoaderData()
+  const { heroGames, lastYear, newGames, randomGames, gamesILike } = useLoaderData() as DiscoverPageData
   return (
     <section className={classes.discover}>
       <Hero games={heroGames} />

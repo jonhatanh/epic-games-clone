@@ -1,20 +1,20 @@
 import classes from './HeroSection.module.css'
-import PropTypes from 'prop-types'
 import HeroMainGame from '../HeroMainGame/HeroMainGame'
 import { useState } from 'react'
 import GameCard from '@/components/GameCard/GameCard'
-import { useMediaQuery } from '@/hooks/useMediaQuery'
-const HeroSection = ({ games }) => {
+import { useMediaQuery } from '@/hooks/useMediaQuery.ts'
+import { GameType } from '@/types/rawApiResponses'
+const HeroSection = ({ games }: { games: GameType[] }) => {
   const match = useMediaQuery('(max-width: 450px)')
   const [mainGameId, setMainGameId] = useState(games[0].id)
-  const mainGame = games.find((game) => game.id === mainGameId)
+  const mainGame = games.find((game) => game.id === mainGameId)! //Maybe add better validation
   const mainGameIndex = games.findIndex(game => game.id === mainGameId)
 
-  function changeMainGame (index) {
+  function changeMainGame(index: number) {
     const newIndex = index === games.length - 1 ? 0 : index + 1
     setMainGameId(games[newIndex].id)
   }
-  function changeMainGameFromSlider (index) {
+  function changeMainGameFromSlider(index: number) {
     let newIndex = index
     if (index === games.length) {
       newIndex = 0
@@ -46,10 +46,6 @@ const HeroSection = ({ games }) => {
         })}
     </article>
   )
-}
-
-HeroSection.propTypes = {
-  games: PropTypes.arrayOf(PropTypes.object).isRequired
 }
 
 export default HeroSection

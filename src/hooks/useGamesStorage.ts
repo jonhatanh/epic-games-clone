@@ -6,7 +6,7 @@ export type StorageType = {
   wishlist: number[]
   library: number[]
 }
-type StorageName = keyof StorageType
+export type StorageName = keyof StorageType
 
 type StorageContextType = {
   idsStorage: StorageType;

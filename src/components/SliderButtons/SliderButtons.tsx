@@ -1,12 +1,17 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import classes from './SliderButtons.module.css'
-import PropTypes from 'prop-types'
 import {
   faChevronLeft,
   faChevronRight
 } from '@fortawesome/free-solid-svg-icons'
 
-const SliderButtons = ({ onClickLeft, onClickRight, children }) => {
+type SliderButtonsProps = {
+  onClickLeft: () => void
+  onClickRight: () => void
+  children: React.ReactNode
+}
+
+const SliderButtons = ({ onClickLeft, onClickRight, children }: SliderButtonsProps) => {
   return (
     <div className={classes.hoverContainer}>
       <div className={classes.buttonContainer}>
