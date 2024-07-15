@@ -1,9 +1,20 @@
 import { Link } from 'react-router-dom'
 import classes from './GameCard.module.css'
-import PropTypes from 'prop-types'
+import { GameDetailsType } from '@/types/rawApiResponses'
 
 const defaultDesc =
   'Lorem ipsum dolor sit amet consectetur adipisicing elit. Enim delectus non dignissimos deserunt, tempore id commodi natus error sunt esse voluptatem.'
+
+type GameCardProps = {
+  game: GameDetailsType,
+  mainGameId?: GameDetailsType['id'],
+  index?: number,
+  changeMainGame?: (index: number) => void,
+  breakLines?: '' | 'two' | 'three',
+  showPrice?: boolean,
+  showDescription?: boolean,
+  cardSize?: '' | 'small' | 'big'
+}
 
 const GameCard = ({
   game: {
@@ -20,7 +31,7 @@ const GameCard = ({
   showPrice = false,
   showDescription = false,
   cardSize = ''
-}) => {
+}: GameCardProps) => {
   const extraCardClass = mainGameId
     ? id === mainGameId
       ? classes.cardActive
@@ -68,23 +79,6 @@ const GameCard = ({
         {cardContent}
       </Link>
       )
-}
-
-GameCard.propTypes = {
-  game: PropTypes.shape({
-    id: PropTypes.number.isRequired,
-    name: PropTypes.string.isRequired,
-    background_image: PropTypes.string.isRequired,
-    description: PropTypes.string,
-    price: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
-  }).isRequired,
-  mainGameId: PropTypes.number,
-  index: PropTypes.number,
-  changeMainGame: PropTypes.func,
-  breakLines: PropTypes.oneOf(['', 'two', 'three']),
-  showPrice: PropTypes.bool,
-  showDescription: PropTypes.bool,
-  cardSize: PropTypes.oneOf(['', 'small', 'big'])
 }
 
 export default GameCard

@@ -18,7 +18,7 @@ import { loader as WishlistLoader } from '../views/Wishlist/Wishlist.loader.js'
 import { loader as CartLoader } from '../views/Cart/Cart.loader.js';
 import { loader as LibraryLoader } from '../views/Library/Library.loader.js'
 import Cart from '../views/Cart/Cart.js'
-import Library from '../views/Library/Library.jsx'
+import Library from '../views/Library/Library.js'
 
 const Router = () => {
   const router = createBrowserRouter([

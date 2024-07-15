@@ -5,9 +5,10 @@ import { StorageContext } from '@/hooks/useGamesStorage'
 import Button from '@/components/Button/Button'
 import toast from 'react-hot-toast'
 import Empty from '@/components/Empty/Empty'
-import GamesCatalogue from '../Store/views/Browse/GamesCatalogue/GamesCatalogue'
+import GamesCatalogue from '../Store/views/Browse/GamesCatalogue/GamesCatalogue.tsx'
+import { GameDetailsType } from '@/types/rawApiResponses'
 const Library = () => {
-  const { games } = useLoaderData()
+  const { games } = useLoaderData() as { games: GameDetailsType[] }
   const { removeGame, idsStorage } = useContext(StorageContext)
 
   function handleClick () {
@@ -29,9 +30,7 @@ const Library = () => {
       {idsStorage.library?.length > 0
         ? (
           <div className={classes.library}>
-            <GamesCatalogue games={games} showPrice={false}>
-              {' '}
-            </GamesCatalogue>
+            <GamesCatalogue games={games} showPrice={false} />
           </div>
           )
         : (

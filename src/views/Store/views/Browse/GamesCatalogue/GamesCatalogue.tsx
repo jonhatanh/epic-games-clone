@@ -1,8 +1,13 @@
 import classes from './GamesCatalogue.module.css'
 import globalClasses from '@/Global.module.css'
-import PropTypes from 'prop-types'
-import GameCard from '@/components/GameCard/GameCard'
-export default function GamesCatalogue ({ games, showPrice = true }) {
+import GameCard from '@/components/GameCard/GameCard.tsx'
+import { GameDetailsType } from '@/types/rawApiResponses'
+
+type GamesCatalogueProps = {
+  games: GameDetailsType[]
+  showPrice?: boolean
+}
+export default function GamesCatalogue ({ games, showPrice = true }: GamesCatalogueProps) {
   return (
     <section className={`${globalClasses.cardContainer} ${classes.catalogue}`}>
       {games.map((game) => {
@@ -20,7 +25,3 @@ export default function GamesCatalogue ({ games, showPrice = true }) {
   )
 }
 
-GamesCatalogue.propTypes = {
-  games: PropTypes.arrayOf(PropTypes.object),
-  showPrice: PropTypes.bool
-}
