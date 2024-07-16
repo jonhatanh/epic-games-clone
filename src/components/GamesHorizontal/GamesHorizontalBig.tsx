@@ -1,8 +1,8 @@
 import classes from './GamesHorizontal.module.css'
 import globalClasses from '@/Global.module.css'
-import PropTypes from 'prop-types'
 import GameCard from '../GameCard/GameCard'
-const GamesHorizontalBig = ({ games }) => {
+import { GameDetailsType } from '@/types/rawApiResponses'
+const GamesHorizontalBig = ({ games }: { games: GameDetailsType[] }) => {
   return (
     <article className={classes.listOfGamesHorizontal}>
       <header>
@@ -25,10 +25,6 @@ const GamesHorizontalBig = ({ games }) => {
       </div>
     </article>
   )
-}
-
-GamesHorizontalBig.propTypes = {
-  games: PropTypes.arrayOf(PropTypes.object).isRequired
 }
 
 export default GamesHorizontalBig

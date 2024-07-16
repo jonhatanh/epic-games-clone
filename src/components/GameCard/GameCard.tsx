@@ -1,12 +1,12 @@
 import { Link } from 'react-router-dom'
 import classes from './GameCard.module.css'
-import { GameType } from '@/types/rawApiResponses'
+import { GameDetailsType, GameType } from '@/types/rawApiResponses'
 
 const defaultDesc =
   'Lorem ipsum dolor sit amet consectetur adipisicing elit. Enim delectus non dignissimos deserunt, tempore id commodi natus error sunt esse voluptatem.'
 
 type GameCardProps = {
-  game: GameType & {description?: string},
+  game: (GameType & { description?: string }) | GameDetailsType,
   mainGameId?: GameType['id'],
   index?: number,
   changeMainGame?: (index: number) => void,

@@ -3,15 +3,15 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {
   faChevronRight
 } from '@fortawesome/free-solid-svg-icons'
-import PropTypes from 'prop-types'
 import GameCard from '../GameCard/GameCard'
 import { randomNumber } from '@/utils/helpers'
 import { Link } from 'react-router-dom'
+import { GameType } from '@/types/rawApiResponses'
 
 const urlReleases = '/store/browse?page=1&ordering=-released'
 const urlRandom = `/store/browse?page=${randomNumber()}`
 
-const GamesVertical = ({ randomGames, recentGames }) => {
+const GamesVertical = ({ randomGames, recentGames }: { randomGames: GameType[], recentGames: GameType[] }) => {
   return (
     <article className={classes.listOfGamesVertical}>
       <div className={classes.listTitle}>
@@ -34,11 +34,6 @@ const GamesVertical = ({ randomGames, recentGames }) => {
       </div>
     </article>
   )
-}
-
-GamesVertical.propTypes = {
-  randomGames: PropTypes.arrayOf(PropTypes.object).isRequired,
-  recentGames: PropTypes.arrayOf(PropTypes.object).isRequired
 }
 
 export default GamesVertical
