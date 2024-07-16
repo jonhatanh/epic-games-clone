@@ -1,10 +1,10 @@
 import classes from './GamesCatalogue.module.css'
 import globalClasses from '@/Global.module.css'
 import GameCard from '@/components/GameCard/GameCard.tsx'
-import { GameDetailsType } from '@/types/rawApiResponses'
+import { GameDetailsType, GameType } from '@/types/rawApiResponses'
 
 type GamesCatalogueProps = {
-  games: GameDetailsType[]
+  games: GameDetailsType[] | GameType[]
   showPrice?: boolean
 }
 export default function GamesCatalogue ({ games, showPrice = true }: GamesCatalogueProps) {

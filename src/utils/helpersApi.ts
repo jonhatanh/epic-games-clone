@@ -93,8 +93,8 @@ export function getBasicApiCall (endPoint: string) {
 }
 
 
-type GenreTypeWithFilter = GenreApiResponse & { filterId: number }
-type FiltersType = {
+export type GenreTypeWithFilter = GenreApiResponse & { filterId: number }
+export type FiltersType = {
   genres?: GenreTypeWithFilter[],
   orderBy?: FilterOrderByItem,
   descending?: boolean,

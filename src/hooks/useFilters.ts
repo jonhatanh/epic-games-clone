@@ -1,19 +1,38 @@
 import { useEffect, useRef, useState } from 'react';
-import { API_URL, DEFAULT_QUERY_STRING, FILTERS_ID } from '../constans';
+import { FilterOrderByItem, FILTERS_ID } from '../constans';
 import { useLocation, useNavigate } from 'react-router-dom';
+import { FiltersType, GenreTypeWithFilter } from '@/utils/helpersApi';
 
-export function useFilters (currentFilters) {
+type DateFilterType = {
+  name: string;
+  slug: string;
+  from: string;
+  to: string;
+  exclusive: 2;
+  filterId: typeof FILTERS_ID.date;
+}
+type FilterItemsType = GenreTypeWithFilter | FilterOrderByItem | DateFilterType
+type ArrayFiltersType = FilterItemsType[]
+
+function isDateFilter (filter: FilterItemsType): filter is DateFilterType {
+  return filter?.filterId === FILTERS_ID.date
+}
+function isFilterOrderByOrDate (filter: FilterItemsType): filter is FilterOrderByItem | DateFilterType {
+  return filter?.filterId === FILTERS_ID.orderBy || filter?.filterId === FILTERS_ID.date
+}
+
+export function useFilters (currentFilters: FiltersType) {
   const [descendingOrder, setDescendingOrder] = useState(false)
   const [fromDate, setFromDate] = useState('')
   const [toDate, setToDate] = useState('')
-  const [filters, setFilters] = useState([])
+  const [filters, setFilters] = useState<ArrayFiltersType>([])
   const navigate = useNavigate()
   const location = useLocation()
   const firstLoadRef = useRef(true)
 
   // Loads filters
   useEffect(() => {
-    const newFiltersState = []
+    const newFiltersState: ArrayFiltersType = []
     if (currentFilters.genres) {
       newFiltersState.push(...currentFilters.genres)
     }
@@ -71,26 +90,30 @@ export function useFilters (currentFilters) {
     orderByFilters
       ? newURL.searchParams.set('ordering', orderByFilters)
       : newURL.searchParams.delete('ordering')
-    dateFilter
+    isDateFilter(dateFilter)
       ? newURL.searchParams.set('dates', `${dateFilter.from},${dateFilter.to}`)
       : newURL.searchParams.delete('dates')
     if (filters.length > 0) {
       if (!firstLoadRef.current) {
-        newURL.searchParams.set('page', 1)
+        newURL.searchParams.set('page', '1')
       }
       firstLoadRef.current = false
       navigate(newURL.pathname + newURL.search)
     }
   }, [filters, descendingOrder, navigate])
 
-  function toggleFilter (filter) {
+  function toggleFilter (filter: FilterItemsType) {
     const index = filters.findIndex(
       (filterItem) => filterItem.slug === filter.slug
     )
     if (index === -1) {
-      if (filter.exclusive) {
+      // if (filter.exclusive) {
+      if (isFilterOrderByOrDate(filter)) {
         const exclusiveIndex = filters.findIndex(
-          (filterItem) => filterItem.exclusive === filter.exclusive
+          (filterItem) => {
+            if(!isFilterOrderByOrDate(filterItem)) return false
+            return filterItem.exclusive === filter.exclusive
+          }
         )
         setFilters((prev) =>
           exclusiveIndex === -1
@@ -104,7 +127,7 @@ export function useFilters (currentFilters) {
       setFilters((prev) => prev.toSpliced(index, 1))
     }
   }
-  function addDateFilter (filter) {
+  function addDateFilter (filter: FilterItemsType) {
     const index = filters.findIndex(
       (filterItem) => filterItem.slug === filter.slug
     )

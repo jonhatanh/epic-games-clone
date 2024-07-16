@@ -2,14 +2,19 @@ import { useState } from 'react'
 import classes from './FilterItem.module.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faChevronDown } from '@fortawesome/free-solid-svg-icons'
-import PropTypes from 'prop-types'
-
 /**
  *
  * @TODO
  * Delete itemsContainerClass
  */
-export default function FilterItem ({ title, children, itemsContainerClass }) {
+
+type FilterItemProps = {
+  title: string;
+  children: React.ReactNode;
+  itemsContainerClass?: string;
+}
+
+export default function FilterItem ({ title, children, itemsContainerClass }: FilterItemProps) {
   const [open, setOpen] = useState(false)
 
   return (
@@ -24,10 +29,4 @@ export default function FilterItem ({ title, children, itemsContainerClass }) {
       <ul className={itemsContainerClass}>{children}</ul>
     </article>
   )
-}
-
-FilterItem.propTypes = {
-  title: PropTypes.string.isRequired,
-  children: PropTypes.any,
-  itemsContainerClass: PropTypes.string
 }

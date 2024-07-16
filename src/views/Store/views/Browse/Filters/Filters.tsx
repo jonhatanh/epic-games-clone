@@ -1,13 +1,20 @@
-import FilterItem from '@/components/FilterItem/FilterItem'
+import FilterItem from '@/components/FilterItem/FilterItem.tsx'
 import classes from './Filters.module.css'
 import { useState } from 'react'
 import Button from '@/components/Button/Button'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCheck, faFilter, faXmark } from '@fortawesome/free-solid-svg-icons'
 import { FILTERS_ID, FILTERS_ITEMS_ORDER_BY } from '@/constans'
-import PropTypes from 'prop-types'
 import { useFilters } from '@/hooks/useFilters'
-export default function Filters ({ genres = null, currentFilters = {} }) {
+import { GenreApiType } from '@/types'
+import { FiltersType } from '@/utils/helpersApi'
+
+type FiltersProps = {
+  genres: GenreApiType | null;
+  currentFilters: FiltersType;
+}
+
+export default function Filters ({ genres = null, currentFilters = {} }: FiltersProps) {
   const {
     filters,
     clearFilters,
@@ -22,7 +29,7 @@ export default function Filters ({ genres = null, currentFilters = {} }) {
   } = useFilters(currentFilters)
   const [filtersOpen, setFiltersOpen] = useState(false)
 
-  function isActive (filterSlug) {
+  function isActive (filterSlug: string) {
     return (
       filters.findIndex((filterItem) => filterItem.slug === filterSlug) !== -1
     )
@@ -119,9 +126,4 @@ export default function Filters ({ genres = null, currentFilters = {} }) {
       </div>
     </aside>
   )
-}
-
-Filters.propTypes = {
-  genres: PropTypes.object,
-  currentFilters: PropTypes.object
 }

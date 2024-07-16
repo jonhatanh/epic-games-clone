@@ -1,10 +1,10 @@
 import { useRouteLoaderData } from 'react-router-dom'
-import classes from './GameGenres.module.css'
-import GenreCard from '@/components/GenreCard/GenreCard'
+import GenreCard from '@/components/GenreCard/GenreCard.tsx'
 import HorizontalScroll from '@/components/HorizontalScroll/HorizontalScroll'
+import { BrowsePageLoaderType } from '../BrowsePage/BrowsePage'
 
 const GameGenres = () => {
-  const { genres } = useRouteLoaderData('BrowsePage')
+  const { genres } = useRouteLoaderData('BrowsePage') as BrowsePageLoaderType
 
   return (
     <HorizontalScroll title='Game Genres'>

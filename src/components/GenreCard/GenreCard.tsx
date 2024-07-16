@@ -1,10 +1,10 @@
 import { Link } from 'react-router-dom'
 import classes from './GenreCard.module.css'
-import PropTypes from 'prop-types'
+import { GenreApiResponse } from '@/types'
 
 const GenreCard = ({
-  genre: { id, name, slug, image_background: backgroundImage }
-}) => {
+  genre: { name, slug, image_background: backgroundImage }
+}: {genre: GenreApiResponse}) => {
   return (
     <Link className={`${classes.card}`} to={`/store/genre/${slug}`}>
       <img
@@ -14,15 +14,6 @@ const GenreCard = ({
       <h5 className='break_lines'>{name}</h5>
     </Link>
   )
-}
-
-GenreCard.propTypes = {
-  genre: PropTypes.shape({
-    id: PropTypes.number,
-    name: PropTypes.string.isRequired,
-    slug: PropTypes.string.isRequired,
-    image_background: PropTypes.string.isRequired
-  })
 }
 
 export default GenreCard
