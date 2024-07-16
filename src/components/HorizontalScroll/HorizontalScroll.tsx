@@ -5,17 +5,25 @@ import {
   faChevronLeft,
   faChevronRight
 } from '@fortawesome/free-solid-svg-icons'
-import PropTypes from 'prop-types'
 import { useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
-const HorizontalScroll = ({ children, title, linkTo = '' }) => {
+import { PropsWithChildren } from 'react'
+
+type HorizontalScrollProps = PropsWithChildren<{
+  title: string
+  linkTo?: string
+}>
+
+const HorizontalScroll = ({ children, title, linkTo = '' }: HorizontalScrollProps) => {
   const [leftButtonDisabled, setLeftButtonDisabled] = useState(true)
   const [rightButtonDisabled, setRightButtonDisabled] = useState(false)
-  const contentContainerRef = useRef(null)
-  const scrollEndRef = useRef(null)
-  function moveScrollBar (moveToRight) {
+  const contentContainerRef = useRef<HTMLDivElement>(null)
+  const scrollEndRef = useRef<number | null>(null)
+  function moveScrollBar (moveToRight: boolean) {
+    if(!contentContainerRef.current) return
     const parentWidth = contentContainerRef.current.offsetWidth
-    const widthChilds = contentContainerRef.current.firstChild?.offsetWidth
+    const firstChild = contentContainerRef.current.firstChild as HTMLElement | null
+    const widthChilds = firstChild ? firstChild.offsetWidth : 0
     let pxBaseOnChilds = widthChilds
       ? Math.floor(parentWidth / widthChilds) * widthChilds
       : parentWidth
@@ -27,15 +35,16 @@ const HorizontalScroll = ({ children, title, linkTo = '' }) => {
     contentContainerRef.current.scrollTo(pxToMove, 0)
   }
 
-  function checkButtonStatus (e) {
+  function checkButtonStatus() {
     if (scrollEndRef.current === null) {
       scrollEndRef.current = setTimeout(() => {
+        if (!contentContainerRef.current) return
         const leftButtonIsDisabled =
-          contentContainerRef.current?.scrollLeft === 0
+          contentContainerRef.current.scrollLeft === 0
         const rightButtonIsDisabled =
-          contentContainerRef.current?.scrollLeft +
-            contentContainerRef.current?.clientWidth ===
-          contentContainerRef.current?.scrollWidth
+          contentContainerRef.current.scrollLeft +
+            contentContainerRef.current.clientWidth ===
+          contentContainerRef.current.scrollWidth
         setLeftButtonDisabled(leftButtonIsDisabled)
         setRightButtonDisabled(rightButtonIsDisabled)
         scrollEndRef.current = null
@@ -85,18 +94,12 @@ const HorizontalScroll = ({ children, title, linkTo = '' }) => {
       <div
         ref={contentContainerRef}
         className={globalClasses.cardContainer}
-        onScroll={(e) => checkButtonStatus(e)}
+        onScroll={() => checkButtonStatus()}
       >
         {children}
       </div>
     </article>
   )
-}
-
-HorizontalScroll.propTypes = {
-  children: PropTypes.arrayOf(PropTypes.element),
-  title: PropTypes.string.isRequired,
-  linkTo: PropTypes.string
 }
 
 export default HorizontalScroll
