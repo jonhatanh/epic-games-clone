@@ -7,11 +7,19 @@ import {
   faChevronRight
 } from '@fortawesome/free-solid-svg-icons'
 import Filters from '@/views/Store/views/Browse/Filters/Filters'
-import Collapsable from '@/components/Collapsable/Collapsable'
+import Collapsable from '@/components/Collapsable/Collapsable.tsx'
 import Button from '@/components/Button/Button'
+import { GamesApiResponse, GamesTypeWithApiInfo } from '@/types/rawApiResponses'
+import {  GenreType } from '@/types'
+import { FiltersType } from '@/utils/helpersApi'
 
+type GenrePageLoaderType = {
+  games: GamesApiResponse | GamesTypeWithApiInfo;
+  genre: GenreType;
+  currentFilters: FiltersType;
+}
 export default function GenrePage () {
-  const { games, genre, currentFilters } = useLoaderData()
+  const { games, genre, currentFilters } = useLoaderData() as GenrePageLoaderType
   return (
     <section className={classes.genreGames}>
       <h2>{genre.name} Games</h2>

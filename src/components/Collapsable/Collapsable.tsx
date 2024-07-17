@@ -1,19 +1,26 @@
-import PropTypes from 'prop-types'
 import classes from './Collapsable.module.css'
-import { useEffect, useRef, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import Button from '../Button/Button'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faChevronDown } from '@fortawesome/free-solid-svg-icons'
 
-const Collapsable = ({ children, size = 'normal' }) => {
+type CollapsableProps = {
+  children: React.ReactElement;
+  size?: 'small' | 'normal' | 'large';
+}
+
+const Collapsable = ({ children, size = 'normal' }: CollapsableProps) => {
   const [showCollapseButton, setShowCollapseButton] = useState(false)
   const [collapsed, setCollapsed] = useState(true)
-  const collapseRef = useRef(null)
+  const collapseRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
     function buttonIsNecessary () {
+      if (!collapseRef.current) return false
       const collapseMaxHeight = collapseRef.current.offsetHeight
-      const childHeight = collapseRef.current.firstChild.offsetHeight
+      const containerChild = collapseRef.current.firstChild as HTMLElement
+      if (!containerChild) return false
+      const childHeight = containerChild.offsetHeight
       return childHeight > collapseMaxHeight
     }
     const handler = () => {
@@ -58,11 +65,6 @@ const Collapsable = ({ children, size = 'normal' }) => {
       )}
     </div>
   )
-}
-
-Collapsable.propTypes = {
-  children: PropTypes.element.isRequired,
-  size: PropTypes.oneOf(['small', 'normal', 'large'])
 }
 
 export default Collapsable

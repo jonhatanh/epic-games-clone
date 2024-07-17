@@ -21,13 +21,13 @@ import { Toaster } from 'react-hot-toast'
 import { StorageContext, useGamesStorage } from './hooks/useGamesStorage.ts'
 import { faGithub } from '@fortawesome/free-brands-svg-icons'
 
-type NavItemType = {
+type NavItemProps = {
   children: React.ReactNode,
   to: string
   icon: IconDefinition
 }
 
-const NavItem = ({ children, to, icon }: NavItemType) => {
+const NavItem = ({ children, to, icon }: NavItemProps) => {
   const navClass = ({ isActive }: {isActive: boolean}) => (isActive ? classes.active : '')
   return (
     <NavLink to={to} className={navClass}>
@@ -35,11 +35,6 @@ const NavItem = ({ children, to, icon }: NavItemType) => {
       {children}
     </NavLink>
   )
-}
-NavItem.propTypes = {
-  children: PropTypes.any,
-  to: PropTypes.string,
-  icon: PropTypes.any
 }
 
 function App () {

@@ -10,7 +10,7 @@ import { GenreApiType } from '@/types'
 import { FiltersType } from '@/utils/helpersApi'
 
 type FiltersProps = {
-  genres: GenreApiType | null;
+  genres?: GenreApiType | null;
   currentFilters: FiltersType;
 }
 

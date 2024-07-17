@@ -1,6 +1,6 @@
 import genresJson from '@/utils/apiGenresResponse.json'
 import gamesJson from '@/utils/apiResponseSteam2.json'
-import { redirect } from 'react-router-dom'
+import { LoaderFunctionArgs, redirect } from 'react-router-dom'
 import {
   getApiURL,
   getCurrentFilters,
@@ -8,12 +8,21 @@ import {
   getBasicApiCall,
   parseGamesInApiResponse
 } from '@/utils/helpersApi'
+import { GenreType } from '@/types'
+import { GameApiResponse, GamesApiResponse, GamesTypeWithApiInfo } from '@/types/rawApiResponses'
 
-export async function loader ({ request, params: { genreSlug } }) {
+type LoaderProps = {
+  request: Request
+  params: {
+    genreSlug: string
+  }
+}
+
+export async function loader ({ request, params: { genreSlug } }: LoaderFunctionArgs<LoaderProps>) {
   const reqURL = new URL(request.url)
   const newPage = reqURL.searchParams.get('page')
   if (newPage === null) {
-    reqURL.searchParams.set('page', 1)
+    reqURL.searchParams.set('page', '1')
     return redirect(reqURL.href)
   }
 
@@ -26,19 +35,19 @@ export async function loader ({ request, params: { genreSlug } }) {
   if (resGenre.status >= 400) {
     throw new Response('Error fetching data :(', { status: 500 })
   }
-  const genre = await resGenre.json()
+  const genre = await resGenre.json() as GenreType
 
-  let games = []
+  let games: GamesApiResponse | GamesTypeWithApiInfo
   if (import.meta.env.PROD) {
     const res = await fetch(apiURL.href, { mode: 'cors' })
     if (res.status >= 400) {
       throw new Response('Error fetching data :(', { status: 500 })
     }
-    games = parseApiUrlPrevNext(await res.json(), reqURL)
+    games = parseApiUrlPrevNext<GameApiResponse>(await res.json(), reqURL)
   } else {
     games = parseGamesInApiResponse(
       parseApiUrlPrevNext(
-        await Promise.resolve(gamesJson),
+        await Promise.resolve(gamesJson) as GamesApiResponse,
         new URL(reqURL.href)
       )
     )
