@@ -12,6 +12,8 @@ The purpose of this project is to learn React Router and deepen our understandin
 
 Initially, I aimed to create a simple game store, drawing inspiration from the [Epic Games UI](https://store.epicgames.com/). However, as I progressed, I ended up building an Epic Games Clone 😁.
 
+Update 07/17/2024: Added TypeScript to the project.
+
 
 
 ### 🔗 **Live preview** of the project is [here](https://game-store.jonhatanhiguera.me/).

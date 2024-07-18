@@ -35,7 +35,7 @@ const GameOverview = () => {
                     const lastItem = game.genres.length - 1 === index
                     return (
                       <React.Fragment key={genre.id}>
-                        <Link to={`/store/genre/${genre.name}?page=1`}>{genre.name}</Link>
+                        <Link to={`/store/genre/${genre.slug}?page=1`}>{genre.name}</Link>
                         {lastItem ? '' : ', '}
                       </React.Fragment>
                     )
