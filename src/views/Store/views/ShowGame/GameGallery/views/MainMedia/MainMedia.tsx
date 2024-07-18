@@ -1,16 +1,22 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import classes from './MainMedia.module.css'
-import PropTypes from 'prop-types'
 import {
   faChevronLeft,
   faChevronRight
 } from '@fortawesome/free-solid-svg-icons'
+import { GameMedia } from '@/types'
 
-const MainMedia = ({ allMedia, mainMediaId, setMainMediaId }) => {
+type MainMediaProps = {
+  allMedia: GameMedia[]
+  mainMediaId: number
+  setMainMediaId: (id: number) => void
+}
+
+const MainMedia = ({ allMedia, mainMediaId, setMainMediaId }: MainMediaProps) => {
   const currentIndex = allMedia.findIndex((media) => media.id === mainMediaId)
 
-  function handleOverClick (direction) {
-    let newIndex
+  function handleOverClick (direction: 'next' | 'prev') {
+    let newIndex: number
     if (direction === 'next') {
       newIndex = currentIndex === allMedia.length - 1 ? 0 : currentIndex + 1
     } else {
@@ -30,7 +36,7 @@ const MainMedia = ({ allMedia, mainMediaId, setMainMediaId }) => {
         style={{ transform: `translateX(-${currentIndex * 100}%)` }}
       >
         {allMedia.map((media) => {
-          if (media.data) {
+          if ('data' in media) {
             return (
               <video
                 key={media.id}
@@ -52,12 +58,6 @@ const MainMedia = ({ allMedia, mainMediaId, setMainMediaId }) => {
       </div>
     </div>
   )
-}
-
-MainMedia.propTypes = {
-  allMedia: PropTypes.arrayOf(PropTypes.object),
-  mainMediaId: PropTypes.number,
-  setMainMediaId: PropTypes.func
 }
 
 export default MainMedia

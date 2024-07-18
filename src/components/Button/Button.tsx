@@ -3,7 +3,7 @@ import classes from './Button.module.css'
 import { Link, LinkProps } from 'react-router-dom'
 
 type BaseButtonProps = {
-  children: React.ReactNode
+  children?: React.ReactNode
   bgColor?: string
   textSize?: string
   size?: string
@@ -21,7 +21,7 @@ type LinkButtonProps = BaseButtonProps & LinkProps;
 export type ButtonType = ButtonProps | LinkButtonProps;
 
 const Button = ({
-  children,
+  children = null,
   bgColor = 'transparent',
   textSize = 'normal',
   size = 'normal',

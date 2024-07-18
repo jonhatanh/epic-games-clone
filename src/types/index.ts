@@ -35,7 +35,7 @@ export type GameVideosType = {
   id: number,
   name: string,
   preview: string,
-  data: GameVideoData[]
+  data: GameVideoData
 }
 type GameVideoData = {
   "480": string,
@@ -51,3 +51,5 @@ export type GameScreenshotsType = {
   is_deleted: boolean
 }
 export type GameScreenshotsApiType = ApiResponseTemplate<GameScreenshotsType>
+
+export type GameMedia = GameScreenshotsType | GameVideosType

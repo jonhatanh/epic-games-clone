@@ -4,17 +4,18 @@ import { faCircleMinus, faCirclePlus } from '@fortawesome/free-solid-svg-icons'
 import Button from '@/components/Button/Button'
 import React, { useContext } from 'react'
 import Collapsable from '@/components/Collapsable/Collapsable'
-import GameGallery from '@/views/Store/views/ShowGame/GameGallery/GameGallery'
+import GameGallery from '@/views/Store/views/ShowGame/GameGallery/GameGallery.tsx'
 import { StorageContext } from '@/hooks/useGamesStorage'
 import ActionStorageButton from '@/components/ActionStorageButton/ActionStorageButton'
-function justEnglishDescription (description) {
+import { ShowGameLoaderType } from '../ShowGamePage/ShowGameLoader'
+function justEnglishDescription (description: string) {
   description = description.replaceAll('<br />', '<br /><br />')
   return description.split('Español')[0]
 }
 
 const GameOverview = () => {
   const { game, achievements, screenshots, movies } =
-    useRouteLoaderData('showGame')
+    useRouteLoaderData('showGame') as ShowGameLoaderType
 
   const { gameInStorage } = useContext(StorageContext)
   const gameInLibrary = gameInStorage(game.id, 'library')
@@ -24,7 +25,7 @@ const GameOverview = () => {
         {/* Game Info */}
         <article>
           {/* Media Player */}
-          <GameGallery allMedia={movies.concat(screenshots)} />
+          <GameGallery allMedia={[...movies, ...screenshots]} />
           <section className={classes.gameExtras}>
             <Collapsable>
               <div className={classes.genreTags}>
@@ -34,7 +35,7 @@ const GameOverview = () => {
                     const lastItem = game.genres.length - 1 === index
                     return (
                       <React.Fragment key={genre.id}>
-                        <Link>{genre.name}</Link>
+                        <Link to={`/store/genre/${genre.name}?page=1`}>{genre.name}</Link>
                         {lastItem ? '' : ', '}
                       </React.Fragment>
                     )
@@ -50,7 +51,8 @@ const GameOverview = () => {
                     const lastItem = game.tags.length - 1 === index
                     return (
                       <React.Fragment key={tags.id}>
-                        <Link>{tags.name}</Link>
+                        {/* <Link>{tags.name}</Link> */}
+                        <Link to="">{tags.name}</Link>
                         {lastItem ? '' : ', '}
                       </React.Fragment>
                     )

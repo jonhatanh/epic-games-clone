@@ -13,7 +13,7 @@ type ActionStorageProps = {
   icon?: { positive: IconDefinition; negative: IconDefinition }
   autoText?: boolean
   removeDefaultClick?: boolean
-  children: React.ReactNode
+  children?: React.ReactNode
 }
 
 const ActionStorageButton = ({

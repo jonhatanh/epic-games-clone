@@ -2,15 +2,18 @@ import { useRouteLoaderData } from 'react-router-dom'
 import classes from './GameAchievements.module.css'
 import Button from '@/components/Button/Button'
 import { useState } from 'react'
+import { ShowGameLoaderType } from '../ShowGamePage/ShowGameLoader'
+import { AchievementsApiType } from '@/types'
 
 const GameAchievements = () => {
-  const { game, achievements } = useRouteLoaderData('showGame')
+  const { game, achievements } = useRouteLoaderData('showGame') as ShowGameLoaderType
   const [nextPage, setNextPage] = useState(achievements.next)
   const [allAchievements, setAllAchievements] = useState(achievements.results)
 
   async function handleClick () {
+    if (nextPage === null) return
     const res = await fetch(nextPage, { mode: 'cors' })
-    const newAchievements = await res.json()
+    const newAchievements = await res.json() as AchievementsApiType
     setNextPage(newAchievements.next)
     setAllAchievements([...allAchievements, ...newAchievements.results])
   }

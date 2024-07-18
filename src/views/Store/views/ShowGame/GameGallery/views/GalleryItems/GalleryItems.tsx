@@ -1,9 +1,15 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import classes from './GalleryItems.module.css'
 import { faPlay } from '@fortawesome/free-solid-svg-icons'
-import PropTypes, { object } from 'prop-types'
+import { GameMedia } from '@/types'
 
-const GalleryItems = ({ media, mainMediaId, changeMediaId }) => {
+type GalleryItemsProps = {
+  media: GameMedia[]
+  mainMediaId: number
+  changeMediaId: (id: number) => void
+}
+
+const GalleryItems = ({ media, mainMediaId, changeMediaId }: GalleryItemsProps) => {
   return (
     <div className={classes.gallery}>
       {/* <button>
@@ -11,7 +17,7 @@ const GalleryItems = ({ media, mainMediaId, changeMediaId }) => {
         </button> */}
       <ul>
         {media.map((mediaItem) => {
-          if (mediaItem.data) {
+          if ('data' in mediaItem) {
             // is video
             return (
               <li
@@ -48,12 +54,6 @@ const GalleryItems = ({ media, mainMediaId, changeMediaId }) => {
         </button> */}
     </div>
   )
-}
-
-GalleryItems.propTypes = {
-  media: PropTypes.arrayOf(object),
-  mainMediaId: PropTypes.number,
-  changeMediaId: PropTypes.func
 }
 
 export default GalleryItems
